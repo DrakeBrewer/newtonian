@@ -1,9 +1,9 @@
 # Newtonian
 
 ## Technology
-Build System: [CMake](https://cmake.org/)
-Graphics Rendering: [Qt](https://www.qt.io/developers)
-Testing Framework: [GoogleTest](https://google.github.io/googletest/)
+Build System: [CMake](https://cmake.org/)<br>
+Graphics Rendering: [Qt](https://www.qt.io/developers)<br>
+Testing Framework: [GoogleTest](https://google.github.io/googletest/)<br>
 
 ## Conventions
 Branches should be created in a `name/type/change` format i.e: `joe/feature/add-readme`. refer to conventional commits for type names.
