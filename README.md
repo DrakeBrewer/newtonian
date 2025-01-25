@@ -39,7 +39,6 @@ to generate a build system within the specified directory. Then, cd into your ne
 cmake --build . --target <target>
 ```
 to generate your CMake generated project binary tree.
-```!Note
-If you are using VSCode, you can follow [this](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started-vscode?pivots=shell-powershell) tutorial to build your projects using VSCode's built in tooling.
-```
+>[!TIP]
+>If you are using VSCode, you can follow [this](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started-vscode?pivots=shell-powershell) tutorial to build your projects using VSCode's built in tooling.
 <!-- TODO: Expand when we have a concrete build process that can be documented -->
