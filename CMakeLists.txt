@@ -23,7 +23,6 @@ FetchContent_MakeAvailable(googletest)
 # Enable testing
 enable_testing()
 
-# Define the custom unit test function
 function(add_unit_test test_name test_sources)
     add_executable(${test_name} ${test_sources})
     target_link_libraries(${test_name} GTest::gtest_main)
