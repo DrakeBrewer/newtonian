@@ -50,9 +50,69 @@ public:
     double objectVelocity; // speed of the object [m/s]
     double objectPosition; // where the object is away from a point [m]
     bool isCollision; // is there a collision or not
+
+    // Constructor for the variables
+    Object(
+        double m = 1.0, double g = 9.81, double deg = 0.0, double l = 1.0, double fc = 0.5,
+        const std::string& shape = "box", const std::string& material = "wood", const std::string& planet = "Earth"
+    ) :
+        // Universal
+        mass(m),
+        gravity(g),
+
+        // Inclined Plane Interaction
+        angle(deg),
+        length(l),
+        frictionCoefficient(fc),
+        externalForceApplied(0.0),
+        objectShape(shape),
+        objectMaterial(material),
+
+        // Time Control System
+        timeScale(1.0),
+        currentTime(0.0),
+        isPaused(false),
+        frameRate(60),
+
+        // Orbital Mechanics
+        centralMassOfBody(5.97e24),
+        orbitingObjectMass(1.0),
+        initialVelocity(0.0),
+        trajectoryOfOrbit(0.0),
+        distanceFromCenter(10.0),
+
+        // Light Intertaction
+        lightIntensity(100.0),
+        wavelength(500.0),
+        refractiveIndex(1.0),
+        reflectivityOfObject(0.7),
+
+        // Fluid Simulation
+        fluidDensity(100.0),
+        fluidViscosity(1.0),
+        objectVolume(1.0),
+        fluidVelocity(0.0),
+
+        // Planetary Physics
+        planetGravity(9.81),
+        planetName(planet),
+
+        // Collision System
+        elasticity(0.7),
+        impulse(0.0), 
+        objectVelocity(0.0), 
+        objectPosition(0.0),
+        isCollision(false)
+    {}
 };
 
+
 int main(){
-    std::cout << "Hello world" << std::endl;
+    // TESTING: this object is made and some parameters printed just for testing
+    Object testObject;
+    std::cout << "Mass: " << testObject.mass << " [kg]" << std::endl;
+    std::cout << "Gravity: " << testObject.gravity << " [m/s^2]" << std::endl;
+    std::cout << "Planet Name: " << testObject.planetName << std::endl;
+
     return 0;
 }
