@@ -11,3 +11,5 @@ build/
 
 *.out
 *.exe
+
+.vscode/

@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED True)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add source directory
 add_subdirectory(src)
 
 # Include GoogleTest using FetchContent
