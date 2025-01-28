@@ -35,20 +35,27 @@ Installing CMake with your package manager may result in an older version of the
 Instead, go to the [github repo](https://github.com/kitware/cmake/releases) to install the latest version in tar.gz format
 Then extract from the command line using the following commands:
 
+```bash
 tar -xvzf cmake-<version>.tar.gz
 cd cmake-<version>
 ./bootstrap
 make
 sudo make install
+```
 
 Then, verify the latest version using:
+
+```bash
 cmake --version
+```
 
 If the version output is not what you were expecting, you may need to change your PATH. Example:
 // in .bashrc
 export PATH=/usr/local/bin:$PATH
 Then, you must reload the configurations using:
 source ~/.bashrc
+
+I (Isaac Osorio Beltran) added this linux install stuff, just didn't do it on the pull request 
 
 ## Build
 From within the root directory of the project run:
