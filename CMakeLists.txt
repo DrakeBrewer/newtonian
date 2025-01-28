@@ -22,11 +22,13 @@ FetchContent_MakeAvailable(googletest)
 # Enable testing
 enable_testing()
 
-function(add_unit_test test_name test_sources)
-    add_executable(${test_name} ${test_sources})
-    target_link_libraries(${test_name} GTest::gtest_main)
+CMake
+function(add_unit_tests)
     include(GoogleTest)
-    gtest_discover_tests(${test_name})
+    gtest_discover_tests(${ARGN}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+    add_dependencies(add_unit_tests ${ARGN})
 endfunction()
 
 # Add unit tests
