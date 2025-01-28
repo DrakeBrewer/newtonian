@@ -1,0 +1,14 @@
+Line 1
+Line 2
+11435 233 45 &*&$%%@!
+Line 4
+
+
+
+\n
+\0
+std::cout << "Hello World" << std::endl;
+exit(0);
+
+Line 13
+Final Line                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               a
