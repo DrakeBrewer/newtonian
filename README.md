@@ -21,7 +21,14 @@ brew install cmake
 ```
 
 ### Windows
-<!-- TODO: -->
+Navigate to the [CMake](https://cmake.org/download/) official download page.<br>
+Download the Windows Installer file (the .msi file, or click [this](https://github.com/Kitware/CMake/releases/download/v3.31.4/cmake-3.31.4-windows-x86_64.msi) to download it).<br>
+After downloading it, run the .msi file to begin installation (follow the installation Wizard).<br>
+After installing CMake you can verify the installation on Command Prompt or PowerShell by running:
+``` sh 
+cmake --version
+```
+If installed correctly, it will output the installed version of CMake.
 
 ### Linux
 <!-- TODO: -->
