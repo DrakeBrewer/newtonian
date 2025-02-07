@@ -1,4 +1,4 @@
-#include <iostream>
+#pragma once
 #include <string>
 
 struct InclinedPlaneInteraction{
@@ -20,11 +20,12 @@ struct TimeControlSystem{
 };
 
 struct OrbitalMechanics{
-    double centralMassOfBody; // this is big M, the mass of what is being orbited around [kg]
-    double orbitingObjectMass; // this is small m, the mass of the object in orbit [kg]
-    double initialVelocity; // the initial velocity of orbiting object [m/s]
-    double trajectoryOfOrbit; // orbital trajectory [m]
-    double distanceFromCenter; // how far away center of object is from center of central mass [m]
+    double planetMass; // this is m1, the mass of the planet [kg]
+    double moonMass; // this is m2, the mass of the moon in orbit [kg]
+    double planetMoonDistance; // distance between center of planet and moon [m]
+    double moonVelocity; // velocity of the moon [m/s]
+    double orbitTime;  // time it takes for the moon to do 1 orbit [s]
+    double gravitationalConstant; // big G
 };
 
 struct LightInteraction{
@@ -86,11 +87,12 @@ typedef struct Object{
         timeControl.frameRate = 60;
 
         // Orbital Mechanics
-        orbitalMechanics.centralMassOfBody = 5.97e24;
-        orbitalMechanics.orbitingObjectMass = 1.0;
-        orbitalMechanics.initialVelocity = 0.0;
-        orbitalMechanics.trajectoryOfOrbit = 0.0;
-        orbitalMechanics.distanceFromCenter = 10.0;
+        orbitalMechanics.planetMass = 5.97e24;
+        orbitalMechanics.moonMass = 7.35e22;
+        orbitalMechanics.planetMoonDistance = 3.84e8;
+        orbitalMechanics.moonVelocity = 1022;
+        orbitalMechanics.orbitTime = 2.36e6;
+        orbitalMechanics.gravitationalConstant = 6.67430e-11;
 
         // Light Interaction
         lightInteraction.lightIntensity = 100.0;
@@ -119,19 +121,3 @@ typedef struct Object{
         collisionSystem.isCollision = false;
     }
 } Object;
-
-
-int main(){
-    // TESTING: this object is made and some parameters printed just for testing
-    Object testObject;
-    std::cout << "Mass: " << testObject.inclinePlane.mass << " [kg]" << std::endl;
-    std::cout << "Gravity: " << testObject.inclinePlane.gravity << " [m/s^2]" << std::endl;
-    std::cout << "Incline Angle: " << testObject.inclinePlane.angle << " degrees" << std::endl;
-    std::cout << "Surface Length: " << testObject.inclinePlane.length << " [m]" << std::endl;
-    std::cout << "Friction: " << testObject.inclinePlane.frictionCoefficient << std::endl;
-    std::cout << "Force Applied: " << testObject.inclinePlane.externalForceApplied << " [N]" << std::endl;
-    std::cout << "Object Shape: " << testObject.inclinePlane.objectShape << std::endl;
-    std::cout << "Object Material: " << testObject.inclinePlane.objectMaterial << std::endl;
-
-    return 0;
-}
