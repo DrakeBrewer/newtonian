@@ -1,0 +1,5 @@
+add_subdirectory(qtbase)
+add_subdirectory(qtdeclarative)
+add_subdirectory(qtquick3d)
+add_subdirectory(qtquicktimeline)
+add_subdirectory(qtshadertools)
