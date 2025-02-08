@@ -1,2 +1,3 @@
 add_subdirectory(unitTesting)
 add_subdirectory(cmake_examples)
+add_subdirectory(qt_examples)
