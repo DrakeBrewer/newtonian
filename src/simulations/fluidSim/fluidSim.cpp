@@ -39,6 +39,7 @@ int main(int argc, char *argv[]){
         else if(userInput.compare("test2") == 0){
             cout << "Don't have the sim ready yet" << endl;
             //simulate test2
+
             continue;
         }
         else{
@@ -48,6 +49,23 @@ int main(int argc, char *argv[]){
 
         break;
     }
+
+    return 0;
+}
+
+
+int runTest1(){
+    
+
+
+
+    return 0;
+}
+
+
+int runTest2(){
+    
+    //Not implemented yet
 
     return 0;
 }
