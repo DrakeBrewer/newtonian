@@ -1,6 +1,7 @@
 #include <iostream>
 #include "orbitalMechanics.h"
-#include "PlaneInteraction.h"
+#include "planeInteraction.h"
+
 // TODO: Add your header files here
 
 int main() {
