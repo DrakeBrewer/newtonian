@@ -30,7 +30,7 @@ int main() {
 	// TODO: Add your functions here
 	switch(userChoice){
 		case 1:
-		    std::cout << "Selected: Inclined Plane Interaction" << std::endl;
+		    PlaneInteraction();
 			break;
 		case 2:
 		    std::cout << "Selected: Time Control System" << std::endl;
