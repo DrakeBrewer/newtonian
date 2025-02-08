@@ -1,3 +1,4 @@
 add_subdirectory(planeInteraction)
 add_subdirectory(planetSim)
 add_subdirectory(orbitalMechanics)
+add_subdirectory(fluidSim)
