@@ -36,5 +36,6 @@ endfunction()
 
 add_custom_target(run_unit_tests ALL)
 
-add_subdirectory(src)
+add_subdirectory(lib)
 add_subdirectory(examples)
+add_subdirectory(src)
