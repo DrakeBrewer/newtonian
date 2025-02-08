@@ -5,7 +5,7 @@
 
 /*
  * delta_time
- * @brief Calculates the delta time in order for frame independent state increments
+ * @brief Calculates the delta time for frame independent state increments
  * @return time since last call to function
  */
 double delta_time() {
