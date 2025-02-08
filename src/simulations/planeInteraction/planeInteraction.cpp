@@ -1,6 +1,6 @@
-#include "PlaneInteraction.h"
+#include "planeInteraction.h"
 #include <iostream>
-#include "object.h"  
+#include "object.hpp"  
 
 void PlaneInteraction() {
     // Create an instance of Object 

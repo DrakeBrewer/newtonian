@@ -1,6 +1,6 @@
 #include <iostream>
 #include "orbitalMechanics.h"
-#include "object.h"
+#include "object.hpp"
 
 void testOrbitalMechanics(){
     Object testObject; // Make an instance of Object since it contains orbitalMechanics
