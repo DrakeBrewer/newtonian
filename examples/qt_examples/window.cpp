@@ -1,4 +1,5 @@
 // Code Sourced from QT Widgets Tutorial - Creating a Window
+// https://doc.qt.io/qt-6/qtwidgets-tutorials-widgets-toplevel-example.html
 // Creates a 320x240 window called toplevel
 #include <QtWidgets>
 
