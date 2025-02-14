@@ -1,5 +1,5 @@
 #include <iostream>
-#include "orbitalMechanics.h"
+#include "orbitalMechanics.hpp"
 #include "planeInteraction.h"
 
 // TODO: Add your header files here
@@ -38,7 +38,7 @@ int main() {
 		    std::cout << "Selected: Time Control System" << std::endl;
             break;
         case 3:
-            testOrbitalMechanics();
+            std::cout<<"Orbital Mechanics"<<std::endl;
 			break;
 		case 4:
 		    std::cout << "Selected: Light Interaction" << std::endl;
