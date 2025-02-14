@@ -1,16 +1,54 @@
 #include <iostream>
-#include "orbitalMechanics.h"
-#include "object.hpp"
+#include "orbitalMechanics.hpp"
 
-void testOrbitalMechanics(){
-    Object testObject; // Make an instance of Object since it contains orbitalMechanics
+// Constuctor that init the default values for orbital mechanics
+OrbitalMechanics::OrbitalMechanics(){
+    planetName = "Earth";
+    setPlanetType(planetName);
+    moonMass = 7.348e22; // [kg]
+    planetMoonDistance = 3.844e8; // [m]
+    moonVelocity = 1022; // [m/s]
+    orbitTime = 2.36e6; // [s]
+    gravitationalConstant = 6.67430e-11; // [(N.m^2)/kg^2]
+}
 
-    // Print out the default values for orbitalMechanics
-    std::cout << "This is the Orbital Mechanics File" << std::endl;
-    std::cout << "Planet Mass: " << testObject.orbitalMechanics.planetMass << " [kg]" << std::endl;
-    std::cout << "Moon Mass: " << testObject.orbitalMechanics.moonMass << " [kg]" << std::endl;
-    std::cout << "Planet to Moon Distance: " << testObject.orbitalMechanics.planetMoonDistance << " [m]" << std::endl;
-    std::cout << "Moon Velocity: " << testObject.orbitalMechanics.moonVelocity << " [m/s]" << std::endl;
-    std::cout << "Orbit Time: " << testObject.orbitalMechanics.orbitTime << " [s]" << std::endl;
-    std::cout << "Gravitational Constant (G): " << testObject.orbitalMechanics.gravitationalConstant << " [(Nm^2)/(kg^2)]" << std::endl;
+// Function that sets the planet type and its corresponding mass, return true if valid, false otherwise
+bool OrbitalMechanics::setPlanetType(const std::string& name){
+    if (name == "Mercury"){
+        planetMass = 3.301e23;
+        planetName = "Mercury";
+    }
+    else if (name == "Venus"){
+        planetMass = 4.86732e24;
+        planetName = "Venus";
+    }
+    else if (name == "Earth"){
+        planetMass = 5.9722e24;
+        planetName = "Earth";
+    }
+    else if (name == "Mars"){
+        planetMass = 6.4171e23;
+        planetName = "Mars";
+    }
+    else if (name == "Jupiter"){
+        planetMass = 1.899e27;
+        planetName = "Jupiter";
+    }
+    else if (name == "Saturn"){
+        planetMass = 5.685e26;
+        planetName = "Saturn";
+    }
+    else if (name == "Uranus"){
+        planetMass = 8.682e25;
+        planetName = "Uranus";
+    }
+    else if (name == "Neptune"){
+        planetMass = 1.024e26;
+        planetName = "Neptune";
+    }
+    else{
+        return false;
+    }
+    return true;
+    // And yes, no Pluto, it's not considered a planet anymore, go cry about it...
 }
