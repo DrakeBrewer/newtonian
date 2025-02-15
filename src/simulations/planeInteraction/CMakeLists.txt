@@ -1,5 +1,5 @@
 add_library(plane_interaction
-	planeInteraction.cpp
+	planeIntMain.cpp
 )
 
 target_link_libraries(

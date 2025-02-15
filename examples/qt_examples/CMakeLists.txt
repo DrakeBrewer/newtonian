@@ -1,5 +1,5 @@
-// CMake taken from QT Widgets Tutorial - Creating a Window
-// https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/tutorials/widgets/toplevel/CMakeLists.txt?h=6.8
+# CMake taken from QT Widgets Tutorial - Creating a Window
+# https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/tutorials/widgets/toplevel/CMakeLists.txt?h=6.8
 cmake_minimum_required(VERSION 3.28.3)
 project(toplevel LANGUAGES CXX)
 
