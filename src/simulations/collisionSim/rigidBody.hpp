@@ -2,6 +2,9 @@
 
 class Vector3d {
 public:
+	Vector3d(float x, float y, float z);
+	~Vector3d();
+
 	float x;
 	float y;
 	float z;
@@ -12,13 +15,16 @@ public:
 };
 
 typedef struct Position {
-public:
 	float x;
 	float y;
 	float z;
 } Position_t;
 
 class RigidBody {
+public:
+	RigidBody();
+	~RigidBody();
+
 	Position_t position;
 	Vector3d velocity;
 	Vector3d acceleration;
