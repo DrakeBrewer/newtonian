@@ -1,6 +1,7 @@
 #include <iostream>
 #include "orbitalMechanics.hpp"
 #include "planeInteraction.h"
+#include "planets.hpp"
 
 // TODO: Add your header files here
 
@@ -48,6 +49,7 @@ int main() {
             break;
 		case 6:
 		    std::cout << "Selected: Planetary Physics" << std::endl;
+			planetSim();
             break;
         case 7:
             std::cout << "Selected: Collision System" << std::endl;
