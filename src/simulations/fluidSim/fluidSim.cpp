@@ -1,4 +1,5 @@
-#include "fluidSim.hpp"
+#include "fluid.hpp"
+#include "object.hpp"
 
 int main(int argc, char *argv[]){
     
@@ -39,9 +40,7 @@ int main(int argc, char *argv[]){
         }
         else if(userInput.compare("test2") == 0){
             cout << "Don't have the sim ready yet" << endl;
-            
-            //simulate test2
-            //runTest2();
+            runTest2();
             continue;
         }
         else{
@@ -56,6 +55,27 @@ int main(int argc, char *argv[]){
 }
 
 
+// Bouyant force thats pushing up is "density(fluid) * volume(object) * gravity"
+//
+// Density = mass / volume
+//
+// Volume = mass / density
+
+
+// --------Tests---------
+
+// need: to add user input for object and fluid
+//       - type and initial values
+// need: to implement buoyancy force and fluid pressure to simulate the object under
+//       a fluid.
+// need: to change the format of the test so that it finished in a certain time
+//       (this is because if the object sinks it will sink forever in this sim)
+// need: freefall equations if a object it falling into the fluid
+//       (to know the final velocity of the object before it enters the fluid)
+
+
+
+
 int runTest1(){
     //The top of the water level is at z=0 , everything less than 0 is water
 
@@ -63,16 +83,12 @@ int runTest1(){
     int sec = 0;
     int vFin = 0;
 
-    object obj(10);
-    fluid water;
+    object obj("wood",10);
+    //fluid liquid;
+    //fluid liquid("water");
+    fluid liquid("oil", 5);
 
-    // Will add user input to set the initial height, water level, velocity, density
-
-
-    //Will need to add the real equations for gravity to get the actual values of the final
-    //velocity of the object before it enters the water
-
-    while(obj.getZ() > water.getFL()){
+    while(obj.getZ() > liquid.getFL()){
         obj.setZ((obj.getZ() - 9.81));
         vFin = obj.getInitV() + (9.81*sec);
         sec++;
@@ -80,18 +96,29 @@ int runTest1(){
     }
 
     cout<<"Simulation Done\n";
-    cout<<"Object reached the water in "<< sec << " seconds." << endl;
-
+    cout<<"Object reached the liquid in "<< sec << " seconds." << endl;
+    cout<<"liquid  density is "<< liquid.getDensity() << endl;
 
     return 0;
 }
 
-
 int runTest2(){
     
-    //Not implemented yet
-    //
-    //Might not need it, think I can implement both into 1 test
+    string input;
+    int sec = 0;
+    int vFin = 0;
+
+    object obj("wood",-10);
+    fluid liquid("water");
+
+    while(obj.getZ() < liquid.getFL()){
+
+        obj.setZ(obj.getZ() + 1);
+        sec++;
+        cout<<"Sec:" << sec << "\nObject height:" << obj.getZ()<< endl;
+    }
+
+    cout<<"Simulation Done\n";
 
     return 0;
 }
