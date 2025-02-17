@@ -49,13 +49,11 @@ Then, verify the latest version using:
 cmake --version
 ```
 
-If the version output is not what you were expecting, you may need to change your PATH. Example:
+If the version output is not what you were expecting, you may need to configure your PATH. Example:
 // in .bashrc
 export PATH=/usr/local/bin:$PATH
 Then, you must reload the configurations using:
 source ~/.bashrc
-
-I (Isaac Osorio Beltran) added this linux install stuff, just didn't do it on the pull request 
 
 ## Build
 From within the root directory of the project run:
