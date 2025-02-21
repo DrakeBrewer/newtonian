@@ -29,6 +29,9 @@ class object{
             else if(obj == "aluminium"){
                 density = 2710;
             }
+            else if(obj == "rock"){
+                density = 2500;
+            }
             //default
         }
 
@@ -38,6 +41,9 @@ class object{
         
 
         // Setters and Getters
+        void setDensity(float d){density = d;}
+        float getDensity(){return density;}
+
         void setMass(float m){mass = m;}
         float getMass(){return mass;}
 

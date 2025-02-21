@@ -19,6 +19,7 @@ int main(int argc, char *argv[]){
         else if(userInput == "help"){
             cout << "Prompt options\n"
                     "exit: will exit the program\n"
+                    "run: runs sim with user's input\n"
                     "test1: sim an object falling into water\n"
                     "test2: sim an object starting under the water\n"
                     "details: detailed explanation of each test" << endl;
@@ -26,11 +27,20 @@ int main(int argc, char *argv[]){
         }
         else if(userInput == "details"){
             cout << "Detailed Explanation\n"
+                    "run:\n"
+                    "   Fluid level is at 0 and the user chooses what fluid, object and\n"
+                    "   the height of the object are\n"
                     "test1:\n" 
                     "   Object starts at a height of 10 meters and with a velocity of 0\n"
                     "test2:\n"
                     "   Object starts at a height of -10 meters (in the water)\n"
                     "   and a velocity of 0\n";
+            continue;
+        }
+        else if(userInput == "run"){
+            cout << "Running Simulation" << endl;
+            run();
+            cout << "Simulation Finished" << endl;
             continue;
         }
         else if(userInput.compare("test1") == 0){
@@ -70,10 +80,78 @@ int main(int argc, char *argv[]){
 //       a fluid.
 // need: to change the format of the test so that it finished in a certain time
 //       (this is because if the object sinks it will sink forever in this sim)
+//       or set a ground level in the fluid
 // need: freefall equations if a object it falling into the fluid
 //       (to know the final velocity of the object before it enters the fluid)
 
+int run(){
+    cout << "Select which object and fluid." << endl;
 
+    string userInput = {};
+    //Getting users input for what object to use
+    while(true){    
+        cout << "\nSelect object:";
+        getline(cin,userInput);
+        if(userInput == "exit" || userInput == "q"){
+            cout << "Exiting...\n";
+            return 0;
+        }
+        else if(userInput == "help"){
+            cout << "list: for list of objects\nhelp: list commands\nexit: to quit";
+            continue;
+        }
+        else if(userInput == "list"){
+            cout << "List of Objects\nwood, aluminium, rock\n";
+            continue;
+        }
+        else if(userInput == "wood" ||userInput == "aluminium" ||userInput == "rock"){
+            object obj(userInput);
+            break;
+        }
+    }
+    //Getting users input for what fluid to use
+    while(true){
+        cout << "\nSelect fluid:";
+        getline(cin,userInput);
+        if(userInput == "exit" || userInput == "q"){
+            cout << "Exiting...\n";
+            return 0;
+        }
+        else if(userInput == "help"){
+            cout << "list: for list of fluids\nhelp: list commands\nexit: to quit";
+            continue;
+        }
+        else if(userInput == "list"){
+            cout << "List of Fluids\nwater, oil, corn syrup\n";
+            continue;
+        }
+        else if(userInput == "water" ||userInput == "oil" ||userInput == "corn syrup" ){
+            fluid liquid(userInput);
+            break;
+        }
+    }
+    //Set height of the object
+    while(true){
+        cout << "\nSet Object Height (-20 to 20):";
+        getline(cin,userInput);
+        if(userInput == "exit" || userInput == "q"){
+            cout << "Exiting...\n";
+            return 0;
+        }
+        else if(userInput == "help"){
+            cout << "help: list commands\nexit: to quit\n";
+            continue;
+        }
+        float num = stof(userInput);
+        else if(num > -20 && num < 20){
+            //
+        }
+    }
+
+    
+
+    return 1;
+}
 
 
 int runTest1(){

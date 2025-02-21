@@ -48,7 +48,7 @@ class fluid{
 };
 
 // Prototypes
-
+int run();
 int runTest1();
 int runTest2();
 
