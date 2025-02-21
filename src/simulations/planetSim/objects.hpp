@@ -11,6 +11,7 @@ class object{//Base object class for spheres, rectangles, cylinders etc.
     float y;
     float z;
 
+
 public:
     object(const string &input){//constructor
         name = input;
@@ -34,7 +35,7 @@ public:
         cout<<"Position("<<x<<","<<y<<","<<z<<")"<<endl;
 
     }
-    void printPos(){
+    const string printPos(){
         cout<<"("<<x<<","<<y<<","<<z<<")"<<endl;
     }
 
