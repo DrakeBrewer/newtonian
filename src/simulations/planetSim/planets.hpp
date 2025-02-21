@@ -25,6 +25,10 @@ public:
         return object(input);
     }
 
+    plane spawnPlane(const string &input){
+        return plane(input);
+    }
+
     //Getters and setters
     float getGrav(){ return gravity;};
 
@@ -32,6 +36,7 @@ public:
 
 //Function Prototypes
 int planetSim();
-int runSim(planet p);
+int setSim(planet p);
+int freeFall(object obj, planet p, plane pl);
 
 #endif

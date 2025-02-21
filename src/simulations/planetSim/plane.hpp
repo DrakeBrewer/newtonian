@@ -12,7 +12,7 @@ class plane{
 
 
 public:
-    plane(string &input){//Constructor
+    plane(const string &input){//Constructor
         name = input;
         x = 0;
         y = 0;
