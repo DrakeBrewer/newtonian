@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <thread>
+
+//#include "object.hpp"
 using namespace std;
 
 class fluid{
@@ -48,8 +52,10 @@ class fluid{
 };
 
 // Prototypes
+// test
 int run();
 int runTest1();
 int runTest2();
-
+// functions
+//float netForce(object obj, fluid liquid, float velocity);
 #endif
