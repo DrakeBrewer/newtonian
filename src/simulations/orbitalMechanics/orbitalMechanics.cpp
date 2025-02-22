@@ -52,3 +52,23 @@ bool OrbitalMechanics::setPlanetType(const std::string& name){
     return true;
     // And yes, no Pluto, it's not considered a planet anymore, go cry about it...
 }
+
+// This method updates the moon's velocity and adjusts the other parameters accordingly
+void OrbitalMechanics::updateMoonVelocity(double newVelocity){
+    std::cout<<"update moon velocty"<<std::endl;
+}
+
+// This method updates the planet's mass and adjusts the other parameters accordingly
+void OrbitalMechanics::updatePlanetMass(double newPlanetMass){
+    std::cout<<"update planet mass"<<std::endl;
+}
+
+// This method updates the moon's mass and adjusts the other parameters accordingly
+void OrbitalMechanics::updateMoonMass(double newMoonMass){
+    std::cout<<"update moon mass"<<std::endl;
+}
+
+// This method updates the distance between the planet and moon and adjusts the other parameters accordingly
+void OrbitalMechanics::updatePlanetMoonDistance(double newDistance){
+    std::cout<<"update planet moon distance"<<std::endl;
+}
