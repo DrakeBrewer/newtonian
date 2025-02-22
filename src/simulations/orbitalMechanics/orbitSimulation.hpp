@@ -1,8 +1,16 @@
 #pragma once
 #include "orbitalMechanics.hpp"
 
-// Function that handles the user input for selecting a planet
-bool handlePlanetMassInput(OrbitalMechanics &simulation);
+class OrbitSimulation{
+private:
+    OrbitalMechanics orbitSim;
+    // Function that handles the user input for selecting a planet
+    bool handlePlanetMassInput();
 
-// Function that handles the user input for setting the moon mass
-bool handleMoonMassInput(OrbitalMechanics &simulation);
+    // Function that handles the user input for setting the moon mass
+    bool handleMoonMassInput();    
+
+public:
+    // This is the interface for the user, which starts/ runs the simulation and collects input
+    void runSimulation();
+};
