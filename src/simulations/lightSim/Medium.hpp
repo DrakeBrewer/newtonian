@@ -1,11 +1,12 @@
 #pragma once
 
 class Medium {
-private:
-    double refractiveIndex;
+protected:
+    double refractiveIndex; 
 
 public:
-    Medium(double index);
+    Medium(double index) : refractiveIndex(index) {}
+    virtual ~Medium() {}
 
-    double getRefractiveIdex() const;
+    double getRefractiveIndex() const { return refractiveIndex; }
 };
