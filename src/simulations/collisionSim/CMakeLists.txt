@@ -17,3 +17,6 @@ PRIVATE
 )
 
 set_target_properties(collision_sim PROPERTIES
+    WIN32_EXECUTABLE ON
+    MACOSX_BUNDLE ON
+)
