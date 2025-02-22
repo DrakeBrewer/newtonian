@@ -6,7 +6,7 @@ LightRay::LightRay(double intensity, double frequency, double speed, double x, d
 
 void LightRay::refract(const Medium& medium){
     double n1 = 1.0;
-    double n2 = medium.getRefractiveIdex();
+    double n2 = medium.getRefractiveIndex();
 
     properties.speed /= n2;
     std::cout << "Refracted. New speed = " << properties.speed << " m/s\n";
