@@ -13,7 +13,9 @@ void LightWave::diffract() {
 }
 
 void LightWave::showProperties() const {
+    std::cout << "LightWave properties:\n";
     std::cout << "Intensity: " << properties.intensity << " W/m^2\n";
     std::cout << "Frequency: " << properties.frequency << " Hz\n";
     std::cout << "Wavelength: " << properties.getWavelength() << "nm\n";
+    std::cout << "Phase: " << phase << "\n";
 }

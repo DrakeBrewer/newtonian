@@ -1,16 +1,30 @@
 #include "Scene.hpp"
 #include <iostream>
 
-void Scene::simulate(double timeStep) {
-    std::cout << "Duration: " << maxTime << " seconds...\n";
+Scene::Scene(double duration)
+    : timeElapsed(0.0), maxTime(duration) {}
 
-    while (timeElapsed < maxTime) {
-	std::cout << "Time: " << timeElapsed << "s\n";
-	timeElapsed += timeStep;
-    }
-
-
-    std::cout << "Simulation Complete.\n";
+void Scene::addObject(std::unique_ptr<Medium> obj) {
+    objects.push_back(std::move(obj));
 }
 
+void Scene::addLight(const LightBase& light) {
+    lights.push_back(std::unique_ptr<LightBase>(light.clone()));
+}
 
+void Scene::simulate(double timeStep) {
+    std::cout << "\nStarting simulation, duration: " << maxTime << " seconds\n";
+    while (timeElapsed < maxTime) {
+	std::cout << "Time: " << timeElapsed << "s\n";
+
+	for(auto& light : lights) {
+	    light->update(timeStep);
+	}
+	timeElapsed += timeStep;
+    }
+    std::cout << "Simulation Complete.\n\n";
+}
+
+const std::vector<std::unique_ptr<LightBase>>& Scene::getLights() const {
+    return lights;
+}

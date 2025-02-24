@@ -1,14 +1,2 @@
 TODO:
-    - Think about how to implement and build a scene. 2D vs 3D? 
-
-        * IDEA: Make the medium a property of the scene. Are you in glass, water, air, vacuum? And then, zone the mediums in the scene, divide it evenly into x mediums. The split will be in the z, and y axis, so to change mediums, propogate through x? Or just have one medium for specific simulations. Alot to think about. Sheesh. 
-
-        * Make medium a class?
-
-        * Make Lens.cpp, Mirror.cpp, Scene.cpp? Maybe deliberate with team before implementing scene. 
-
-        Start thinking about integrating Qt. How to create a scene in there. 
-
-    - Think about how to implement mirrors vs mediums. Subclasses vs seperate structs? 
-
-    - Make functions configurable and add basic parameters while the first two on this list are figured out.
+    - Add spacial element to entities. Objects, and light. That way, when a light is travelling, the interaction happens when they collide. The interaction function is called dynamically in this way. 

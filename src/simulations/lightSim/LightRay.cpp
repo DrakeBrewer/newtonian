@@ -1,13 +1,14 @@
 #include "LightRay.hpp"
 #include <iostream>
+#include <cmath>
 
 LightRay::LightRay(double intensity, double frequency, double speed, double x, double y, double z)
     : properties(intensity, frequency, speed, x, y, z) {}
 
 void LightRay::refract(const Medium& medium){
-    double n1 = 1.0;
     double n2 = medium.getRefractiveIndex();
-
+    // Angle change based on Snell's law to be implemented.
+    // For now, speed simply changes based on new index.
     properties.speed /= n2;
     std::cout << "Refracted. New speed = " << properties.speed << " m/s\n";
 }
@@ -24,6 +25,7 @@ void LightRay::reflect() {
 }
 
 void LightRay::showProperties() const {
+    std::cout << "LightRay Properties:\n";
     std::cout << "Intensity: " << properties.intensity << " W/m^2";
     std::cout << "Frequency: " << properties.frequency << " Hz\n";
     std::cout << "Wavelength: " << properties.getWavelength() << " nm\n";

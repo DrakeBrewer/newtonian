@@ -13,6 +13,7 @@ void LightParticle::collide() {
 }
 
 void LightParticle::showProperties() const {
+    std::cout << "LightParticle Properties: \n";
     std::cout << "Intensity: " << properties.intensity << " W/m^2\n";
     std::cout << "Wavelength: " << properties.getWavelength() << " nm\n";
     std::cout << "Energy: " << energy << " J\n";
