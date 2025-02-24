@@ -1,34 +1,24 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "LightBase.hpp"
 #include "Medium.hpp"
-#include "LightRay.hpp"
-#include "LightWave.hpp"
-#include "LightParticle.hpp"
+#include <iostream>
 
 class Scene {
     private:
+        std::vector<std::unique_ptr<LightBase>> lights;
         std::vector<std::unique_ptr<Medium>> objects; 
-        std::vector<std::unique_ptr<LightRay>> rays; 
-        std::vector<std::unique_ptr<LightWave>> waves;
-        std::vector<std::unique_ptr<LightParticle>> photons;
-
         double timeElapsed;
         double maxTime;
 
     public:
-        Scene (double duration = 10.0) // Default duration of 10 seconds
-            : timeElapsed(0.0), maxTime(duration) {}
+        //Scene bounded by duration of Scene. Default 10 seconds
+        Scene (double duration = 10.0);
 
         void addObject(std::unique_ptr<Medium> obj);
-        void addRay(const LightRay& ray);
-        void addWave(const LightWave& wave);
-        void addPhoton(const LightParticle& photon);
+        void addLight(const LightBase& light);
         void simulate(double timeStep);
 
-        std::vector<std::unique_ptr<LightRay>>& getRays() { return rays; }
-        std::vector<std::unique_ptr<LightWave>>& getWaves() { return waves; }
-        std::vector<std::unique_ptr<LightParticle>>& getParticles() { return photons; }
-
-        bool isComplete() const { return timeElapsed >= maxTime; }
+        const std::vector<std::unique_ptr<LightBase>>& getLights() const;
 };

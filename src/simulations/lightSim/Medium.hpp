@@ -9,4 +9,8 @@ public:
     virtual ~Medium() {}
 
     double getRefractiveIndex() const { return refractiveIndex; }
+
+    virtual void interact(class LightBase& light) const {
+        // No interaction by default, subclass can override
+    }
 };
