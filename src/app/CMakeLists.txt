@@ -1,9 +1,22 @@
-add_executable(newtonian_app
-	main.cpp
+find_package(Qt6 REQUIRED COMPONENTS
+	Core
+	Widgets
 )
 
-target_link_libraries(
-	newtonian_app
-	orbital_mechanics
-	plane_interaction
+qt_standard_project_setup()
+
+add_executable(newtonian
+	main.cpp
+	window.cpp # TODO: make window a separate library
+)
+
+target_link_libraries(newtonian
+PRIVATE
+	Qt6::Core
+	Qt6::Widgets
+)
+
+set_target_properties(newtonian PROPERTIES
+    WIN32_EXECUTABLE ON
+    MACOSX_BUNDLE ON
 )
