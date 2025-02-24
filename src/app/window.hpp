@@ -14,7 +14,6 @@ public:
 // TODO: Turn sidebar into a class
 // class Sidebar : public QWidget {
 // 	Q_OBJECT
-
 // public:
 // 	Sidebar(QWidget *parent = nullptr);
 // };
