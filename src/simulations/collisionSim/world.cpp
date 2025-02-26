@@ -8,7 +8,7 @@ void PhysicsWorld::addBody(RigidBody *body) {
 
 void PhysicsWorld::tick(double delta) {
 	this->timeElapsed += delta;
-	std::cout << "\r" << std::fflush(stdout) << "Time: " << this->timeElapsed;
+	// std::cout << "\r" << std::fflush(stdout) << "Time: " << this->timeElapsed;
 
 	for (auto& body : this->bodies) {
 		// TODO: 

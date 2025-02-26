@@ -1,5 +1,7 @@
 #include "rigidBody.hpp"
 #include <cmath>
+#include <cstdio>
+#include <iostream>
 
 Vector3d::Vector3d(float x, float y, float z): x(0), y(0), z(0) {
 	this->x = x;
@@ -45,6 +47,8 @@ void RigidBody::update(double delta) {
 		this->position.y += this->velocity.y * delta;
 		this->position.z += this->velocity.z * delta;
 	}
+
+	std::cout << "\r" << std::fflush(stdout) << "x: " << this->position.x << "y: " << this->position.y << "z: " << this->position.z;
 }
 
 

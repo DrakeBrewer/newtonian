@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
 
 	RigidBody *obj = new RigidBody(
 		Vector3d(0, 0, 100),
-		Vector3d(),
+		Vector3d(10, -10, 20),
 		Vector3d(),
 		10,
 		false
