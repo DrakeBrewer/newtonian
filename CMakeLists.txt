@@ -24,14 +24,14 @@ include(GoogleTest)
 
 # Allows for build of exclusively unit tests for 
 #   faster build time when testing
-function(add_unit_tests test)
+function(add_tests test)
     gtest_discover_tests(${test}
       # Below allows us to run tests within directories.
       # If you only want to run tests in build/src/physics/friction,
       #     you can do so from that directory.
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
-    add_dependencies(run_unit_tests ${test})
+    add_dependencies(unit_tests ${test})
 endfunction()
 
 add_custom_target(run_unit_tests ALL)
