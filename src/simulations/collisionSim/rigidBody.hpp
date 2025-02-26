@@ -10,25 +10,29 @@ public:
 	float y;
 	float z;
 
+	// TODO: vector params should be by ref since we prob
+	// aren't changing the incoming vector.
 	Vector3d crossProduct(Vector3d vec);
 	float dotProduct(Vector3d vec);
 	float magnitude();
-};
 
-typedef struct Position {
-	float x;
-	float y;
-	float z;
-} Position_t;
+	// TODO:: https://people.math.harvard.edu/~jjchen/math21a/handouts/vector-ops.html
+	// - [ ] Vector addition
+	// - [ ] Scalar multiplication
+	// - [ ] Transformations?
+};
 
 class RigidBody {
 public:
-	RigidBody(Position initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic);
+	RigidBody(Vector3d initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic);
 	~RigidBody(){};
 
-	Position_t position;
+	Vector3d position;
 	Vector3d velocity;
 	Vector3d acceleration;
 	float mass;
 	bool isStatic;
+
+	void update(double delta);
+	void applyForce(Vector3d force);
 };
