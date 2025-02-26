@@ -34,7 +34,7 @@ function(add_tests test)
     add_dependencies(unit_tests ${test})
 endfunction()
 
-add_custom_target(run_unit_tests ALL)
+add_custom_target(unit_tests ALL)
 
 add_subdirectory(lib)
 add_subdirectory(examples)
