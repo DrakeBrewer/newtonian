@@ -1,5 +1,5 @@
 #include "rigidBody.hpp"
-#include "delta_time.hpp"
+#include "deltaTime.hpp"
 #include "world.hpp"
 
 int main(int argc, char **argv) {
@@ -22,12 +22,12 @@ int main(int argc, char **argv) {
 	);
 
 	world->addBody(obj);
-	world->addBody(floor);
+	// world->addBody(floor);
 
-	while (true) {
+	while (obj->position.z > 0) {
 		// TODO: Might want to change this to a float for perf reasons
 		// Kind of min-maxxing at that point though.
-		double dt = delta_time();
+		double dt = deltaTime();
 		world->tick(dt);
 	}
 

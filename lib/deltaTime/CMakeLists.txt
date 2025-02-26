@@ -1,5 +1,5 @@
 add_library(delta_time
-	delta_time.cpp
+	deltaTime.cpp
 )
 
 target_include_directories(delta_time PUBLIC

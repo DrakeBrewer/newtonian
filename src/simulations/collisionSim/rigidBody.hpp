@@ -12,8 +12,8 @@ public:
 
 	// TODO: vector params should be by ref since we prob
 	// aren't changing the incoming vector.
-	Vector3d crossProduct(Vector3d vec);
-	float dotProduct(Vector3d vec);
+	Vector3d crossProduct(const Vector3d& vec);
+	float dotProduct(const Vector3d& vec);
 	float magnitude();
 
 	// TODO:: https://people.math.harvard.edu/~jjchen/math21a/handouts/vector-ops.html

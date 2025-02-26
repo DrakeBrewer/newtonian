@@ -1,14 +1,14 @@
 #include <ctime>
 #include <chrono>
 
-#include "delta_time.hpp"
+#include "deltaTime.hpp"
 
 /*
  * delta_time
  * @brief Calculates the delta time for frame independent state increments
  * @return time since last call to function
  */
-double delta_time() {
+double deltaTime() {
 	// Removes the need to track things with a class
 	static auto prev_time = std::chrono::steady_clock::now();
 	auto curr_time = std::chrono::steady_clock::now();

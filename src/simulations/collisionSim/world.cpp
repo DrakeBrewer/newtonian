@@ -1,3 +1,4 @@
+#include <iostream>
 #include "world.hpp"
 #include "rigidBody.hpp"
 
@@ -7,10 +8,11 @@ void PhysicsWorld::addBody(RigidBody *body) {
 
 void PhysicsWorld::tick(double delta) {
 	this->timeElapsed += delta;
+	std::cout << "\r" << std::fflush(stdout) << "Time: " << this->timeElapsed;
 
 	for (auto& body : this->bodies) {
 		// TODO: 
-		// - [ ] apply forces
+		// - [ ] apply forces (kinda implemented)
 		// - [x] update body
 		// - [ ] check collision (can of worms, notes contain details)
 		// - [ ] resolve collisions
