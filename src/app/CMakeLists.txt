@@ -7,10 +7,11 @@ qt_standard_project_setup()
 
 add_executable(newtonian
 	main.cpp
-	window.cpp # TODO: make window a separate library
 )
 
 target_link_libraries(newtonian
+PUBLIC
+	window
 PRIVATE
 	Qt6::Core
 	Qt6::Widgets

@@ -34,7 +34,7 @@ target_link_libraries(
 	GTest::gtest_main
 )
 
-add_unit_tests(example_test)
-add_unit_tests(hello_test)
-add_unit_tests(math_test)
+add_tests(example_test)
+add_tests(hello_test)
+add_tests(math_test)
 
