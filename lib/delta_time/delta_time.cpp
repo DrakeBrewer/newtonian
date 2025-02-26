@@ -13,5 +13,8 @@ double delta_time() {
 	static auto prev_time = std::chrono::steady_clock::now();
 	auto curr_time = std::chrono::steady_clock::now();
 
-	return std::chrono::duration<double>(curr_time - prev_time).count();
+	double delta = std::chrono::duration<double>(curr_time - prev_time).count();
+	prev_time = curr_time;
+
+	return delta;
 }
