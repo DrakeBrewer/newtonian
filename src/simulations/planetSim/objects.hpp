@@ -1,7 +1,9 @@
 #ifndef OBJECTS_H
 #define OBJECTS_H
 
-#include "planets.hpp";
+#include <iostream>
+#include <string>
+using namespace std;
 
 class object{//Base object class for spheres, rectangles, cylinders etc.
     string name;
@@ -35,7 +37,7 @@ public:
         cout<<"Position("<<x<<","<<y<<","<<z<<")"<<endl;
 
     }
-    const string printPos(){
+    void printPos(){
         cout<<"("<<x<<","<<y<<","<<z<<")"<<endl;
     }
 

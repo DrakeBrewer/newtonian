@@ -1,8 +1,9 @@
 #ifndef PLANE_H
 #define PLANE_H
 
-#include "planets.hpp"
-
+#include <iostream>
+#include <string>
+using namespace std;
 class plane{
 
     string name;
@@ -36,4 +37,4 @@ public:
 
 };
 
-#endif;
+#endif
