@@ -2,6 +2,13 @@
 #include "planets.hpp"
 #include "objects.hpp"
 
+int main(int argc, char *argv[]){
+
+    planetSim();
+    return 0;
+
+};
+
 int planetSim(){
 
     string userIn;
@@ -228,7 +235,7 @@ int setSim(planet p){
 int freeFall(object obj, planet p, plane pl){//Free fall simulation
     
     //Vars I will need
-    int vFin = 0;
+    float vFin = 0;
     int sec = 0;
     int time = 0;
 
@@ -245,9 +252,9 @@ int freeFall(object obj, planet p, plane pl){//Free fall simulation
 
     while(sec != time){//Free fall loop
 
-        obj.setX((obj.getY() - p.getGrav()));
+        obj.setY((obj.getY()) - (p.getGrav()));
 
-        if(obj.getY() == pl.getX()){
+        if((obj.getY()) <= (pl.getX())){
 
             cout<<"Object Reached Plane"<<endl;
             break;
@@ -255,7 +262,7 @@ int freeFall(object obj, planet p, plane pl){//Free fall simulation
 
         obj.printPos();
 
-        vFin = obj.getInitV() + (p.getGrav()*sec);
+        vFin = (obj.getInitV()) + ((p.getGrav())*sec);
 
         cout<<"Velocity: "<<vFin<<"At time: "<<sec<<endl;
 
@@ -266,7 +273,8 @@ int freeFall(object obj, planet p, plane pl){//Free fall simulation
 
     cout<<"Final Velocity: "<<vFin<<endl;
 
-    cout<<"Final Position:"<< obj.printPos() <<endl;
+    cout<<"Final Position:"<< endl;
+    obj.printPos();
 
     return 0;
 
