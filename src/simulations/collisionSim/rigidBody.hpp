@@ -4,7 +4,7 @@ class Vector3d {
 public:
 	Vector3d(): x(0), y(0), z(0) {}
 	Vector3d(float x, float y, float z);
-	~Vector3d();
+	~Vector3d(){};
 
 	float x;
 	float y;
@@ -24,7 +24,7 @@ typedef struct Position {
 class RigidBody {
 public:
 	RigidBody(Position initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic);
-	~RigidBody();
+	~RigidBody(){};
 
 	Position_t position;
 	Vector3d velocity;

@@ -26,7 +26,7 @@ float Vector3d::magnitude() {
 	return std::sqrt(sum);
 }
 
-RigidBody::RigidBody(Position_t initPos, Vector3d initVel, Vector3d initAcc, float mass) {
+RigidBody::RigidBody(Position_t initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic) {
 	this->position = initPos;
 	this->velocity = initVel;
 	this->acceleration = initAcc;
