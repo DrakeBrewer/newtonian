@@ -1,14 +1,12 @@
-#include <iostream>
-#include <ostream>
-
-#include "main.hpp"
 #include "rigidBody.hpp"
 #include "delta_time.hpp"
+#include "world.hpp"
 
 int main(int argc, char **argv) {
-	std::cout << "Hello World!" << std::endl;
+	PhysicsWorld *world = new PhysicsWorld();
+
 	RigidBody *obj = new RigidBody(
-		Position_t{0, 0, 10},
+		Vector3d(0, 0, 100),
 		Vector3d(),
 		Vector3d(),
 		10,
@@ -16,22 +14,22 @@ int main(int argc, char **argv) {
 	);
 
 	RigidBody *floor = new RigidBody(
-		Position_t{0, 0, 0},
+		Vector3d(),
 		Vector3d(),
 		Vector3d(),
 		1000,
 		true
 	);
 
-	while (true) {
-		double dt = delta_time();
-		tick(dt);
+	world->addBody(obj);
+	world->addBody(floor);
 
+	while (true) {
+		// TODO: Might want to change this to a float for perf reasons
+		// Kind of min-maxxing at that point though.
+		double dt = delta_time();
+		world->tick(dt);
 	}
 
 	return 0;
-}
-
-void tick(double delta) {
-		std::cout << "delta time: " << delta << std::endl;
 }

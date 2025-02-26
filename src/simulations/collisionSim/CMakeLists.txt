@@ -1,6 +1,7 @@
 add_executable(collision_sim
 	main.cpp
 	rigidBody.cpp
+	world.cpp
 )
 
 target_link_libraries(collision_sim
