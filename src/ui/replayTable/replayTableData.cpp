@@ -1,6 +1,17 @@
 
 #include "replayTable.hpp"
 
+// Function to convert std::variant to string
+std::string variantToString(const value& val) 
+{
+    // lamda that takes a value and returns a string
+    return std::visit([](const auto& v) -> std::string {
+        std::stringstream stream;
+        stream << v; // stringstream automatically converts to a string
+        return stream.str();
+    }, val);
+}
+
 // basic testObject
 testObject::testObject(double p, double v)
 {
@@ -43,6 +54,52 @@ void replayTable::printTable() const
     }
 }
 
+void replayTable::reset()
+{
+    table.clear();
+}
+
+void replayTable::exportCSV(const std::string& filename) const 
+{
+    std::ofstream file(filename);
+    if (!file.is_open()) 
+    {
+        std::cerr << "ERROR opening file: " << filename << std::endl;
+        return;
+    }
+
+    // Check if the table is empty
+    if (table.empty()) 
+    {
+        std::cerr << "Table is empty" << std::endl;
+        return;
+    }
+    // write the header with the attribute names first
+    const auto& firstRow = table.front();
+    bool firstElem = true;
+    for (const auto& elem : firstRow) 
+    {
+        if (!firstElem) file << ","; // commas between elements
+        file << elem.first; // attribute name
+        firstElem = false;
+    }
+    file << "\n"; // move on to the actual data
+
+    // start writing rows
+    for (const auto& row : table) 
+    {
+        firstElem = true;
+        for (const auto& elem : row) 
+        {
+            if (!firstElem) file << ",";
+            file << variantToString(elem.second); // convert to string
+            firstElem = false;
+        }
+        file << "\n"; // move on to next row
+    }
+    file.close();
+}
+
 replayTableUpdater::replayTableUpdater(testObject* obj, replayTable* tab, const std::vector<std::string>& attrName, int freq)
 {
     object = obj;
@@ -58,6 +115,7 @@ void replayTableUpdater::update()
     if (tickCount % updateFrequency == 0)
     {
         attributeMap newRow;
+        newRow["timestamp"] = tickCount;
         for (const auto& attr : trackedAttributes)
         {
             auto iter = object->getAttributes().find(attr);

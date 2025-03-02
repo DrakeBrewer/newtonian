@@ -4,11 +4,16 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <fstream>
+#include <sstream>
 #include <variant>
 
 // create aliases for table structure
 using value = std::variant<int, double, std::string, float>;
 using attributeMap = std::map<std::string, value>;
+
+// Function to convert variant to string
+std::string variantToString(const value& val);
 
 // example test object
 class testObject{
@@ -29,6 +34,8 @@ class replayTable{
         void addRow(const attributeMap& newData);
         // print out the table
         void printTable() const;
+        void reset();
+        void exportCSV(const std::string& filename) const;
 };
 
 class replayTableUpdater{

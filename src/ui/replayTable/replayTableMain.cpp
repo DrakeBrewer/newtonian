@@ -21,6 +21,9 @@ int main() {
     }
 
     table.printTable();  // print table
+    table.exportCSV("replayData.csv");
+    table.reset();
+    table.printTable();
     return 0;
 }
 
