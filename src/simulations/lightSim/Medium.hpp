@@ -1,16 +1,16 @@
 #pragma once
+#include <math.h>
+#include <iostream>
 
 class Medium {
-protected:
-    double refractiveIndex; 
-
 public:
-    Medium(double index) : refractiveIndex(index) {}
-    virtual ~Medium() {}
+    float refractiveIndex;
+    std::string mediumName;
 
-    double getRefractiveIndex() const { return refractiveIndex; }
+    Medium(float refractionIndex, std::string name)
+        : refractiveIndex(refractionIndex), mediumName(std::move(name)) {}
 
-    virtual void interact(class LightBase& light) const {
-        // No interaction by default, subclass can override
+    float refractionAngle(float incidentAngle) const {
+        return asin(sin(incidentAngle) / refractiveIndex);
     }
 };
