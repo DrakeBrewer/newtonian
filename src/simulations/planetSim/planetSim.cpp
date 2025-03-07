@@ -1,11 +1,29 @@
 
 #include "planets.hpp"
 #include "objects.hpp"
+#include <QApplication>
+#include <QMainWindow>
 
 int main(int argc, char *argv[]){
 
-    planetSim();
-    return 0;
+    std::cout << "Starting application..." << std::endl;
+
+    QApplication app(argc, argv);
+
+    QMainWindow mainWindow;
+    mainWindow.setWindowTitle("PlanetSim - Qt Test");
+    mainWindow.resize(800, 600);
+    mainWindow.show();
+
+    std::cout << "Entering event loop..." << std::endl;
+    return app.exec();
+
+    
+
+    /*planetSim();
+    return 0;*/
+
+
 
 };
 
