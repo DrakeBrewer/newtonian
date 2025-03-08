@@ -102,6 +102,51 @@ Cuboid::Cuboid(float length, float width, float height, Vector3d position, float
 	this->vertices[7] = Vector3d(this->position.x - halfL, this->position.y - halfW, this->position.z - halfH);  // bottom-back-left
 }
 
+void Cuboid::update(double delta) {
+	RigidBody::update(delta);
+	this->updateVertices();
+}
+
+void Cuboid::updateVertices() {
+	float halfL = this->length / 2;
+	float halfW = this->width / 2;
+	float halfH = this->height / 2;
+
+	// NOTE: This code is disgusting
+	// TODO: Find a not gross way to do it without remaking a bunch of vectors..?
+	this->vertices[0].x = this->position.x + halfL;
+	this->vertices[0].y = this->position.y + halfW;
+	this->vertices[0].z = this->position.z + halfH;
+
+	this->vertices[1].x = this->position.x - halfL;
+	this->vertices[1].y = this->position.y + halfW;
+	this->vertices[1].z = this->position.z + halfH;
+
+	this->vertices[2].x = this->position.x + halfL;
+	this->vertices[2].y = this->position.y - halfW;
+	this->vertices[2].z = this->position.z + halfH;
+
+	this->vertices[3].x = this->position.x - halfL;
+	this->vertices[3].y = this->position.y - halfW;
+	this->vertices[3].z = this->position.z + halfH;
+
+	this->vertices[4].x = this->position.x + halfL;
+	this->vertices[4].y = this->position.y + halfW;
+	this->vertices[4].z = this->position.z - halfH;
+
+	this->vertices[5].x = this->position.x - halfL;
+	this->vertices[5].y = this->position.y + halfW;
+	this->vertices[5].z = this->position.z - halfH;
+
+	this->vertices[6].x = this->position.x + halfL;
+	this->vertices[6].y = this->position.y - halfW;
+	this->vertices[6].z = this->position.z - halfH;
+
+	this->vertices[7].x = this->position.x - halfL;
+	this->vertices[7].y = this->position.y - halfW;
+	this->vertices[7].z = this->position.z - halfH;
+}
+
 float Cuboid::surfaceArea() {
 	return 2 * (this->length * this->width +
 		    this->height * this->width +

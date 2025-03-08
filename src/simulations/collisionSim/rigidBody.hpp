@@ -48,7 +48,7 @@ public:
 
 	bool isStatic;
 
-	void update(double delta);
+	virtual void update(double delta);
 	void applyForce(Vector3d force);
 };
 
@@ -77,8 +77,12 @@ public:
 
 	Vector3d vertices[8];
 
+	void update(double delta);
+
 	float surfaceArea();
 	float volume();
+private:
+	void updateVertices();
 };
 
 // TODO: meshes and compound objects?
