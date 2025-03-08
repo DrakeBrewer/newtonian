@@ -38,7 +38,7 @@ bool OrbitSimulation::handleMoonMassInput(){
     // Set var for moon mass, and also min (0.1%) and max (50%) of planet mass for the moon mass range
     double userMoonMass;
     double minMoonMass = (orbitSim.planetMass * 0.001);
-    double maxMoonMass = (orbitSim.planetMass * 0.5);
+    double maxMoonMass = (orbitSim.planetMass * 0.1);
 
     // Prompt the user over and over until a valid moon mass is selected
     while(true){
@@ -69,6 +69,43 @@ bool OrbitSimulation::handleMoonMassInput(){
     }
 }
 
+bool OrbitSimulation::handleParameterUpdate(){
+    int parameterChoice;
+    double newParameterValue;
+
+    std::cout<<"\n===========Now You Can Update Equation Parameters===========" << std::endl;
+    std::cout << "1) Update Moon Velocity" << std::endl;
+    std::cout << "2) Update Planet Mass" << std::endl;
+    std::cout << "3) Update Planet-Moon Distance" << std::endl;
+    std::cout << "0) Exit Parameter Updates" << std::endl;
+    std::cout << "Enter Parameter Update Choice: ";
+    std::cin>> parameterChoice;
+
+    if(parameterChoice == 0){
+        std::cout << "Exiting Parameter Updates..."<<std::endl;
+        return false;
+    }
+    else if(parameterChoice == 1){
+        std::cout << "\n<Enter new moon velocity [m/s]: ";
+        std::cin >> newParameterValue;
+        orbitSim.updateMoonVelocity(newParameterValue);
+    }
+    else if(parameterChoice == 2){
+        std::cout << "\n<Enter new planet mass [kg]: ";
+        std::cin >> newParameterValue;
+        orbitSim.updatePlanetMass(newParameterValue);
+    }
+    else if(parameterChoice == 3){
+        std::cout << "\n<Enter new planet-moon distance [m]: ";
+        std::cin >> newParameterValue;
+        orbitSim.updatePlanetMoonDistance(newParameterValue);
+    }
+    else{
+        std::cout<<"\n<ERROR: Invalid parameter update choice, select options 0-3>"<<std::endl;
+    }
+    return true;
+}
+
 // This is the interface for the user, which starts/ runs the simulation and collects input
 void OrbitSimulation::runSimulation(){
     std::cout<<"=============================================================="<<std::endl;
@@ -93,6 +130,12 @@ void OrbitSimulation::runSimulation(){
             break;
         }
         // Handle moon mass, only after a valid planet is selected 
-        handleMoonMassInput();
+        if(!handleMoonMassInput()){
+            continue;
+        }
+        // Handle parameter updates
+        while(handleParameterUpdate()){
+            continue;
+        }
     }
 }
