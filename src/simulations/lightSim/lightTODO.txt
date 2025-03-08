@@ -1,2 +1,4 @@
 TODO:
-    - Add spacial element to entities. Objects, and light. That way, when a light is travelling, the interaction happens when they collide. The interaction function is called dynamically in this way. 
+    - Condense code base. Some files can be condesned into one. For example, do I need both a light struct and a light base? 
+    - Finish setting up spacial representation, then begin adding all the calculations.
+    - Test test test. Make unit test. 

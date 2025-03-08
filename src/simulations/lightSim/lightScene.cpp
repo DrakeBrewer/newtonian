@@ -3,8 +3,14 @@
 
 lightScene::lightScene(double duration, Vector3d minBound = {0,0,0}, Vector3d maxBound = {100,100,100})
     :	timeElapsed(0.0),
-	maxTime(duration),
+	maxTime((duration < 30.0) ? 30.0 : duration),
 	bounds({minBound, maxBound}),
+	ground({0,1,0}, 0) {}
+
+lightScene::lightScene()
+    :	timeElapsed(0.0),
+	maxTime(30.0),
+	bounds({{0,0,0}, {100,100,100}}),
 	ground({0,1,0}, 0) {}
 
 void lightScene::addMedium(std::unique_ptr<Medium> newMedium) {
@@ -22,7 +28,7 @@ void lightScene::simulate(double timeStep) {
 
     // TODO: Finish refactoring dimensional component in to simulation. Have the ground absorb some light, update position of light and objects, etc.
     
-    // TODO: Consider wether to use deltaTime or fixed time step, find out what interloping means.
+    // TODO: Consider wether to use deltaTime or fixed time step
 
     while (timeElapsed < maxTime) {
 	std::cout << "Time: " << timeElapsed << "s\n";

@@ -4,7 +4,7 @@ add_executable(light_sim
    LightRay.cpp
    LightWave.cpp
    LightStuct.hpp
-   Scene.cpp
+   lightScene.cpp
    Medium.hpp
    Mirror.cpp
 )

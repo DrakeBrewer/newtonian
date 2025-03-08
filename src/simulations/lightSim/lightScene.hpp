@@ -30,17 +30,19 @@ struct Plane {
 };
 
 class lightScene {
-    private:
+    public:
         std::vector<std::unique_ptr<LightBase>> lights;
         std::vector<std::unique_ptr<Medium>> mediums; 
         sceneBounds bounds;
         Plane ground;
+        double fixedTime = 1.0/60; // 60Hz fixed time step
         double timeElapsed;
         double maxTime;
 
-    public:
         //lightScene bounded by duration of lightScene. Default 10 seconds
         lightScene (double duration, Vector3d minBound, Vector3d maxBound);
+        lightScene ();
+        ~lightScene ();
 
         void addMedium(std::unique_ptr<Medium> newMedium);
         void addLight(const LightBase& newLight);
