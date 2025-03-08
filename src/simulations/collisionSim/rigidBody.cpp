@@ -58,3 +58,25 @@ void RigidBody::applyForce(Vector3d force) {
 	this->acceleration.y = force.y / this->mass;
 	this->acceleration.z = force.z / this->mass;
 }
+
+float Sphere::surfaceArea() {
+	return 4.0f * PI * std::pow(this->radius, 2);
+}
+
+float Sphere::volume() {
+	return (4.0f/3.0f) * PI * std::pow(this->radius, 3);
+}
+
+float Sphere::diameter() {
+	return 2 * this->radius;
+}
+
+float Cuboid::surfaceArea() {
+	return 2 * (this->length * this->width +
+		    this->height * this->width +
+		    this->length * this->height);
+}
+
+float Cuboid::volume() {
+	return this->length * this->width * this->height;
+}
