@@ -7,8 +7,8 @@
 
 class IShape {
 public:
-	IShape();
-	virtual ~IShape();
+	IShape() {};
+	virtual ~IShape() {};
 
 	virtual float volume() = 0;
 	virtual float surfaceArea() = 0;
@@ -69,7 +69,7 @@ class Cuboid : public RigidBody,
 	public IShape {
 public:
 	Cuboid(float length, float width, float height, Vector3d position, float mass);
-	~Cuboid();
+	~Cuboid() {};
 
 	float length;
 	float width;

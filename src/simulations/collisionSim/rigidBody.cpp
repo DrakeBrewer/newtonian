@@ -50,8 +50,8 @@ void RigidBody::update(double delta) {
 
 	std::cout << "\r" << std::fflush(stdout) <<
 		"x: " << this->position.x <<
-		"y: " << this->position.y <<
-		"z: " << this->position.z;
+		", y: " << this->position.y <<
+		", z: " << this->position.z;
 }
 
 

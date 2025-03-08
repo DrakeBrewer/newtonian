@@ -21,10 +21,17 @@ int main(int argc, char **argv) {
 		true
 	);
 
-	world->addBody(obj);
+	Sphere *sphere = new Sphere(
+		3.0f,
+		Vector3d(0, 0, 100),
+		10
+	);
+
+	world->addBody(sphere);
+	// world->addBody(obj);
 	// world->addBody(floor);
 
-	while (obj->position.z > 0) {
+	while (sphere->position.z > 0) {
 		// TODO: Might want to change this to a float for perf reasons
 		// Kind of min-maxxing at that point though.
 		double dt = deltaTime();
