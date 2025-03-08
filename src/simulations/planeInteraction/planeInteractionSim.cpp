@@ -4,14 +4,84 @@
 #include <limits>
 #include <string>
 #include <cctype>
+#include <vector>
+#include <algorithm>
 
-static double getPositiveDouble(const std::string &prompt, bool allowZero = false);
-static double getGravity(const std::string &prompt);
-static std::string getValidString(const std::string &prompt);
+// Helper function to get a positive double value.
+// If allowZero is false, only values greater than 0 are accepted.
+// If allowZero is true, 0 is accepted but negatives are not.
+double getPositiveDouble(const std::string &prompt, bool allowZero = false) {
+	std::cout << prompt;
+	double value = 0.0;
+	while (true) {
+		std::cin >> value;
+		if (std::cin.fail()) {
+			std::cout << "Invalid input. Please enter a valid number.\n";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		} else {
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			if (!allowZero && value <= 0) {
+				std::cout << "Value must be a positive number.\n";
+			} else if (allowZero && value < 0) {
+				std::cout << "Value must be >= 0.\n";
+			} else {
+				break;
+			}
+		}
+		std::cout << prompt;
+	}
+	return value;
+}
 
+// Helper function to get a valid gravity value.
+// If the user enters a value <= 0, gravity defaults to 9.81.
+double getGravity(const std::string &prompt) {
+	double g = 0.0;
+	while (true) {
+		std::cout << prompt;
+		std::cin >> g;
+		if (std::cin.fail()) {
+			std::cout << "Invalid input. Please enter a valid number.\n";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		} else {
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			if (g <= 0) {
+				std::cout << "Gravity cannot be zero or negative. Defaulting to 9.81 m/s^2.\n";
+				g = 9.81;
+			}
+			break;
+		}
+	}
+	return g;
+}
+
+// Helper function to prompt the user to select one of the allowed options.
+// It continues to prompt until the user enters a valid choice.
+std::string getValidChoice(const std::string &prompt, const std::vector<std::string>& allowedOptions) {
+	while (true) {
+		std::cout << prompt;
+		std::string input;
+		std::getline(std::cin, input);
+		// Check if the input is one of the allowed options.
+		if (std::find(allowedOptions.begin(), allowedOptions.end(), input) != allowedOptions.end()) {
+			return input;
+		} else {
+			std::cout << "Invalid choice. Please choose one of the following options: ";
+			for (const auto &option : allowedOptions) {
+				std::cout << option << " ";
+			}
+			std::cout << "\n";
+		}
+	}
+}
+
+// Main simulation function that gathers input, creates the simulation object, and displays results.
 void runPlaneSimulation() {
 	std::cout << "----- Inclined Plane Simulation -----" << std::endl;
 
+	// Get validated numeric inputs
 	double mass = getPositiveDouble("Enter mass of the object (kg): ");
 	double gravity = getGravity("Enter gravitational acceleration (m/s^2): ");
 	double angle = getPositiveDouble("Enter angle of the plane (degrees): ");
@@ -19,9 +89,15 @@ void runPlaneSimulation() {
 	double frictionCoefficient = getPositiveDouble("Enter friction coefficient: ", true);
 	double externalForceApplied = getPositiveDouble("Enter external force applied (N): ", true);
 
-	std::string objectShape = getValidString("Enter object shape: ");
-	std::string objectMaterial = getValidString("Enter object material: ");
+	// Define allowed options for object shape and material
+	std::vector<std::string> allowedShapes = {"Cube", "Sphere", "Cylinder"};
+	std::vector<std::string> allowedMaterials = {"Steel", "Wood", "Plastic"};
 
+	// Get valid choices for object shape and material
+	std::string objectShape = getValidChoice("Enter object shape (Cube, Sphere, Cylinder): ", allowedShapes);
+	std::string objectMaterial = getValidChoice("Enter object material (Steel, Wood, Plastic): ", allowedMaterials);
+
+	// Create simulation object using the provided parameters
 	InclinedPlaneMechanics plane(
 		mass,
 		gravity,
@@ -33,6 +109,7 @@ void runPlaneSimulation() {
 		objectMaterial
 	);
 
+	// Display the input parameters
 	std::cout << "\n--- Simulation Parameters ---" << std::endl;
 	std::cout << "Mass: " << mass << " kg" << std::endl;
 	std::cout << "Gravity: " << gravity << " m/s^2" << std::endl;
@@ -43,6 +120,7 @@ void runPlaneSimulation() {
 	std::cout << "Object Shape: " << objectShape << std::endl;
 	std::cout << "Object Material: " << objectMaterial << std::endl;
 
+	// Run calculations using the simulation object
 	double netForce = plane.calculateNetForce();
 	std::cout << "\nCalculated Net Force along the plane: " << netForce << " N" << std::endl;
 
@@ -55,69 +133,5 @@ void runPlaneSimulation() {
 	}
 
 	std::cout << "--------------------------------------" << std::endl;
-}
-
-static double getPositiveDouble(const std::string &prompt, bool allowZero) {
-	double value = 0.0;
-	while (true) {
-		std::cout << prompt;
-		std::cin >> value;
-		if (std::cin.fail()) {
-			std::cout << "Invalid input. Please enter a valid number.\n";
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			continue;
-		}
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		if (!allowZero && value <= 0) {
-			std::cout << "Value must be a positive number.\n";
-		} else if (allowZero && value < 0) {
-			std::cout << "Value must be >= 0.\n";
-		} else {
-			break;
-		}
-	}
-	return value;
-}
-
-static double getGravity(const std::string &prompt) {
-	double g = 0.0;
-	while (true) {
-		std::cout << prompt;
-		std::cin >> g;
-		if (std::cin.fail()) {
-			std::cout << "Invalid input. Please enter a valid number.\n";
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			continue;
-		}
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		if (g <= 0) {
-			std::cout << "Gravity cannot be zero or negative. Defaulting to 9.81 m/s^2.\n";
-			g = 9.81;
-		}
-		break;
-	}
-	return g;
-}
-
-static std::string getValidString(const std::string &prompt) {
-	while (true) {
-		std::cout << prompt;
-		std::string input;
-		std::getline(std::cin, input);
-		bool allWhitespace = true;
-		for (char c : input) {
-			if (!std::isspace(static_cast<unsigned char>(c))) {
-				allWhitespace = false;
-				break;
-			}
-		}
-		if (input.empty() || allWhitespace) {
-			std::cout << "Input cannot be empty. Please try again.\n";
-		} else {
-			return input;
-		}
-	}
 }
 
