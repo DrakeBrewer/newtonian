@@ -17,8 +17,6 @@ public:
     planet(const string &input,const float g){//Constructor
         planetName = input;
         gravity = g;
-        cout << g << endl;
-        cout << planetName << endl;
         
     }
     object spawnObj(const string &input){//Allow a planet to spawn and object
