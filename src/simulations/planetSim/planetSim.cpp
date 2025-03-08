@@ -3,10 +3,10 @@
 #include "objects.hpp"
 #include <QApplication>
 #include <QMainWindow>
+#include <QtWidgets>
+#include <QPalette>
 
 int main(int argc, char *argv[]){
-
-    std::cout << "Starting application..." << std::endl;
 
     QApplication app(argc, argv);
 
@@ -15,7 +15,21 @@ int main(int argc, char *argv[]){
     mainWindow.resize(800, 600);
     mainWindow.show();
 
-    std::cout << "Entering event loop..." << std::endl;
+    QPalette pal = mainWindow.palette();
+    pal.setColor(QPalette::Window, Qt::white);
+    mainWindow.setAutoFillBackground(true);
+    mainWindow.setPalette(pal);
+
+    QPushButton *startButton = new QPushButton(QApplication::translate("childwidget","Start"),&mainWindow);
+    QPushButton *quitButton = new QPushButton(QApplication::translate("childwidget","Quit"),&mainWindow);
+    
+
+    startButton->move(350,300);
+    startButton->show();
+
+    quitButton->move(350,330);
+    quitButton->show();
+
     return app.exec();
 
     
