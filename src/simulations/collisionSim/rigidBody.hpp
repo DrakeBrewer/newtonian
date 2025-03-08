@@ -2,6 +2,9 @@
 
 #define PI 3.14f
 
+// TODO: Evaluate the need for doubles instead of floats in 
+// some of the more critical sections of the sim
+
 class IShape {
 public:
 	IShape();
@@ -40,15 +43,19 @@ public:
 	Vector3d velocity;
 	Vector3d acceleration;
 	float mass;
+	// TODO: implement this with quaternions
+	// float rotation;
+
 	bool isStatic;
 
 	void update(double delta);
 	void applyForce(Vector3d force);
 };
 
-class Sphere : public RigidBody, public IShape {
+class Sphere : public RigidBody,
+	public IShape {
 public:
-	Sphere(float radius);
+	Sphere(float radius, Vector3d position, float mass);
 	~Sphere() {};
 
 	float radius;
@@ -58,9 +65,10 @@ public:
 	float diameter();
 };
 
-class Cuboid : public RigidBody, public IShape {
+class Cuboid : public RigidBody,
+	public IShape {
 public:
-	Cuboid(float length, float width, float height);
+	Cuboid(float length, float width, float height, Vector3d position, float mass);
 	~Cuboid();
 
 	float length;
@@ -72,3 +80,5 @@ public:
 	float surfaceArea();
 	float volume();
 };
+
+// TODO: meshes and compound objects?

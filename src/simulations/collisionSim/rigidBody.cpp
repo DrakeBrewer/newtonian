@@ -48,7 +48,10 @@ void RigidBody::update(double delta) {
 		this->position.z += this->velocity.z * delta;
 	}
 
-	std::cout << "\r" << std::fflush(stdout) << "x: " << this->position.x << "y: " << this->position.y << "z: " << this->position.z;
+	std::cout << "\r" << std::fflush(stdout) <<
+		"x: " << this->position.x <<
+		"y: " << this->position.y <<
+		"z: " << this->position.z;
 }
 
 
@@ -57,6 +60,14 @@ void RigidBody::applyForce(Vector3d force) {
 	this->acceleration.x = force.x / this->mass;
 	this->acceleration.y = force.y / this->mass;
 	this->acceleration.z = force.z / this->mass;
+}
+
+
+Sphere::Sphere(float radius, Vector3d position, float mass)
+	: RigidBody(position, Vector3d(), Vector3d(), mass, false) {
+	this->radius = radius;
+	this->position = position;
+	this->mass = mass;
 }
 
 float Sphere::surfaceArea() {
@@ -69,6 +80,26 @@ float Sphere::volume() {
 
 float Sphere::diameter() {
 	return 2 * this->radius;
+}
+
+Cuboid::Cuboid(float length, float width, float height, Vector3d position, float mass)
+	: RigidBody(position, Vector3d(), Vector3d(), mass, false) {
+	this->length = length;
+	this->width = width;
+	this->height = height;
+
+	float halfL = this->length / 2;
+	float halfW = this->width / 2;
+	float halfH = this->height / 2;
+
+	this->vertices[0] = Vector3d(this->position.x + halfL, this->position.y + halfW, this->position.z + halfH);  // top-front-right
+	this->vertices[1] = Vector3d(this->position.x - halfL, this->position.y + halfW, this->position.z + halfH);  // top-front-left
+	this->vertices[2] = Vector3d(this->position.x + halfL, this->position.y - halfW, this->position.z + halfH);  // top-back-right
+	this->vertices[3] = Vector3d(this->position.x - halfL, this->position.y - halfW, this->position.z + halfH);  // top-back-left
+	this->vertices[4] = Vector3d(this->position.x + halfL, this->position.y + halfW, this->position.z - halfH);  // bottom-front-right
+	this->vertices[5] = Vector3d(this->position.x - halfL, this->position.y + halfW, this->position.z - halfH);  // bottom-front-left
+	this->vertices[6] = Vector3d(this->position.x + halfL, this->position.y - halfW, this->position.z - halfH);  // bottom-back-right
+	this->vertices[7] = Vector3d(this->position.x - halfL, this->position.y - halfW, this->position.z - halfH);  // bottom-back-left
 }
 
 float Cuboid::surfaceArea() {
