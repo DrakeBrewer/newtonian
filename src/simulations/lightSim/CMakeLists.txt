@@ -1,12 +1,12 @@
 add_executable(light_sim 
-    LightBase.cpp
-    LightParticle.cpp
-    LightRay.cpp
-    LightWave.cpp
-    LightStuct.hpp
-    Scene.cpp
-    Medium.hpp
-    Mirror.cpp
+   LightBase.cpp
+   LightParticle.cpp
+   LightRay.cpp
+   LightWave.cpp
+   LightStuct.hpp
+   Scene.cpp
+   Medium.hpp
+   Mirror.cpp
 )
 
 target_link_libraries(light_sim
