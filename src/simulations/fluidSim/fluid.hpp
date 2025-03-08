@@ -16,6 +16,7 @@ class fluid{
     float pressure;
     
     public:
+        string name;
         // Constructors
         fluid(){
             density = 0;
@@ -32,6 +33,7 @@ class fluid{
             }else if(liquid == "corn syrup"){
                 density = 1380;
             }
+            name = liquid;
             //Default
         }
         

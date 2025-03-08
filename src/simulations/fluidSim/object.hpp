@@ -1,23 +1,28 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include <cmath>
 
 // Object that interacts with the fluid
 
 class object{
-    float initV;
-    float mass;    // kg
-    float density; // kg/m^3
-    float volume;
-    float x, y, z;
-    // volume = mass / density
-
     public:
+        string name;
+        int shape; // For now: 0: Cube , 1: Sphere
+        float dragCoe;
+        float initV;
+        float mass;    // kg
+        float density; // kg/m^3
+        float volume;  // mass / density
+        float x, y, z;
+
         // Constructors
         object(){
+            shape = 0; // Cube
+            dragCoe = 1.05; //Drag Coefficient for a cube
             mass = 0;
             density = 0;
-            volume = 0.01;
+            volume = 0.1; // 10 cm^2
             initV = 0;
             x = 0;
             y = 0;
@@ -31,10 +36,13 @@ class object{
             }
             else if(obj == "aluminium"){
                 density = 2710;
+                mass = density * volume;
             }
             else if(obj == "rock"){
                 density = 2500;
+                mass = density * volume;
             }
+            name = obj;
             //default
         }
 
@@ -42,6 +50,11 @@ class object{
             this->z=z;
         }
         
+        float area(){
+            if(shape == 0) return pow(cbrt(volume),2); //area for a cube
+            return 3.14159 * pow( cbrt( (3*volume) / (4*3.14159) ),2); //area for a sphere
+        }
+
 
         // Setters and Getters
         void setDensity(float d){density = d;}
