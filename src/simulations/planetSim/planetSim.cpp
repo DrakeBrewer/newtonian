@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]){
 
     QApplication app(argc, argv);
-
+    
     QMainWindow mainWindow;
     mainWindow.setWindowTitle("PlanetSim - Qt Test");
     mainWindow.resize(800, 600);
