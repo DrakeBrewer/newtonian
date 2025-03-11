@@ -17,6 +17,7 @@ public:
 class Vector3d {
 public:
 	Vector3d(): x(0), y(0), z(0) {};
+
 	Vector3d(float x, float y, float z);
 	~Vector3d(){};
 
@@ -36,6 +37,13 @@ public:
 
 class RigidBody {
 public:
+	RigidBody(): 
+		position(Vector3d()), 
+		velocity(Vector3d()), 
+		acceleration(Vector3d()), 
+		mass(0), 
+		isStatic(false) {};
+
 	RigidBody(Vector3d initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic);
 	~RigidBody(){};
 
