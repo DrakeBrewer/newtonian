@@ -15,3 +15,32 @@ include_directories(C:/Qt/6.8.2/mingw_64/include/QtCore)
 
 
 target_link_libraries(planetSim PRIVATE Qt6::Widgets)
+
+add_executable(thomas_blackBoxTest
+	thomas_blackBoxTest.cpp
+)
+
+target_include_directories(thomas_blackBoxTest PRIVATE
+    ${gtest_SOURCE_DIR}/googletest/include
+)
+
+target_link_libraries(thomas_blackBoxTest
+	#planetSim
+	GTest::gtest_main
+)
+
+add_executable(thomas_whiteBoxTest
+	thomas_whiteBoxTest.cpp
+)
+
+target_include_directories(thomas_whiteBoxTest PRIVATE
+    ${gtest_SOURCE_DIR}/googletest/include
+)
+
+target_link_libraries(thomas_whiteBoxTest
+	#planetSim
+	GTest::gtest_main
+)
+
+add_tests(thomas_blackBoxTest)
+add_tests(thomas_whiteBoxTest)
