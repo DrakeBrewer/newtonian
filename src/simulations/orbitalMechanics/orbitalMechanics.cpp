@@ -51,6 +51,8 @@ bool OrbitalMechanics::setPlanetType(const std::string& name){
         planetName = "Neptune";
     }
     else{
+        planetMass = 5.9722e24;
+        planetName = "Earth";
         return false;
     }
     return true;

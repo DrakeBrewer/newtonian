@@ -40,11 +40,12 @@ bool OrbitSimulation::handleMoonMassInput(){
     double minMoonMass = (orbitSim.planetMass * 0.001);
     double maxMoonMass = (orbitSim.planetMass * 0.1);
 
+    std::cout<<"Valid moon mass range:\n"
+                <<minMoonMass<<" -> "<<maxMoonMass<<std::endl;
+                
     // Prompt the user over and over until a valid moon mass is selected
     while(true){
         // Show the valid mass range of the moon relative to the selected planet mass
-        std::cout<<"Valid moon mass range:\n"
-                <<minMoonMass<<" -> "<<maxMoonMass<<std::endl;
         std::cout<<"\n<Enter the moon's mass in [kg] (or type '-1' to go back to planet selection):"<<std::endl;
         std::cout<<">> ";
         std::cin>>userMoonMass;
@@ -53,6 +54,8 @@ bool OrbitSimulation::handleMoonMassInput(){
             std::cout<<"Returning to planet selection..."<<std::endl;
             return false;
         }
+
+        std::cout << "Entered Moon Mass: " << userMoonMass;
 
         double scalar = 1e-10; // This is very important to scale properly with floating point precision
         if(userMoonMass < (minMoonMass * (1 - scalar)) || userMoonMass > (maxMoonMass * (1 + scalar))){

@@ -2,7 +2,7 @@
 #include "orbitalMechanics.hpp"
 
 class OrbitSimulation{
-private:
+public:
     OrbitalMechanics orbitSim;
     // Function that handles the user input for selecting a planet
     bool handlePlanetMassInput();
