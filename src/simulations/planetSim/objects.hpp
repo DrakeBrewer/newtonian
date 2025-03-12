@@ -27,7 +27,7 @@ public:
 
     //Getters and setters
     void setMass(float m){
-        if(m <= 0 | NULL){
+        if(m <= 0){
             mass = 1;
         }
         else if(m > 1000){
