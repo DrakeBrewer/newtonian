@@ -13,3 +13,5 @@ build/
 *.exe
 
 .vscode/
+
+/extern/googletest/ 
