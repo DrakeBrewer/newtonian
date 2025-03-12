@@ -5,13 +5,11 @@
 #include <iostream>
 
 class LightRay: public LightBase {
-private:
-    LightStruct properties;
-
 public:
-    LightRay(double intensity, double frequency, double speed, double x, double y, double z);
+    LightStruct properties;
+    LightRay(double intensity, double frequency, double speed, float x, float y, float z);
 
-    virtual void update(double timeStep) override {
+    virtual void update(float timeStep) override {
         std::cout << "updating ray: " << timeStep << " seconds.\n";
     }
 

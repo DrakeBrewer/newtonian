@@ -29,7 +29,7 @@ struct Plane {
     }
 };
 
-class lightScene {
+class LightScene {
     public:
         std::vector<std::unique_ptr<LightBase>> lights;
         std::vector<std::unique_ptr<Medium>> mediums; 
@@ -39,10 +39,10 @@ class lightScene {
         double timeElapsed;
         double maxTime;
 
-        //lightScene bounded by duration of lightScene. Default 10 seconds
-        lightScene (double duration, Vector3d minBound, Vector3d maxBound);
-        lightScene ();
-        ~lightScene ();
+        //lightScene bounded by duration of lightScene. 5 second minimum.
+        LightScene (double duration, Vector3d minBound, Vector3d maxBound);
+        LightScene ();
+        ~LightScene ();
 
         void addMedium(std::unique_ptr<Medium> newMedium);
         void addLight(const LightBase& newLight);

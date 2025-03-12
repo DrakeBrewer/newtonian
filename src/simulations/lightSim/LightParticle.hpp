@@ -1,7 +1,6 @@
 #pragma once
-
-#include "LightStruct.hpp"
 #include "LightBase.hpp"
+#include "LightStruct.hpp"
 #include <iostream>
 
 /* 
@@ -10,15 +9,15 @@
   need a more discrete representation of light
  */
 class LightParticle : public LightBase {
-private: 
+
+public: 
     LightStruct properties;
     double energy;
 
-public: 
-    LightParticle(double intensity, double frequency, double speed, double x, double y, double z, double energy);
+    LightParticle(double intensity, double frequency, double speed, float x, float y, float z, double energy);
 
-    virtual void update(double timeStep) override {
-        std::cout << "update photon: " << timeStep << " seconds.\n";
+    virtual void update(float timeStep) override {
+        std::cout << "Update photon: " << timeStep << " seconds.\n";
     }
     
     void scatter();
