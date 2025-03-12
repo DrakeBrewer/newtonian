@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]){
 
     QApplication app(argc, argv);
-
+    
     QMainWindow mainWindow;
     mainWindow.setWindowTitle("PlanetSim - Qt Test");
     mainWindow.resize(800, 600);
@@ -73,7 +73,7 @@ int planetSim(){
     
         }
         else if(userIn == "moon"){
-
+            
             cout<<"Moon Selected"<<endl;
 
             cout<<"Setting Up Sim...."<<endl;
