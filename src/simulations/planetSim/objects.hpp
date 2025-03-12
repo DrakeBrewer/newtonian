@@ -26,9 +26,14 @@ public:
     }
 
     //Getters and setters
-    void setMass(float m)
-    {
-        mass = m;
+    void setMass(float m){
+        if(m <= 0){
+            mass = 1;
+        }
+        else if(m > 1000){
+            mass = 1000;
+        }
+        else{mass = m;}
     }
 
     void printInfo(){
@@ -45,17 +50,35 @@ public:
 
     float getInitV(){return initV;}
 
-    void setX(float newX){x = newX;}
+    void setX(float newX){
+        if(newX > 0){
+            x = newX;
+        }
+        else{ x = 0;}
+    }
 
-    void setY(float newY){y = newY;}
+    void setY(float newY){
+        if(newY> 0){
+            y = newY;
+        }
+        else{ y = 0;}
+    }
 
-    void setZ(float newZ){z = newZ;}
+    void setZ(float newZ){
+
+        if(newZ > 0){
+            z = newZ;
+        }
+        else {z = 0;}
+    }
 
     float getX(){ return x;}
 
     float getY(){ return y;}
 
     float getZ(){ return z;}
+
+    float getMass(){return mass;}
 };
 
 #endif
