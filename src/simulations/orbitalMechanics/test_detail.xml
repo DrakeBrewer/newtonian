@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="3" failures="0" disabled="0" errors="0" time="0.034" timestamp="2025-03-12T10:58:10.700" name="AllTests">
+  <testsuite name="OrbitalMechanics" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0.008" timestamp="2025-03-12T10:58:10.706">
+    <testcase name="setPlanetType" file="C:\Users\artem\Desktop\newtonian\src\simulations\orbitalMechanics\testingSuite.cpp" line="9" status="run" result="completed" time="0." timestamp="2025-03-12T10:58:10.707" classname="OrbitalMechanics" />
+    <testcase name="updatePlanetMassANDmoonVelocity" file="C:\Users\artem\Desktop\newtonian\src\simulations\orbitalMechanics\testingSuite.cpp" line="136" status="run" result="completed" time="0.001" timestamp="2025-03-12T10:58:10.711" classname="OrbitalMechanics" />
+  </testsuite>
+  <testsuite name="OrbitSimulation" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0.013" timestamp="2025-03-12T10:58:10.717">
+    <testcase name="handleMoonMassInput" file="C:\Users\artem\Desktop\newtonian\src\simulations\orbitalMechanics\testingSuite.cpp" line="58" status="run" result="completed" time="0.009" timestamp="2025-03-12T10:58:10.720" classname="OrbitSimulation" />
+  </testsuite>
+</testsuites>
