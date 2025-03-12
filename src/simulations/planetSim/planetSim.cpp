@@ -73,7 +73,7 @@ int planetSim(){
     
         }
         else if(userIn == "moon"){
-
+            
             cout<<"Moon Selected"<<endl;
 
             cout<<"Setting Up Sim...."<<endl;

@@ -2,7 +2,17 @@
 #include <gtest/gtest.h>
 
 
-//White Box Test -> Branch Coverage
+/*White Box Test -> Branch Coverage
+Method being tested:
+ void setMass(float m){
+        if(m <= 0){
+            mass = 1;
+        }
+        else if(m > 1000){
+            mass = 1000;
+        }
+        else{mass = m;}
+    }*/
 TEST(WhiteBox_ObjectTest,InvalidMass){
     object obj = object("Test");
 
