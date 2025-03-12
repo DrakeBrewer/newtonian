@@ -1,7 +1,7 @@
 #include "LightParticle.hpp"
 #include <iostream>
 
-LightParticle::LightParticle(double intensity, double frequency, double speed, double x, double y, double z, double energy)
+LightParticle::LightParticle(double intensity, double frequency, double speed, float x, float y, float z, double energy)
 : properties(intensity, frequency, speed, x, y, z), energy(energy) {}
 
 void LightParticle::scatter() {
@@ -13,8 +13,7 @@ void LightParticle::collide() {
 }
 
 void LightParticle::showProperties() const {
-    std::cout << "LightParticle Properties: \n";
-    std::cout << "Intensity: " << properties.intensity << " W/m^2\n";
-    std::cout << "Wavelength: " << properties.getWavelength() << " nm\n";
+    std::cout << "---Particle Properties---\n";
+    properties.showProperties();
     std::cout << "Energy: " << energy << " J\n";
 }
