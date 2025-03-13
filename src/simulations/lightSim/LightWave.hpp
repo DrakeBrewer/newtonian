@@ -1,6 +1,5 @@
 #pragma once
 
-#include "LightStruct.hpp"
 #include "LightBase.hpp"
 #include <iostream>
 
@@ -12,10 +11,9 @@
 
 class LightWave : public LightBase {
 public:
-    LightStruct properties;
     float phase;
 
-    LightWave(double intensity, double frequency, double speed, float x, float y, float z, float phase);
+    LightWave(float frequency, float speed, Vector3d p, Vector3d d, float phase);
 
 
     virtual void update(float timeStep) override {
@@ -27,7 +25,5 @@ public:
     void diffract();
     virtual void showProperties() const override;
 
-    virtual LightBase* clone() const override {
-        return new LightWave(*this);
-    }
+    virtual LightBase* clone() const override;
 };

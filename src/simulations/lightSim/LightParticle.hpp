@@ -1,6 +1,5 @@
 #pragma once
 #include "LightBase.hpp"
-#include "LightStruct.hpp"
 #include <iostream>
 
 /* 
@@ -11,10 +10,9 @@
 class LightParticle : public LightBase {
 
 public: 
-    LightStruct properties;
     double energy;
 
-    LightParticle(double intensity, double frequency, double speed, float x, float y, float z, double energy);
+    LightParticle(float frequency, float speed, Vector3d p, Vector3d d, float energy);
 
     virtual void update(float timeStep) override {
         std::cout << "Update photon: " << timeStep << " seconds.\n";
@@ -23,8 +21,5 @@ public:
     void scatter();
     void collide();
     virtual void showProperties() const override;
-
-    virtual LightBase* clone() const override {
-        return new LightParticle(*this);
-    }
+    virtual LightBase* clone() const override;
 };

@@ -2,9 +2,10 @@
 #include <vector>
 #include <memory>
 #include "LightBase.hpp"
-#include "Medium.hpp"
 #include "../collisionSim/rigidBody.hpp"
 #include <iostream>
+#include "MaterialVolume.hpp"
+#include "../../../lib/deltaTime/deltaTime.hpp"
 
 struct sceneBounds {
     Vector3d minBound;
@@ -17,24 +18,11 @@ struct sceneBounds {
     }
 };
 
-struct Plane {
-    Vector3d normalVector;
-    float distanceFromOrigin;
-
-    Plane(Vector3d normal, float distance)
-        : normalVector(normal), distanceFromOrigin(distance) {}
-
-    bool isBelow(const Vector3d point) const {
-        return (normalVector.x * point.x + normalVector.y * point.y + normalVector.z * point.z + distanceFromOrigin) < 0;
-    }
-};
-
 class LightScene {
     public:
         std::vector<std::unique_ptr<LightBase>> lights;
-        std::vector<std::unique_ptr<Medium>> mediums; 
+        std::vector<Material> materials;
         sceneBounds bounds;
-        Plane ground;
         double fixedTime = 1.0/60; // 60Hz fixed time step
         double timeElapsed;
         double maxTime;
@@ -44,9 +32,12 @@ class LightScene {
         LightScene ();
         ~LightScene ();
 
-        void addMedium(std::unique_ptr<Medium> newMedium);
         void addLight(const LightBase& newLight);
-        void simulate(double timeStep);
+        void addMaterial(const Material& mat);
+        void simulate();
+        void update(float deltaTime);
+
+        const Material* findMaterialInteraction(Vector3d& position) const;
 
         const std::vector<std::unique_ptr<LightBase>>& getLights() const;
 };
