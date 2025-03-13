@@ -57,9 +57,9 @@ void RigidBody::update(double delta) {
 
 // TODO: use diff eq's for this later?
 void RigidBody::applyForce(Vector3d force) {
-	this->acceleration.x = force.x / this->mass;
-	this->acceleration.y = force.y / this->mass;
-	this->acceleration.z = force.z / this->mass;
+	this->acceleration.x += force.x / this->mass;
+	this->acceleration.y += force.y / this->mass;
+	this->acceleration.z += force.z / this->mass;
 }
 
 
