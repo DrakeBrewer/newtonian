@@ -55,7 +55,7 @@ void LightScene::simulate() {
 		    ray->reflect(material->unitNormal);
 		} else if (material->transmissive) {
 		    std::cout << "Refraction occurs.\n";
-		    ray->refract(material->refractiveIndex, material->unitNormal, *this);
+		    ray->refract(material->refractiveIndex, material->unitNormal);
 		} else { 
 		    std::cout << "Absorption occurs.\n";
 		    ray->absorb();
