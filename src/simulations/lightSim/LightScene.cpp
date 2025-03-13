@@ -3,6 +3,8 @@
 #include "MaterialVolume.hpp"
 #include <iostream>
 
+#define DEBUG 0
+
 LightScene::LightScene(float duration, Vector3d minBound = {0,0,0}, Vector3d maxBound = {100,100,100})
     :	timeElapsed(0.0),
 	maxTime(duration),
@@ -33,7 +35,7 @@ Material* LightScene::findMaterialInteraction(Vector3d& position) {
 }
 
 void LightScene::simulate() {
-    std::cout << "\nStarting simulation, duration: " << maxTime << " seconds\n";
+    if(DEBUG) std::cout << "\nStarting simulation, duration: " << maxTime << " seconds\n";
 
     double accumulatedTime = 0.0;
 
@@ -42,7 +44,7 @@ void LightScene::simulate() {
 	accumulatedTime += deltaT;
 	timeElapsed += deltaT;
 
-	std::cout << "Time: " << timeElapsed << "s\n";
+	if(DEBUG) std::cout << "Time: " << timeElapsed << "s\n";
 
 	for(auto& light : lights) {
 	    Vector3d position = light->position;
@@ -51,13 +53,13 @@ void LightScene::simulate() {
 	    LightRay* ray = dynamic_cast<LightRay*>(light.get());
 	    if(material && ray) {
 		if(material->reflective) {
-		    std::cout << "Reflection occurs.\n";
+		    if(DEBUG) std::cout << "Reflection occurs.\n";
 		    ray->reflect(material->unitNormal);
 		} else if (material->transmissive) {
-		    std::cout << "Refraction occurs.\n";
+		    if(DEBUG) std::cout << "Refraction occurs.\n";
 		    ray->refract(material->refractiveIndex, material->unitNormal);
 		} else { 
-		    std::cout << "Absorption occurs.\n";
+		    if(DEBUG) std::cout << "Absorption occurs.\n";
 		    ray->absorb();
 		}
 	    }
@@ -66,7 +68,7 @@ void LightScene::simulate() {
 	}
     }
 
-    std::cout << "Simulation Complete.\n\n";
+    if(DEBUG) std::cout << "Simulation Complete.\n\n";
 }
 
 const std::vector<std::unique_ptr<LightBase>>& LightScene::getLights() const {

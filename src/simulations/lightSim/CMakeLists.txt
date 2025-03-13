@@ -12,7 +12,7 @@ target_link_libraries(testSuite
 )
 
 include_directories(
-   ${CMAKE_SOURCE_DIR}/src/simulations/collisionSim)
+   ${CMAKE_SOURCE_DIR}/src/simulations/collisionSim
    ${CMAKE_SOURCE_DIR}/src/simulations/lightSim
 )
 
@@ -36,3 +36,4 @@ add_tests(testSuite)
 # )
 
 # include_directories(${CMAKE_SOURCE_DIR}/src/simulations/collisionSim)
+
