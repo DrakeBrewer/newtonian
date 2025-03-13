@@ -1,17 +1,23 @@
+#include <exception>
 #include <iostream>
 #include <cmath>
+#include <stdexcept>
 #include "LightRay.hpp"
+
+#define DEBUG 0
 
 LightRay::LightRay(float f, float s, Vector3d p, Vector3d d)
     : LightBase::LightBase(f,s,p,d) {}
 
 void LightRay::refract(float n2, Vector3d& normal) {
 
+    if(n2 < 1) throw std::invalid_argument("Invalid index: n2 must be >= 1");
+
     // n = c/v
     float n1 = vacuumSpeed / this->speed;
 
-    //  compute ratio, determines bending of light
-    float ratio = (n1 < n2) ? (n1/n2) : (n2/n1);
+    float ratio = n1/n2;
+
     // angle between incoming light and surface normal
     float cosTheta1 = normal.dotProduct(direction);
 
@@ -35,7 +41,7 @@ void LightRay::refract(float n2, Vector3d& normal) {
     direction.z = (ratio * direction.z) + (ratio * cosTheta1 - cosTheta2) * normal.z;
 
 
-    std::cout << "New direction: <" << this->direction.x << ", " << this->direction.y << ", " << this->direction.z << ">\n";
+    if(DEBUG) std::cout << "New direction: <" << this->direction.x << ", " << this->direction.y << ", " << this->direction.z << ">\n";
 }
 
 void LightRay::reflect(Vector3d& normal) {
@@ -44,7 +50,7 @@ void LightRay::reflect(Vector3d& normal) {
     direction.y = direction.y - 2 * dot * normal.y;
     direction.z = direction.z - 2 * dot * normal.z;
 
-    std::cout << "New direction: <" << this->direction.x << ", " << this->direction.y << ", " << this->direction.z << ">\n";
+    if(DEBUG) std::cout << "New direction: <" << this->direction.x << ", " << this->direction.y << ", " << this->direction.z << ">\n";
 }
 
 void LightRay::showProperties() const {

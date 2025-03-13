@@ -36,4 +36,11 @@ public:
     }
 
     float getWavelength() const { return speed/frequency; }
+
+    virtual void reset(float f, float s, Vector3d p, Vector3d d) {
+        this->frequency = f;
+        this->speed = s;
+        this->position = p;
+        this->direction = d;
+    }
 };
