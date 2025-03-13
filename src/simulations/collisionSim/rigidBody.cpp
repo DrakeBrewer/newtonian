@@ -27,6 +27,13 @@ float Vector3d::magnitude() {
 	return std::sqrt(sum);
 }
 
+// Equal funciton with tolerance to deal with floating point precision 
+bool Vector3d::isEqual(const Vector3d vec, float epsilon) const {
+	return	(std::fabs(this->x - vec.x) < epsilon) &&
+			(std::fabs(this->y - vec.y) < epsilon) &&
+			(std::fabs(this->z - vec.z) < epsilon);
+}
+
 RigidBody::RigidBody(Vector3d initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic) {
 	this->position = initPos;
 	this->velocity = initVel;

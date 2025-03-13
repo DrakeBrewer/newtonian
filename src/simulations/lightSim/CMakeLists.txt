@@ -1,14 +1,18 @@
-add_executable(light_sim 
-   LightParticle.cpp
+# Testing Suite #
+
+add_executable(testSuite
+   testSuite.cpp
    LightRay.cpp
+   LightParticle.cpp
    LightWave.cpp
-   lightScene.cpp
+   LightScene.cpp
 )
 
-target_link_libraries(light_sim
-    delta_time
-    rigidBody
+target_link_libraries(testSuite
+    GTest::gtest_main
 )
+
+add_tests(testSuite)
 
 include_directories(${CMAKE_SOURCE_DIR}/src/simulations/collisionSim)
 

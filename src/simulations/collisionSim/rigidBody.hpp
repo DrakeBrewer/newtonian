@@ -30,6 +30,7 @@ public:
 	float dotProduct(const Vector3d& vec);
 	float dotProduce(Vector3d& vec);
 	float magnitude();
+	bool isEqual(const Vector3d vec, float epsilon = 1e-6) const;
 
 	// TODO:: https://people.math.harvard.edu/~jjchen/math21a/handouts/vector-ops.html
 	// - [ ] Vector addition

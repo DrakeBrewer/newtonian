@@ -9,7 +9,7 @@ public:
 
     virtual void showProperties() const override;
     virtual LightBase* clone() const override;
-    void refract(float n2, Vector3d& normal, LightScene& scene);
+    void refract(float n2, Vector3d& normal);
     void reflect(Vector3d& normal);
     void absorb();
 };

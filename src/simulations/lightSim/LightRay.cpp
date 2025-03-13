@@ -5,39 +5,34 @@
 LightRay::LightRay(float f, float s, Vector3d p, Vector3d d)
     : LightBase::LightBase(f,s,p,d) {}
 
-void LightRay::refract(float n2, Vector3d& normal, LightScene& scene) {
+void LightRay::refract(float n2, Vector3d& normal) {
 
-    Material* currentMaterial = scene.findMaterialInteraction(position);
+    // n = c/v
+    float n1 = vacuumSpeed / this->speed;
 
-    float n1 = (currentMaterial) ? currentMaterial->refractiveIndex : 1.0;
-
+    //  compute ratio, determines bending of light
     float ratio = (n1 < n2) ? (n1/n2) : (n2/n1);
-    float cosThetaI = normal.dotProduct(direction);
+    // angle between incoming light and surface normal
+    float cosTheta1 = normal.dotProduct(direction);
 
-    // clamp to prevent floating point errors
-    cosThetaI = std::max(-1.0f, std::min(1.0f, cosThetaI));
+    // sin^2(theta) = (ratio)^2 * (1 - cos^2(theta))
+    float sinTheta2 = ratio * ratio * (1 - cosTheta1 * cosTheta1);
 
-    if(cosThetaI < 0) {
-	normal.x *= -1;
-	normal.y *= -1;
-	normal.z *= -1;
-	cosThetaI = -cosThetaI;
-    }
-
-    float sinThetaT2 = ratio * ratio * (1 - cosThetaI * cosThetaI);
-
-    if(sinThetaT2 > 1.0) {
+    // Check for total internal reflection
+    if(sinTheta2 > 1.0) {
 	reflect(normal);
 	return;
     }
 
+    // if none, compute speed in new medium
     this->speed = vacuumSpeed / n2;
 
-    float cosThetaT = std::sqrt(1 - sinThetaT2);
 
-    direction.x = (ratio * direction.x) + (ratio * cosThetaI - cosThetaT) * normal.x;
-    direction.y = (ratio * direction.y) + (ratio * cosThetaI - cosThetaT) * normal.y;
-    direction.z = (ratio * direction.z) + (ratio * cosThetaI - cosThetaT) * normal.z;
+    float cosTheta2 = std::sqrt(1 - sinTheta2);
+
+    direction.x = (ratio * direction.x) + (ratio * cosTheta1 - cosTheta2) * normal.x;
+    direction.y = (ratio * direction.y) + (ratio * cosTheta1 - cosTheta2) * normal.y;
+    direction.z = (ratio * direction.z) + (ratio * cosTheta1 - cosTheta2) * normal.z;
 
 
     std::cout << "New direction: <" << this->direction.x << ", " << this->direction.y << ", " << this->direction.z << ">\n";
