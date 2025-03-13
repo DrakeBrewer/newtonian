@@ -2,7 +2,7 @@
 #define OBJECT_H
 
 #include <cmath>
-
+using namespace std;
 // Object that interacts with the fluid
 
 class object{

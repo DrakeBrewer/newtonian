@@ -53,11 +53,4 @@ class fluid{
         float getPressure(){ return pressure;}
 };
 
-// Prototypes
-// test
-int run();
-int runTest1();
-int runTest2();
-// functions
-//float netForce(object obj, fluid liquid, float velocity);
 #endif
