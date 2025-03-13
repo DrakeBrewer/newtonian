@@ -6,14 +6,15 @@
 
 int main() {
     LightScene scene = LightScene();
+    float vacuumSpeed = 2.9979245e8;
 
-    LightRay ray(1000, 600, 299792458, 1.0, 0.0, 0.0);
+    LightRay ray(600, vacuumSpeed, 1.0, 0.0, 0.0);
     scene.addLight(ray);
 
-    LightWave wave(800, 500, 299792458, 0.0, 1.0, 0.0, 0.0);
+    LightWave wave(500, vacuumSpeed, 0.0, 1.0, 0.0, 0.0);
     scene.addLight(wave);
 
-    LightParticle particle(500, 400, 299792458, 0.0, 0.0, 1.0, 1.0e-19);
+    LightParticle particle(400, vacuumSpeed, 0.0, 0.0, 1.0, 1.0e-19);
     scene.addLight(particle);
 
     std::cout << "Before:\n";
