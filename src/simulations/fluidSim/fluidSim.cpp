@@ -1,18 +1,4 @@
-#include "fluid.hpp"
-#include "object.hpp"
-
-
-float netForce(object obj, fluid liquid, float velocity);
-void userInterface();
-
-int main(int argc, char *argv[]){
-    cout << "Fluid Simulation\n\n";
-
-    userInterface();
-    return 0;
-}
-
-
+#include "fluidSim.hpp"
 // --------Tests---------
 
 // Has user input for the object and the fluid
@@ -83,19 +69,9 @@ int run(){
     }
     
     //run Sim
-    float velocity = obj.getInitV();//inital velocity
-    float dt = 0.02; // Time step in seconds
-    while((std::abs(velocity) > 0.06 || std::abs(obj.getZ()) > .03) && obj.getZ() >= -20){
-        float force = netForce(obj,liquid,velocity);
-        float acceleration = force / obj.getMass();
-        velocity += acceleration * dt;
-        obj.setZ(obj.getZ() - velocity * dt);
+    int simResult = runSimulation(obj, liquid, true);
 
-        std::cout << "z: " << obj.getZ() << " m" << ", velocity: " << velocity << " m/s" << endl;
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));; //Slows down the simulation
-    }
-
-    if(obj.getZ() <= -20) cout << "\nObject: " << obj.name << ", Sinks" << endl;
+    if(simResult) cout << "\nObject: " << obj.name << ", Sinks" << endl;
     else cout << "\nObject: " << obj.name << ", Floats" << endl;
 
     return 0;
@@ -110,7 +86,8 @@ int runTest1(){
     
     object obj("rock",10);
     fluid liquid("water", 0);
-    float sec = 0;
+    float sec = 0; float reachedIn = 0;
+    int reachedFlag = 0;
     float velocity = obj.getInitV();//inital velocity
     float dt = 0.01; // Time step in seconds
     while((std::abs(velocity) > 0.01 || std::abs(obj.getZ()) > .01) && obj.getZ() > -20){
@@ -119,15 +96,18 @@ int runTest1(){
         velocity += acceleration * dt;
         obj.setZ(obj.getZ() - velocity * dt);
 
-        std::cout << "z: " << obj.getZ() << " m" << ", velocity: " << velocity << " m/s" << 
-            "Time: " << sec << endl;
+        std::cout << "\rz: " << fflush(stdout) << obj.getZ() << " m" << ", velocity: " << velocity << " m/s" << 
+            "Time: " << sec;
         std::this_thread::sleep_for(std::chrono::milliseconds(10));; //Slows down the simulation
         sec += dt;
+        if(!reachedFlag) reachedIn = sec;
+        if(!reachedFlag && (obj.z < 0)) reachedFlag++;
     }
 
 
-    cout<<"Simulation Done\n";
-    cout<<"Object reached the liquid in "<< sec << " seconds." << endl;
+    cout<<"\nSimulation Done\n";
+    cout<<"Finished in "<< sec << " seconds." << endl;
+    cout<<"Object reached the liquid in "<< reachedIn << " seconds." << endl;
     cout<<"liquid  density is "<< liquid.getDensity() << endl;
     cout<<"object  mass is "<< obj.getMass() << endl;
 
@@ -143,12 +123,7 @@ int runTest2(){
     object obj("wood",-10);
     fluid liquid("water");
 
-    while(obj.getZ() < liquid.getFL()){
-
-        obj.setZ(obj.getZ() + 1);
-        sec++;
-        cout<<"Sec:" << sec << "\nObject height:" << obj.getZ()<< endl;
-    }
+    int simResult = runSimulation(obj, liquid, true);
 
     cout<<"Simulation Done\n";
 
@@ -172,6 +147,25 @@ float netForce(object obj, fluid liquid, float velocity){
     }
     drag = .5 * dragCoefficient * liquid.getDensity() * obj.area() * velocity * std::abs(velocity);
     return weight - buoyantForce - drag;
+}
+
+int runSimulation(object obj, fluid liquid, bool printFlag){
+    float velocity = obj.getInitV();//inital velocity
+    float dt = 0.02; // Time step in seconds
+    while((std::abs(velocity) > 0.06 || std::abs(obj.getZ()) > .03) && obj.getZ() >= -20){
+        float force = netForce(obj,liquid,velocity);
+        float acceleration = force / obj.getMass();
+        velocity += acceleration * dt;
+        obj.setZ(obj.getZ() - velocity * dt);
+
+        if(printFlag){
+            std::cout << "\rz: " << obj.getZ() << " m" << ", velocity: " << velocity << " m/s";
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));; //Slows down the simulation
+        }
+    }
+
+    if(obj.getZ() <= -20) return 1; // Object sinks
+    else return 0;                  // Object floats
 }
 
 void userInterface(){
