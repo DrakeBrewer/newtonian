@@ -23,21 +23,21 @@ class LightScene {
         std::vector<std::unique_ptr<LightBase>> lights;
         std::vector<Material> materials;
         sceneBounds bounds;
-        double fixedTime = 1.0/60; // 60Hz fixed time step
-        double timeElapsed;
-        double maxTime;
+        float fixedTime = 1.0/60; // 60Hz fixed time step
+        float timeElapsed;
+        float maxTime;
 
         //lightScene bounded by duration of lightScene. 5 second minimum.
-        LightScene (double duration, Vector3d minBound, Vector3d maxBound);
+        LightScene (float duration, Vector3d minBound, Vector3d maxBound);
         LightScene ();
         ~LightScene ();
 
-        void addLight(const LightBase& newLight);
-        void addMaterial(const Material& mat);
+        void addLight(LightBase& newLight);
+        void addMaterial(Material& mat);
         void simulate();
         void update(float deltaTime);
 
-        const Material* findMaterialInteraction(Vector3d& position) const;
+        Material* findMaterialInteraction(Vector3d& position);
 
         const std::vector<std::unique_ptr<LightBase>>& getLights() const;
 };

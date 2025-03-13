@@ -16,11 +16,6 @@ public:
     LightWave(float frequency, float speed, Vector3d p, Vector3d d, float phase);
 
 
-    virtual void update(float timeStep) override {
-        phase += timeStep;
-        std::cout << "update wave: " << timeStep << " seconds\n";
-    }
-    
     void interfere();
     void diffract();
     virtual void showProperties() const override;
