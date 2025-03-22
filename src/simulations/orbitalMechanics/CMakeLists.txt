@@ -1,18 +1,29 @@
-# cmake_minimum_required(VERSION 3.10)
-# project(OrbitalMechanics)
+cmake_minimum_required(VERSION 3.10)
 
-# # Add Google Test as a subdir and also add orbitalMechanics.cpp and orbitSimulation.cpp to add_library
-# add_subdirectory(../../../extern/googletest ../../../build/googletest)
-# add_library(orbital_mechanics
-#     orbitalMechanics.cpp
-# 	orbitSimulation.cpp
-# )
+project(OrbitalMechanics)
 
-# # Add the test executable, testing_suite
-# add_executable(testing_suite testingSuite.cpp)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
-# # Link Google Test, enable and run it
-# target_link_libraries(testing_suite PRIVATE orbital_mechanics gtest gtest_main)
-# enable_testing()
-# include(GoogleTest)
-# gtest_discover_tests(testing_suite)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
+
+add_subdirectory(../../../extern/googletest ../../../build/googletest)
+add_library(orbital_mechanics
+    orbitalMechanics.cpp
+	orbitSimulation.cpp
+)
+add_executable(testing_suite testingSuite.cpp)
+target_link_libraries(testing_suite PRIVATE orbital_mechanics gtest gtest_main)
+
+add_executable(gui_app
+    mainQt.cpp
+    MainWindow.cpp
+    orbitalMechanics.cpp
+    orbitSimulation.cpp
+)
+target_link_libraries(gui_app PRIVATE Qt6::Widgets orbital_mechanics)
+
+enable_testing()
+include(GoogleTest)
+gtest_discover_tests(testing_suite)
