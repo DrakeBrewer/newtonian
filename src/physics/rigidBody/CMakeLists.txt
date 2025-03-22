@@ -1,3 +1,5 @@
+add_subdirectory(test)
+
 add_library(rigid_body
 	rigidBody.cpp
 )

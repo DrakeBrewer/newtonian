@@ -7,6 +7,7 @@ target_link_libraries(
 	rigid_body_test
 	GTest::gtest_main
 	rigid_body
+	world
 )
 
 add_tests(rigid_body_test)
@@ -34,6 +35,7 @@ target_link_libraries(
 	GTest::gtest_main
 	rigid_body
 	delta_time
+	world
 )
 
 add_tests(collision_test)
