@@ -5,10 +5,13 @@
 #cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="C:/Qt/6.8.2/mingw_64" -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build
 set(CMAKE_CXX_STANDARD 17) 
 
+set (CMAKE_AUTOMOC ON)
+
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 add_executable(planetSim
 	planetSim.cpp
+	QtApp.cpp
 )
 
 include_directories(C:/Qt/6.8.2/mingw_64/include)

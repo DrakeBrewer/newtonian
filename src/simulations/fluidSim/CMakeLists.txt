@@ -1,7 +1,7 @@
 
 
 add_executable(fluid_sim
-        mainFuild.cpp
+        mainFluid.cpp
         fluidSim.cpp
 )
 
