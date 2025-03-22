@@ -38,12 +38,14 @@ class replayTable{
         // print out the table
         void printTable() const;
         void reset();
+        // get the table
         const std::vector<attributeMap>& getTable() const;
         void exportCSV(const std::string& filename) const;
-
+        // perform range Query
         replayTable rangeQuery(const std::string& column, const value& minVal, const value& maxVal);
-
+        // perform filter
         replayTable filter(const std::string& column, const value& condition);
+        // perform select
         replayTable select(const std::vector<std::string>& columns);
 };
 

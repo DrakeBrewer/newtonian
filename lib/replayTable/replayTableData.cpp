@@ -7,11 +7,11 @@ std::string variantToString(const value& val)
     // lamda that takes a value and returns a string
     return std::visit([](const auto& v) -> std::string {
         std::stringstream stream;
+        // Handle floating point nums
         if constexpr (std::is_floating_point_v<std::decay_t<decltype(v)>>) 
         {
-            // If the value is a floating-point number, set the precision for display purposes
-            stream.precision(3);  // Set precision to 3 decimal places for display
-            stream << std::fixed << v;  // Ensure it prints in fixed-point notation (not scientific)
+            stream.precision(3);  // 3 decimal places
+            stream << std::fixed << v;  // avoid scientific notation
         }
         else
         {
@@ -112,25 +112,30 @@ void replayTable::exportCSV(const std::string& filename) const
     file.close();
 }
 
+// Perform range query
 replayTable replayTable::rangeQuery(const std::string& column, const value& minVal, const value& maxVal)
 {
+    // Want to return seperate table
     replayTable result;
     for (const auto& row : table)
     {
+        // make sure the table is not empty
         if(row.count(column) > 0)
         {
-
+            // Handle ints
             if (auto val = std::get_if<int>(&row.at(column)))
             {
                 if (auto minInt = std::get_if<int>(&minVal), maxInt = std::get_if<int>(&maxVal); minInt && maxInt)
                 {
+                    // if value is in the range
                     if(*val >= *minInt && *val <= *maxInt)
                     {
                         result.addRow(row);
                     }
                 }
-
+                
             }
+            // handle floats
             else if(auto val = std::get_if<float>(&row.at(column)))
             {
                 if (auto minFloat = std::get_if<float>(&minVal), maxFloat = std::get_if<float>(&maxVal); minFloat && maxFloat)
@@ -141,6 +146,7 @@ replayTable replayTable::rangeQuery(const std::string& column, const value& minV
                     }
                 }
             }
+            // handle doubles
             else if(auto val = std::get_if<double>(&row.at(column)))
             {
                 if (auto minDouble = std::get_if<double>(&minVal), maxDouble = std::get_if<double>(&maxVal); minDouble && maxDouble)
@@ -154,13 +160,14 @@ replayTable replayTable::rangeQuery(const std::string& column, const value& minV
             }
             else
             {
-                std::cerr << "Error: Column contains a value of unsupported type for range query: " << column << std::endl;
+                std::cerr << "Error: invalid type for range query: " << column << std::endl;
             }
         }
     }
     return result;
 }
 
+// Filter for a condtion
 replayTable replayTable::filter(const std::string& column, const value& condition)
 {
     replayTable result;
@@ -174,6 +181,7 @@ replayTable replayTable::filter(const std::string& column, const value& conditio
     return result;
 }
 
+// Select columns from table
 replayTable replayTable::select(const std::vector<std::string>& columns)
 {
     replayTable result;
@@ -208,7 +216,7 @@ void replayTableUpdater::update()
     {
         attributeMap newRow;
         newRow["timestamp"] = tickCount;
-        std::cout << "Updating table at tick " << tickCount << std::endl;  // Debugging print
+        std::cout << "Updating table at tick " << tickCount << std::endl;  // Debugg stuff
         
         std::cout << "Tracking the following attributes:" << std::endl;
         for (const auto& attr : trackedAttributes) {
@@ -229,7 +237,7 @@ void replayTableUpdater::update()
             auto iter = obj->getAttributes().find(attr);
             if(iter != obj->getAttributes().end())
             {
-                std::cout << "Adding attribute " << attr << " with value: " << variantToString(iter->second) << std::endl;  // Debugging print
+                std::cout << "Adding attribute " << attr << " with value: " << variantToString(iter->second) << std::endl;  
                 newRow[attr] = iter->second;
             }
         }
