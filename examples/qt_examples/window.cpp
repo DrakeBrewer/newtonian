@@ -2,6 +2,8 @@
 // https://doc.qt.io/qt-6/qtwidgets-tutorials-widgets-toplevel-example.html
 // Creates a 320x240 window called toplevel
 #include <QtWidgets>
+#include <QApplication>
+#include <QWidget>
 
 int main(int argc, char * argv[])
 {

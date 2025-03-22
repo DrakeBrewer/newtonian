@@ -1,20 +1,23 @@
 #include "LightParticle.hpp"
 #include <iostream>
-
-LightParticle::LightParticle(double intensity, double frequency, double speed, double x, double y, double z, double energy)
-: properties(intensity, frequency, speed, x, y, z), energy(energy) {}
-
+ 
+LightParticle::LightParticle(float f, float s, Vector3d p, Vector3d d, float e)
+    : LightBase::LightBase(f, s, p, d), energy(e) {}
+ 
 void LightParticle::scatter() {
-    std::cout << "Light particle is scattering!" << std::endl;
+     std::cout << "Light particle is scattering!" << std::endl;
 }
-
+ 
 void LightParticle::collide() {
-    std::cout << "Light particle colliding";
+     std::cout << "Light particle colliding";
 }
-
+ 
 void LightParticle::showProperties() const {
     std::cout << "LightParticle Properties: \n";
-    std::cout << "Intensity: " << properties.intensity << " W/m^2\n";
-    std::cout << "Wavelength: " << properties.getWavelength() << " nm\n";
+    LightBase::showProperties();
     std::cout << "Energy: " << energy << " J\n";
+}
+
+LightBase* LightParticle::clone() const {
+    return new LightParticle(*this);
 }

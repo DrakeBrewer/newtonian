@@ -1,8 +1,8 @@
 #include "LightWave.hpp"
 #include <iostream> 
 
-LightWave::LightWave(double intensity, double frequency, double speed, double x, double y, double z, double phase)
-    : properties(intensity, frequency, speed, x, y, z), phase(phase) {}
+LightWave::LightWave(float f, float s, Vector3d p, Vector3d d, float phase)
+    : LightBase::LightBase(f,s,p,d), phase(phase) {}
 
 void LightWave::interfere() {
     std::cout << "Light wave interfering\n";
@@ -14,8 +14,10 @@ void LightWave::diffract() {
 
 void LightWave::showProperties() const {
     std::cout << "LightWave properties:\n";
-    std::cout << "Intensity: " << properties.intensity << " W/m^2\n";
-    std::cout << "Frequency: " << properties.frequency << " Hz\n";
-    std::cout << "Wavelength: " << properties.getWavelength() << "nm\n";
+    LightBase::showProperties();
     std::cout << "Phase: " << phase << "\n";
+}
+
+LightBase* LightWave::clone() const {
+    return new LightWave(*this);
 }
