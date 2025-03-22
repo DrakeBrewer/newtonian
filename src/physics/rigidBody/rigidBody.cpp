@@ -30,6 +30,31 @@ void RigidBody::update(double delta) {
 		", z: " << this->position.z;
 }
 
+// Method to get map of attributes to be used by replayTable.
+// Virtual, so can be overridden by dirived classes like Sphere.
+// This code was written by Brendan
+
+std::unordered_map<std::string, float> RigidBody::getAttributes() const {
+        std::unordered_map<std::string, float> attributes;
+	std::cout << "Getting values" << std::endl;
+        attributes["position.x"] = position.x;
+        attributes["position.y"] = position.y;
+        attributes["position.z"] = position.z;
+        attributes["velocity.x"] = velocity.x;
+        attributes["velocity.y"] = velocity.y;
+        attributes["velocity.z"] = velocity.z;
+        attributes["acceleration.x"] = acceleration.x;
+        attributes["acceleration.y"] = acceleration.y;
+        attributes["acceleration.z"] = acceleration.z;
+        attributes["mass"] = mass;
+	std::cout << "position x, y, z is <" << position.x <<","<< position.y << "," << position.z <<">" << std::endl;
+	std::cout << "velocity x, y, z is <" << velocity.x <<","<< velocity.y << "," << velocity.z <<">" << std::endl;
+
+	std::cout << "acceleration x, y, z is <" << acceleration.x <<","<< acceleration.y << "," << acceleration.z <<">" << std::endl;
+
+        return attributes;
+}
+
 
 // TODO: use diff eq's for this later?
 void RigidBody::applyForce(Vector3d force) {

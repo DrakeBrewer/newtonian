@@ -1,3 +1,5 @@
+include_directories(/home/brendan/Qt/6.8.2/gcc_64/lib/cmake/Qt6)
+
 find_package(Qt6 REQUIRED COMPONENTS
 	Core
 	Widgets
