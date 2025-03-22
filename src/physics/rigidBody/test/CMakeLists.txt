@@ -7,23 +7,11 @@ target_link_libraries(
 	rigid_body_test
 	GTest::gtest_main
 	rigid_body
+	vector3d
 	world
 )
 
 add_tests(rigid_body_test)
-
-# Vector Tests
-add_executable(vector3d_test
-	vector3d_test.cpp
-)
-
-target_link_libraries(
-	vector3d_test
-	GTest::gtest_main
-	rigid_body
-)
-
-add_tests(vector3d_test)
 
 # Collision Tests
 add_executable(collision_test
@@ -35,6 +23,7 @@ target_link_libraries(
 	GTest::gtest_main
 	rigid_body
 	delta_time
+	vector3d
 	world
 )
 
