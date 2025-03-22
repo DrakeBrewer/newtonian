@@ -1,5 +1,5 @@
 #pragma once
-#include "../collisionSim/rigidBody.hpp"
+#include "../../../lib/vector3d/vector3d.hpp"
 #include <cmath>
 #include <string>
 

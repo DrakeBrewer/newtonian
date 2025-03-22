@@ -1,5 +1,5 @@
 #include "LightBase.hpp"
-#include "../collisionSim/rigidBody.hpp"
+#include "../../../lib/vector3d/vector3d.hpp"
 #include "LightRay.hpp"
 
 int main() {

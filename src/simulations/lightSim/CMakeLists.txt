@@ -10,7 +10,7 @@ target_link_libraries(testSuite
 )
 
 include_directories(
-   ${CMAKE_SOURCE_DIR}/src/simulations/collisionSim
+   ${CMAKE_SOURCE_DIR}/lib/vector3d
    ${CMAKE_SOURCE_DIR}/src/simulations/lightSim
 )
 

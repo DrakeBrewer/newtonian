@@ -2,7 +2,7 @@
 #include <vector>
 #include <memory>
 #include "LightBase.hpp"
-#include "../collisionSim/rigidBody.hpp"
+#include "../../../lib/vector3d/vector3d.hpp"
 #include <iostream>
 #include "MaterialVolume.hpp"
 #include "../../../lib/deltaTime/deltaTime.hpp"

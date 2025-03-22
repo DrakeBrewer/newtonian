@@ -1,6 +1,5 @@
 #pragma once
-#include "../collisionSim/rigidBody.hpp"
-#include "MaterialVolume.hpp"
+#include "../../../lib/vector3d/vector3d.hpp"
 #include <iostream>
 
 class LightBase {

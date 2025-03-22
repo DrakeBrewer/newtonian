@@ -1,7 +1,7 @@
 #pragma once
 
 #include <math.h>
-#include "../collisionSim/rigidBody.hpp"
+#include "../../../lib/vector3d/vector3d.hpp"
 #include <iostream>
 
 /*
