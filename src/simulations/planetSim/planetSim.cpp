@@ -1,42 +1,15 @@
 
 #include "planets.hpp"
-#include "objects.hpp"
-#include <QApplication>
-#include <QMainWindow>
-#include <QtWidgets>
-#include <QPalette>
+#include "QtApp.hpp"
 
 int main(int argc, char *argv[]){
 
-    QApplication app(argc, argv);
+    QApplication app(argc, argv);//Initalize the QT event loop
     
-    QMainWindow mainWindow;
-    mainWindow.setWindowTitle("PlanetSim - Qt Test");
-    mainWindow.resize(800, 600);
-    mainWindow.show();
+    QtApp mainWindow;//Create an instance of the mainwindow
+    mainWindow.show();//Display the window
 
-    QPalette pal = mainWindow.palette();
-    pal.setColor(QPalette::Window, Qt::white);
-    mainWindow.setAutoFillBackground(true);
-    mainWindow.setPalette(pal);
-
-    QPushButton *startButton = new QPushButton(QApplication::translate("childwidget","Start"),&mainWindow);
-    QPushButton *quitButton = new QPushButton(QApplication::translate("childwidget","Quit"),&mainWindow);
-    
-
-    startButton->move(350,300);
-    startButton->show();
-
-    quitButton->move(350,330);
-    quitButton->show();
-
-    return app.exec();
-
-    
-
-    /*planetSim();
-    return 0;*/
-
+    return app.exec();//Start the app
 
 
 };
