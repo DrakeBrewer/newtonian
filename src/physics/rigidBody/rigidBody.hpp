@@ -1,6 +1,12 @@
 #pragma once
 #include "vector3d.hpp"
 
+// Includes for integration with replayTable
+#include <variant>
+#include <unordered_map>
+#include <string>
+#include <variant>
+
 #define PI 3.14f
 
 // TODO: Evaluate the need for doubles instead of floats in 
@@ -38,6 +44,10 @@ public:
 
 	virtual void update(double delta);
 	void applyForce(Vector3d force);
+
+	// (Brendan) method for getting attribute map for replayTable
+	virtual std::unordered_map<std::string, float> getAttributes() const;
+
 };
 
 class Sphere : public RigidBody,

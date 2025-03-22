@@ -3,14 +3,17 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <fstream>
 #include <sstream>
 #include <variant>
+#include "world.hpp"
+#include "object.hpp"
+#include "deltaTime.hpp"
 
 // create aliases for table structure
 using value = std::variant<int, double, std::string, float>;
-using attributeMap = std::map<std::string, value>;
+using attributeMap = std::unordered_map<std::string, value>;
 
 // Function to convert variant to string
 std::string variantToString(const value& val);
@@ -20,10 +23,10 @@ class testObject{
     public:
         double pos;
         double vel;
-        std::map<std::string, double> attributes; 
+        std::unordered_map<std::string, double> attributes; 
         testObject(double p, double v);
         void update(double time);
-        const std::map<std::string, double>& getAttributes() const;
+        const std::unordered_map<std::string, double>& getAttributes() const;
 };
 
 class replayTable{
@@ -35,17 +38,26 @@ class replayTable{
         // print out the table
         void printTable() const;
         void reset();
+        // get the table
+        const std::vector<attributeMap>& getTable() const;
         void exportCSV(const std::string& filename) const;
+        // perform range Query
+        replayTable rangeQuery(const std::string& column, const value& minVal, const value& maxVal);
+        // perform filter
+        replayTable filter(const std::string& column, const value& condition);
+        // perform select
+        replayTable select(const std::vector<std::string>& columns);
 };
 
 class replayTableUpdater{
     public:
-        testObject* object; // placeholder
+        RigidBody* obj; // placeholder
         replayTable * table;
         std::vector<std::string> trackedAttributes;
         int updateFrequency;
         int tickCount;
         // constructor
-        replayTableUpdater(testObject* obj, replayTable* tab, const std::vector<std::string>& attrName, int freq);
+        //replayTableUpdater(testObject* obj, replayTable* tab, const std::vector<std::string>& attrName, int freq);
+        replayTableUpdater(RigidBody* body, replayTable* tab, const std::vector<std::string>& attrName, int freq);
         void update(); // update the table
 };
