@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include <cmath>
 #include <gtest/gtest.h>
 #include "rigidBody.hpp"
 #include "vector3d.hpp"
@@ -113,6 +114,43 @@ TEST_F(Vector3dTest, DivisionOverload) {
 	ASSERT_FLOAT_EQ(expected.x, (v1/scalar).x);
 	ASSERT_FLOAT_EQ(expected.y, (v1/scalar).y);
 	ASSERT_FLOAT_EQ(expected.z, (v1/scalar).z);
+}
+
+TEST_F(Vector3dTest, Normalize) {
+	Vector3d vec = v1;
+	v1.normalize();
+	
+	float mag = std::sqrt(
+		(vec.x * vec.x) +
+		(vec.y * vec.y) +
+		(vec.z * vec.z)
+	);
+
+	float xNormd = vec.x / mag;
+	float yNormd = vec.y / mag;
+	float zNormd = vec.z / mag;
+
+	ASSERT_FLOAT_EQ(xNormd, v1.x);
+	ASSERT_FLOAT_EQ(yNormd, v1.y);
+	ASSERT_FLOAT_EQ(zNormd, v1.z);
+
+	// Calculated via calculator
+	ASSERT_FLOAT_EQ(0.2672612419f, v1.x);
+	ASSERT_FLOAT_EQ(0.53452248382485f, v1.y);
+	ASSERT_FLOAT_EQ(0.80178372573727f, v1.z);
+}
+
+TEST_F(Vector3dTest, Normalized) {
+	Vector3d normd = v1.normalized();
+
+	// Calculated via calculator
+	ASSERT_FLOAT_EQ(0.2672612419f, normd.x);
+	ASSERT_FLOAT_EQ(0.53452248382485f, normd.y);
+	ASSERT_FLOAT_EQ(0.80178372573727f, normd.z);
+
+	ASSERT_FLOAT_EQ(10.0f, v1.x);
+	ASSERT_FLOAT_EQ(20.0f, v1.y);
+	ASSERT_FLOAT_EQ(30.0f, v1.z);
 }
 
 int main(int argc, char **argv) {

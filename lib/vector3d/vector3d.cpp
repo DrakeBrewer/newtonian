@@ -80,11 +80,7 @@ void Vector3d::normalize() {
 Vector3d Vector3d::normalized() {
 	float magnitude = this->magnitude();
 
-	return Vector3d(
-		this->x / magnitude,
-		this->y / magnitude,
-		this->z / magnitude,
-	);
+	return Vector3d(this->x, this->y, this->z) / magnitude;
 }
 
 
