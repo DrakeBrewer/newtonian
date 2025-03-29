@@ -170,9 +170,10 @@ replayTable replayTable::rangeQuery(const std::string& column, const value& minV
 // Filter for a condtion
 replayTable replayTable::filter(const std::string& column, const value& condition)
 {
+    std::cout << "Filtering for value : " << variantToString(condition) << "." << std::endl; 
     replayTable result;
     for(const auto& row : table)
-    {
+    {   
         if(row.count(column) > 0 && row.at(column) == condition)
         {
             result.addRow(row);
@@ -234,8 +235,8 @@ void replayTableUpdater::update()
 
         for (const auto& attr : trackedAttributes)
         {
-            auto iter = obj->getAttributes().find(attr);
-            if(iter != obj->getAttributes().end())
+            auto iter = objectAttributes.find(attr);
+            if(iter != objectAttributes.end())
             {
                 std::cout << "Adding attribute " << attr << " with value: " << variantToString(iter->second) << std::endl;  
                 newRow[attr] = iter->second;
