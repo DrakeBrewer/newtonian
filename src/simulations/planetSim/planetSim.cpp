@@ -1,9 +1,11 @@
 
 #include "planets.hpp"
 #include "QtApp.hpp"
+#include "simConfig.hpp"
 
 int main(int argc, char *argv[]){
-
+    
+    //QCoreApplication::addLibraryPath("C:/Qt/6.8.2/mingw_64/plugins");
     QApplication app(argc, argv);//Initalize the QT event loop
     
     QtApp mainWindow;//Create an instance of the mainwindow

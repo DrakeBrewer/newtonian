@@ -1,6 +1,7 @@
 #include "QtApp.hpp"
 #include "planets.hpp"
 
+
 QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
 
     //Title and initial size
@@ -18,7 +19,7 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
     startButton -> move(350,300);
     
     //Connect the startButton 'Clicked' signal to trigger the the runSim slot in the app
-    connect(startButton, &QPushButton::clicked, this, &QtApp::runSim);
+    connect(startButton, &QPushButton::clicked, this, &QtApp::startApp);
     
     quitButton = new QPushButton("Quit",this);
     quitButton -> move(350,500);
@@ -30,8 +31,10 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
 
 }
 
-void QtApp::runSim(){
-    planetSim();
+void QtApp::startApp(){
+
+    configWindow = new simConfigWindow(this);
+    configWindow -> show();
 }
 
 
