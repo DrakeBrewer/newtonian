@@ -20,12 +20,13 @@ public:
 
 	Vector3d crossProduct(const Vector3d& vec);
 	Vector3d projectOnto(const Vector3d& vec);
-	Vector3d normalize();
+	Vector3d normalized();
 	Vector3d reflect(); // TODO: implement this
-	Vector3d negate();
 
 	float dotProduct(const Vector3d& vec);
 	float magnitude();
+
+	void normalize();
 
 	// TODO:: https://people.math.harvard.edu/~jjchen/math21a/handouts/vector-ops.html
 	// - [ ] Vector addition

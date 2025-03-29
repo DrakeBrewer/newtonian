@@ -69,15 +69,24 @@ Vector3d Vector3d::projectOnto(const Vector3d& vec) {
 	return (dot / magSqrd) * vec;
 }
 
-Vector3d Vector3d::normalize() {
+void Vector3d::normalize() {
+	float magnitude = this->magnitude();
+
+	this->x /= magnitude;
+	this->y /= magnitude;
+	this->z /= magnitude;
+}
+
+Vector3d Vector3d::normalized() {
 	float magnitude = this->magnitude();
 
 	return Vector3d(
 		this->x / magnitude,
 		this->y / magnitude,
-		this->z / magnitude
+		this->z / magnitude,
 	);
 }
+
 
 float Vector3d::dotProduct(const Vector3d& vec) {
 	 return (this->x * vec.x) + (this->y * vec.y) + (this->z * vec.z);
