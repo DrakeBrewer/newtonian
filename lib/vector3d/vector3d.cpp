@@ -24,6 +24,10 @@ Vector3d Vector3d::operator-(const Vector3d& vec) const {
 	);
 }
 
+Vector3d Vector3d::operator-() const {
+	return Vector3d(-this->x, -this->y, -this->z);
+}
+
 Vector3d Vector3d::operator*(float scalar) const {
 	return Vector3d(
 		this->x * scalar,
@@ -55,6 +59,24 @@ Vector3d Vector3d::crossProduct(const Vector3d& vec) {
 	float k = (this->x * vec.y) - (this->y * vec.x);
 
 	return Vector3d(i, j, k);
+}
+
+Vector3d Vector3d::projectOnto(const Vector3d& vec) {
+	float dot = this->dotProduct(vec);
+	float sum = std::pow(vec.x, 2) + std::pow(vec.y, 2) + std::pow(vec.z, 2);
+	float magSqrd = std::sqrt(sum) * std::sqrt(sum);
+
+	return (dot / magSqrd) * vec;
+}
+
+Vector3d Vector3d::normalize() {
+	float magnitude = this->magnitude();
+
+	return Vector3d(
+		this->x / magnitude,
+		this->y / magnitude,
+		this->z / magnitude
+	);
 }
 
 float Vector3d::dotProduct(const Vector3d& vec) {

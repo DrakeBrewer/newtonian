@@ -13,6 +13,7 @@ public:
 
 	Vector3d operator+(const Vector3d& vec) const;
 	Vector3d operator-(const Vector3d& vec) const;
+	Vector3d operator-() const;
 	Vector3d operator*(float scalar) const;
 	friend Vector3d operator*(float scalar, const Vector3d& vec);
 	Vector3d operator/(float scalar) const;
@@ -20,7 +21,7 @@ public:
 	Vector3d crossProduct(const Vector3d& vec);
 	Vector3d projectOnto(const Vector3d& vec);
 	Vector3d normalize();
-	Vector3d reflect();
+	Vector3d reflect(); // TODO: implement this
 	Vector3d negate();
 
 	float dotProduct(const Vector3d& vec);
