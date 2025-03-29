@@ -1,10 +1,51 @@
 #include "vector3d.hpp"
 #include <cmath>
+#include <stdexcept>
 
 Vector3d::Vector3d(float x, float y, float z): x(0), y(0), z(0) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
+}
+
+Vector3d Vector3d::operator+(const Vector3d& vec) const {
+	return Vector3d(
+		this->x + vec.x,
+		this->y + vec.y,
+		this->z + vec.z
+	);
+}
+
+Vector3d Vector3d::operator-(const Vector3d& vec) const {
+	return Vector3d(
+		this->x - vec.x,
+		this->y - vec.y,
+		this->z - vec.z
+	);
+}
+
+Vector3d Vector3d::operator*(float scalar) const {
+	return Vector3d(
+		this->x * scalar,
+		this->y * scalar,
+		this->z * scalar
+	);
+}
+
+Vector3d operator*(float scalar, const Vector3d& vec) {
+	return vec * scalar;
+}
+
+Vector3d Vector3d::operator/(float scalar) const {
+	if (scalar != 0) {
+		return Vector3d(
+			this->x / scalar,
+			this->y / scalar,
+			this->z / scalar
+		);
+	}
+
+	throw std::overflow_error("Divide by zero exception");
 }
 
 // internal X vec
