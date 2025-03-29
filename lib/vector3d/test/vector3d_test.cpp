@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include <gtest/gtest.h>
 #include "rigidBody.hpp"
+#include "vector3d.hpp"
 
 class Vector3dTest : public ::testing::Test {
 protected:
@@ -61,6 +62,58 @@ TEST_F(Vector3dTest, Magnitude) {
 	GTEST_SKIP();
 }
 
+TEST_F(Vector3dTest, AdditionOverload) {
+	Vector3d vec = Vector3d(5, 5, 5);
+	Vector3d expected = Vector3d(15, 25, 35);
+
+	ASSERT_FLOAT_EQ(expected.x, (v1+vec).x);
+	ASSERT_FLOAT_EQ(expected.y, (v1+vec).y);
+	ASSERT_FLOAT_EQ(expected.z, (v1+vec).z);
+}
+
+TEST_F(Vector3dTest, SubtractionOverload) {
+	Vector3d vec = Vector3d(10.0f, 1.0f, 14.0f);
+	Vector3d expected = Vector3d(0.0f, 19.0f, 16.0f);
+
+	ASSERT_FLOAT_EQ(expected.x, (v1-vec).x);
+	ASSERT_FLOAT_EQ(expected.y, (v1-vec).y);
+	ASSERT_FLOAT_EQ(expected.z, (v1-vec).z);
+}
+
+TEST_F(Vector3dTest, NegationOverload) {
+	Vector3d expected = Vector3d(-10.0f, -20.0f, -30.0f);
+	
+	ASSERT_FLOAT_EQ(expected.x, -v1.x);
+	ASSERT_FLOAT_EQ(expected.y, -v1.y);
+	ASSERT_FLOAT_EQ(expected.z, -v1.z);
+}
+
+TEST_F(Vector3dTest, MultiplacationOverload) {
+	Vector3d expected = Vector3d(30.0f, 60.0f, 90.0f);
+	float scalar = 3.0f;
+
+	ASSERT_FLOAT_EQ(expected.x, (v1*scalar).x);
+	ASSERT_FLOAT_EQ(expected.y, (v1*scalar).y);
+	ASSERT_FLOAT_EQ(expected.z, (v1*scalar).z);
+}
+
+TEST_F(Vector3dTest, MultiplacationOverloadReverseOrder) {
+	Vector3d expected = Vector3d(30.0f, 60.0f, 90.0f);
+	float scalar = 3.0f;
+
+	ASSERT_FLOAT_EQ(expected.x, (scalar*v1).x);
+	ASSERT_FLOAT_EQ(expected.y, (scalar*v1).y);
+	ASSERT_FLOAT_EQ(expected.z, (scalar*v1).z);
+}
+
+TEST_F(Vector3dTest, DivisionOverload) {
+	Vector3d expected = Vector3d(2.0f, 4.0f, 6.0f);
+	float scalar = 5.0f;
+
+	ASSERT_FLOAT_EQ(expected.x, (v1/scalar).x);
+	ASSERT_FLOAT_EQ(expected.y, (v1/scalar).y);
+	ASSERT_FLOAT_EQ(expected.z, (v1/scalar).z);
+}
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
