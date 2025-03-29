@@ -8,7 +8,7 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
-add_subdirectory(../../../extern/googletest ../../../build/googletest)
+#add_subdirectory(../../../extern/googletest ../../../build/googletest)
 add_library(orbital_mechanics
     orbitalMechanics.cpp
 	orbitSimulation.cpp

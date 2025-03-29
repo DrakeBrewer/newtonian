@@ -1,5 +1,5 @@
 # Ensure that Google Test is found
-find_package(GTest REQUIRED)
+#find_package(GTest REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR})
 
 add_executable(replay_table_test

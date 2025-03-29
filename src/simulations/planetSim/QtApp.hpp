@@ -1,10 +1,15 @@
 #ifndef QTAPP_HPP
 #define QTAPP_HPP
 
-#include <QmainWindow>
+#include <QMainWindow>
 #include <QPushButton>
 #include <QApplication>
 #include <QPalette>
+#include <QDebug>
+
+#include "simConfig.hpp"
+
+
 
 class QtApp : public QMainWindow{
     Q_OBJECT //Macro required by QT to allow signals and slots
@@ -16,12 +21,14 @@ public:
 
 private slots:
     //Qt uses slots that to handle behavior such as button clicks
-    void runSim();
+    void startApp();
 
 private:
     //Declarations for some basic buttons
     QPushButton *startButton;
     QPushButton *quitButton;
+
+    simConfigWindow *configWindow;
 
 };
 
