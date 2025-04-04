@@ -72,6 +72,20 @@ bool OrbitSimulation::handleMoonMassInput(){
     }
 }
 
+double OrbitSimulation::getMinMoonMass(){
+    return orbitSim.planetMass * 0.001;
+}
+double OrbitSimulation::getMaxMoonMass(){
+    return orbitSim.planetMass * 0.1;
+}
+bool OrbitSimulation::isValidMoonMass(double userMoonMass){
+    double scalar = 1e-10;
+    double minMoonMass = (getMinMoonMass() * (1 - scalar));
+    double maxMoonMass = (getMaxMoonMass() * (1 + scalar));
+
+    return ((userMoonMass >= minMoonMass) && (userMoonMass <= maxMoonMass));
+}
+
 bool OrbitSimulation::handleParameterUpdate(){
     int parameterChoice;
     double newParameterValue;
