@@ -10,10 +10,14 @@ public:
     // Function that handles the user input for setting the moon mass
     bool handleMoonMassInput();    
 
+    // These function handle what they say, called for the Qt interface
+    bool isValidMoonMass(double userMoonMass);
+    double getMinMoonMass();
+    double getMaxMoonMass();
+
     // Function that handles the updates of parameters from the user
     bool handleParameterUpdate();
 
-public:
     // This is the interface for the user, which starts/ runs the simulation and collects input
     void runSimulation();
 };

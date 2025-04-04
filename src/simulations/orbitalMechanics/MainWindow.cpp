@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setCentralWidget(centralWidget);
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
 
-    // Planet Selection Dropdown
+    // Planet Selection Dropdown -------------------------------------------------------------
     QVBoxLayout *dropdownLayout = new QVBoxLayout();
 
     QLabel *planetLabel = new QLabel("Planet Selection", centralWidget);
@@ -47,8 +47,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     mainLayout->addLayout(dropdownLayout);
     mainLayout->addSpacing(21);
 
-    // Setting the Moon Mass
-
+    // Setting the Moon Mass -----------------------------------------------------------------
     // Moon Mass Label
     QLabel *moonMassLabel = new QLabel("Set Moon Mass [kg]", centralWidget);
     moonMassLabel->setStyleSheet("font-size: 16pt; font-weight: bold;");
@@ -57,10 +56,61 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     // Show the valid moon mass range
     moonMassRangeLabel = new QLabel(centralWidget);
     moonMassRangeLabel->setStyleSheet("font-size: 12pt;");
-    double minMoonMass = integrateOrbitSim.orbitSim.planetMass * 0.001;
-    double maxMoonMass = integrateOrbitSim.orbitSim.planetMass * 0.1;
+    double minMoonMass = integrateOrbitSim.getMinMoonMass();
+    double maxMoonMass = integrateOrbitSim.getMaxMoonMass();
     moonMassRangeLabel->setText(QString("Valid Moon Mass Range: %1 [kg] to %2 [kg]").arg(minMoonMass).arg(maxMoonMass));
     mainLayout->addWidget(moonMassRangeLabel, 0, Qt::AlignLeft);
+
+    // Moon Mass Input Field
+    QVBoxLayout *moonMassInputLayout = new QVBoxLayout();
+    QLineEdit *moonMassInput = new QLineEdit(centralWidget);
+    moonMassInput->setPlaceholderText("Enter in Scientific Notation then press ENTER...");
+    moonMassInput->setStyleSheet("font-size: 12pt;");
+    moonMassInput->setFixedWidth(330);
+    moonMassInputLayout->addWidget(moonMassInput);
+    mainLayout->addLayout(moonMassInputLayout);
+
+    connect(moonMassInput, &QLineEdit::returnPressed, this, [=](){
+        bool isValid;
+        double userMoonMass = moonMassInput->text().toDouble(&isValid);
+        if(!isValid){
+            qDebug() << "<ERROR: Enter a number>";
+            return;
+        }
+
+        if(!integrateOrbitSim.isValidMoonMass(userMoonMass)){
+            qDebug() << "<ERROR: Enter a valid moon mass>";
+            return;
+        }
+
+        integrateOrbitSim.orbitSim.moonMass = userMoonMass;
+        qDebug() << "<Updated Moon Mass: " << userMoonMass << "[kg]>";
+        double minMoonMass = integrateOrbitSim.getMinMoonMass();
+        double maxMoonMass = integrateOrbitSim.getMaxMoonMass();
+        moonMassRangeLabel->setText(QString("Valid Moon Mass Range: %1 [kg] to %2 [kg]").arg(minMoonMass).arg(maxMoonMass));
+    });
+    mainLayout->addSpacing(21);
+
+    // Update Moon Velocity ------------------------------------------------------------------
+    QLabel *updateVelocityLabel = new QLabel("Update Moon Velocity [m/s]", centralWidget);
+    updateVelocityLabel->setStyleSheet("font-size: 16pt; font-weight: bold;");
+    mainLayout->addWidget(updateVelocityLabel);
+    mainLayout->addSpacing(21);
+
+
+    // Update Planet Mass --------------------------------------------------------------------
+    QLabel *updatePlanetMassLabel = new QLabel("Update Planet Mass [kg]", centralWidget);
+    updatePlanetMassLabel->setStyleSheet("font-size: 16pt; font-weight: bold;");
+    mainLayout->addWidget(updatePlanetMassLabel);
+    mainLayout->addSpacing(21);
+
+
+    // Update Planet to Moon Distance --------------------------------------------------------
+    QLabel *updateDistanceLabel = new QLabel("Update Planet to Moon Distance [m]", centralWidget);
+    updateDistanceLabel->setStyleSheet("font-size: 16pt; font-weight: bold;");
+    mainLayout->addWidget(updateDistanceLabel);
+
+
 
     mainLayout->addStretch();
 }
