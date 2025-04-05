@@ -151,8 +151,8 @@ float netForce(object obj, fluid liquid, float velocity){
 
 int runSimulation(object obj, fluid liquid, bool printFlag){
     float velocity = obj.getInitV();//inital velocity
-    float dt = 0.02; // Time step in seconds
-    while((std::abs(velocity) > 0.06 || std::abs(obj.getZ()) > .03) && obj.getZ() >= -20){
+    float dt = 0.01; // Time step in seconds
+    while((std::abs(velocity) > 0.03 || std::abs(obj.getZ()) > .03) && obj.getZ() >= -20){
         float force = netForce(obj,liquid,velocity);
         float acceleration = force / obj.getMass();
         velocity += acceleration * dt;
