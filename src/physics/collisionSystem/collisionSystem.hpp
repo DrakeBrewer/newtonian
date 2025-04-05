@@ -2,6 +2,12 @@
 #include "rigidBody.hpp"
 #include "vector3d.hpp"
 
+// TODO: implement these classes
+// - Implement broad phase detection
+// - Implement narrow phase detection (SAT)
+// - Implement SAT
+// - Implement Projections for SAT
+// - Implemnet Collision Resolutions
 class Projection {
 	float min;
 	float max;
@@ -30,7 +36,6 @@ public:
 
 	// SAT specific funcitons
 	Vector3d findSeparatingAxis();
-
 };
 
 class CollisionResolver {
