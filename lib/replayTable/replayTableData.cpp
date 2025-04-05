@@ -103,8 +103,17 @@ void replayTable::exportCSV(const std::string& filename) const
         firstElem = true;
         for (const auto& elem : row) 
         {
+            const auto& elemName = elem.first;
             if (!firstElem) file << ",";
-            file << variantToString(elem.second); // convert to string
+            auto iter = row.find(elemName); // find where to insert data
+            if (iter != row.end())
+            {
+                file << variantToString(elem.second); // convert to string
+            }
+            else
+            {
+                file << ""; // column not found, write nothing
+            }
             firstElem = false;
         }
         file << "\n"; // move on to next row
@@ -112,88 +121,18 @@ void replayTable::exportCSV(const std::string& filename) const
     file.close();
 }
 
-// Perform range query
-replayTable replayTable::rangeQuery(const std::string& column, const value& minVal, const value& maxVal)
-{
-    // Want to return seperate table
-    replayTable result;
-    for (const auto& row : table)
-    {
-        // make sure the table is not empty
-        if(row.count(column) > 0)
-        {
-            // Handle ints
-            if (auto val = std::get_if<int>(&row.at(column)))
-            {
-                if (auto minInt = std::get_if<int>(&minVal), maxInt = std::get_if<int>(&maxVal); minInt && maxInt)
-                {
-                    // if value is in the range
-                    if(*val >= *minInt && *val <= *maxInt)
-                    {
-                        result.addRow(row);
-                    }
-                }
-                
-            }
-            // handle floats
-            else if(auto val = std::get_if<float>(&row.at(column)))
-            {
-                if (auto minFloat = std::get_if<float>(&minVal), maxFloat = std::get_if<float>(&maxVal); minFloat && maxFloat)
-                {
-                    if(*val >= *minFloat && *val <= *maxFloat)
-                    {
-                        result.addRow(row);
-                    }
-                }
-            }
-            // handle doubles
-            else if(auto val = std::get_if<double>(&row.at(column)))
-            {
-                if (auto minDouble = std::get_if<double>(&minVal), maxDouble = std::get_if<double>(&maxVal); minDouble && maxDouble)
-                {
-                    if(*val >= *minDouble && *val <= *maxDouble)
-                    {
-                        result.addRow(row);
-                    }
-                }
-
-            }
-            else
-            {
-                std::cerr << "Error: invalid type for range query: " << column << std::endl;
-            }
-        }
-    }
-    return result;
-}
-
-// Filter for a condtion
-replayTable replayTable::filter(const std::string& column, const value& condition)
-{
-    std::cout << "Filtering for value : " << variantToString(condition) << "." << std::endl; 
-    replayTable result;
-    for(const auto& row : table)
-    {   
-        if(row.count(column) > 0 && row.at(column) == condition)
-        {
-            result.addRow(row);
-        }
-    }
-    return result;
-}
-
 // Select columns from table
 replayTable replayTable::select(const std::vector<std::string>& columns)
 {
     replayTable result;
-    for (const auto& row : table)
+    for (const auto& row : table) // loop through table
     {
         attributeMap newRow;
-        for(const auto& col : columns)
+        for(const auto& col : columns) // for each column
         {
-            if(row.count(col) > 0)
+            if(row.count(col) > 0) // make sure its not empty
             {
-                newRow[col] = row.at(col);
+                newRow[col] = row.at(col); // insert into new row
             }
         }
         result.addRow(newRow);
