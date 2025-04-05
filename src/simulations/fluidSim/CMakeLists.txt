@@ -1,6 +1,7 @@
 
+cmake_minimum_required(VERSION 3.16)
 
-#project(FluidSim)
+project(FluidSim)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
@@ -8,24 +9,32 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-add_executable(fluidSim
-        mainFluid.cpp
-        #QtApp.cpp
+add_executable(FluidSimQt
+        mainQt.cpp
+        mainWindow.cpp
+        mainWindow.hpp
+        
         fluidSim.cpp
 )
 
-#target_link_libraries(fluidSim PRIVATE Qt6::Widgets)
+target_link_libraries(FluidSimQt PRIVATE Qt6::Widgets)
 
-############Testing Suite##############
-
-add_executable(fluid_sim_test
-        testingSuite.cpp
+add_executable(FluidSim
+        mainFluid.cpp    
         fluidSim.cpp
 )
 
-target_link_libraries(
-        fluid_sim_test
-        GTest::gtest_main
-)
+#-------------Testing Suite-------------#
 
-add_tests(fluid_sim_test)
+#add_executable(fluid_sim_test
+#        testingSuite.cpp
+#        fluidSim.cpp
+#)
+
+#target_link_libraries(
+#        fluid_sim_test
+#        GTest::gtest_main
+#)
+
+#add_tests(fluid_sim_test)
+
