@@ -4,7 +4,7 @@
 
 int main() {
     // Create RigidBody objects (with position, velocity, acceleration, mass, and static status)
-    RigidBody body1(Vector3d(10.0f, 0.0f, 0.0f), Vector3d(5.0f, 0.0f, 0.0f), Vector3d(0.0f, 0.0f, 0.0f), 2.0f, false);
+    RigidBody body1(Vector3d(10.0f, 0.0f, 0.0f), Vector3d(5.0f, 2.0f, 0.0f), Vector3d(0.0f, 0.0f, 3.0f), 2.0f, false);
     //RigidBody body2(Vector3d(20.0f, 0.0f, 0.0f), Vector3d(3.0f, 0.0f, 0.0f), Vector3d(0.0f, 0.0f, 0.0f), 3.0f, false);
     //RigidBody body3(Vector3d(30.0f, 0.0f, 0.0f), Vector3d(2.0f, 0.0f, 0.0f), Vector3d(0.0f, 0.0f, 0.0f), 4.0f, false);
 
@@ -30,18 +30,6 @@ int main() {
     // Print the current table after updates
     std::cout << "Original Table:" << std::endl;
     table.printTable();
-    std::cout << std::endl;
-
-    // Perform a range query on the "position" column to find objects with position.x between 15.0 and 25.0
-    replayTable rangeQueryResult = table.rangeQuery("position.x", 15.0, 25.0);
-    std::cout << "Range Query Result (Position.x between 15 and 25):" << std::endl;
-    rangeQueryResult.printTable();
-    std::cout << std::endl;
-
-    // Perform a filter query to get objects where the mass equals 3.0
-    replayTable filterResult = table.filter("position.x", 10.000);
-    std::cout << "Filter Result (position.x = 10.0):" << std::endl;
-    filterResult.printTable();
     std::cout << std::endl;
 
     // Perform a select query to select only the "position" and "mass" columns
