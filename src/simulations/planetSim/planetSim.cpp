@@ -17,129 +17,128 @@ int main(int argc, char *argv[]){
 };
 
 int planetSim(){
+    // string userIn;
 
-    string userIn;
+    // cout<<"Welcome To Planet Sim."<<endl;
 
-    cout<<"Welcome To Planet Sim."<<endl;
+    // cout<<"Enter 'H' for a help menu / command list"<<endl;//TODO: Add help menu
 
-    cout<<"Enter 'H' for a help menu / command list"<<endl;//TODO: Add help menu
+    // while(true){
 
-    while(true){
+    //     cout<<"Where would you like to run the simulation?"<<endl;
 
-        cout<<"Where would you like to run the simulation?"<<endl;
+    //     getline(cin,userIn);//TODO: Make user input more robust
 
-        getline(cin,userIn);//TODO: Make user input more robust
+    //     if(userIn == "exit"){
 
-        if(userIn == "exit"){
-
-            cout<<"Goodbye"<<endl;
-            return 0;
-        }
+    //         cout<<"Goodbye"<<endl;
+    //         return 0;
+    //     }
             
-        else if(userIn == "earth"){
+    //     else if(userIn == "earth"){
 
-            cout<<"Earth Selected"<<endl;
+    //         cout<<"Earth Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Earth",9.81);
+    //         planet p("Earth",9.81);
 
-            setSim(p);
+    //         setSim(p);
     
-        }
-        else if(userIn == "moon"){
+    //     }
+    //     else if(userIn == "moon"){
             
-            cout<<"Moon Selected"<<endl;
+    //         cout<<"Moon Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Moon",1.62);
+    //         planet p("Moon",1.62);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else if(userIn == "mercury"){
+    //     else if(userIn == "mercury"){
 
-            cout<<"Mercury Selected"<<endl;
+    //         cout<<"Mercury Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Mercury",3.7);
+    //         planet p("Mercury",3.7);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else if(userIn == "venus"){
+    //     else if(userIn == "venus"){
 
-            cout<<"Venus Selected"<<endl;
+    //         cout<<"Venus Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Venus",8.87);
+    //         planet p("Venus",8.87);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else if(userIn == "mars"){
+    //     else if(userIn == "mars"){
 
-            cout<<"mars Selected"<<endl;
+    //         cout<<"mars Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("mars",3.73);
+    //         planet p("mars",3.73);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else if(userIn == "jupiter"){
+    //     else if(userIn == "jupiter"){
 
-            cout<<"Jupiter Selected"<<endl;
+    //         cout<<"Jupiter Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Jupiter",24.79);
+    //         planet p("Jupiter",24.79);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else if(userIn == "saturn"){
+    //     else if(userIn == "saturn"){
 
-            cout<<"Saturn Selected"<<endl;
+    //         cout<<"Saturn Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Saturn",10.44);
+    //         planet p("Saturn",10.44);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else if(userIn == "uranus"){
+    //     else if(userIn == "uranus"){
 
-            cout<<"Uranus Selected"<<endl;
+    //         cout<<"Uranus Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Uranus",8.87);
+    //         planet p("Uranus",8.87);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else if(userIn == "neptune"){
+    //     else if(userIn == "neptune"){
 
-            cout<<"Neptune Selected"<<endl;
+    //         cout<<"Neptune Selected"<<endl;
 
-            cout<<"Setting Up Sim...."<<endl;
+    //         cout<<"Setting Up Sim...."<<endl;
 
-            planet p("Neptune",11.15);
+    //         planet p("Neptune",11.15);
 
-            setSim(p);
-        }
+    //         setSim(p);
+    //     }
 
-        else{
+    //     else{
 
-            cout<<"Error: Unidentified Input: "<<userIn <<endl;
-        }
-    }
+    //         cout<<"Error: Unidentified Input: "<<userIn <<endl;
+    //     }
+    // }
 
     return 0;
 

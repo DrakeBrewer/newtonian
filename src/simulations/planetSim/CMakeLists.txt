@@ -6,8 +6,10 @@
 set(CMAKE_CXX_STANDARD 17) 
 
 set (CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
 add_executable(planetSim
 	planetSim.cpp
@@ -20,7 +22,7 @@ include_directories(C:/Qt/6.8.2/mingw_64/include/QtWidgets)
 include_directories(C:/Qt/6.8.2/mingw_64/include/QtCore)
 
 
-target_link_libraries(planetSim PRIVATE Qt6::Widgets)
+target_link_libraries(planetSim PRIVATE Qt6::Core Qt6::Widgets)
 
 add_executable(thomas_blackBoxTest
 	thomas_blackBoxTest.cpp
