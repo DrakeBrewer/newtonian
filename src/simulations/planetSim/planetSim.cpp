@@ -1,287 +1,320 @@
 
-#include "planets.hpp"
-#include "QtApp.hpp"
-#include "simConfig.hpp"
+// #include "planets.hpp"
+// #include "QtApp.hpp"
+// #include "simConfig.hpp"
+
+#include <QApplication>
+#include <QMainWindow>
+#include <QComboBox>
+#include <QVBoxLayout>
+#include <QDebug>
 
 int main(int argc, char *argv[]){
     
     //QCoreApplication::addLibraryPath("C:/Qt/6.8.2/mingw_64/plugins");
-    QApplication app(argc, argv);//Initalize the QT event loop
+    //QCoreApplication::addLibraryPath("platforms");
+    //QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/platforms");
+
+    // QApplication app(argc, argv);//Initalize the QT event loop
+
+    // QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/platforms");
     
-    QtApp mainWindow;//Create an instance of the mainwindow
-    mainWindow.show();//Display the window
+    // QtApp mainWindow;//Create an instance of the mainwindow
+    // mainWindow.show();//Display the window
 
-    return app.exec();//Start the app
+    // return app.exec();//Start the app
 
+    QApplication app(argc, argv);
+
+    QMainWindow window;
+    QWidget *central = new QWidget(&window);
+    QVBoxLayout *layout = new QVBoxLayout(central);
+
+    QComboBox *combo = new QComboBox(central);
+    combo->addItems({"Earth", "Mars", "Venus"});
+    layout->addWidget(combo);
+
+    QObject::connect(combo, &QComboBox::currentTextChanged, [](const QString &text){
+        qDebug() << "Selected:" << text;
+    });
+
+    window.setCentralWidget(central);
+    window.setWindowTitle("Combo Test");
+    window.resize(400, 200);
+    window.show();
+
+    return app.exec();
+
+    
 
 };
 
-int planetSim(){
-    // string userIn;
+// int planetSim(){
+//     // string userIn;
 
-    // cout<<"Welcome To Planet Sim."<<endl;
+//     // cout<<"Welcome To Planet Sim."<<endl;
 
-    // cout<<"Enter 'H' for a help menu / command list"<<endl;//TODO: Add help menu
+//     // cout<<"Enter 'H' for a help menu / command list"<<endl;//TODO: Add help menu
 
-    // while(true){
+//     // while(true){
 
-    //     cout<<"Where would you like to run the simulation?"<<endl;
+//     //     cout<<"Where would you like to run the simulation?"<<endl;
 
-    //     getline(cin,userIn);//TODO: Make user input more robust
+//     //     getline(cin,userIn);//TODO: Make user input more robust
 
-    //     if(userIn == "exit"){
+//     //     if(userIn == "exit"){
 
-    //         cout<<"Goodbye"<<endl;
-    //         return 0;
-    //     }
+//     //         cout<<"Goodbye"<<endl;
+//     //         return 0;
+//     //     }
             
-    //     else if(userIn == "earth"){
+//     //     else if(userIn == "earth"){
 
-    //         cout<<"Earth Selected"<<endl;
+//     //         cout<<"Earth Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Earth",9.81);
+//     //         planet p("Earth",9.81);
 
-    //         setSim(p);
+//     //         setSim(p);
     
-    //     }
-    //     else if(userIn == "moon"){
+//     //     }
+//     //     else if(userIn == "moon"){
             
-    //         cout<<"Moon Selected"<<endl;
+//     //         cout<<"Moon Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Moon",1.62);
+//     //         planet p("Moon",1.62);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else if(userIn == "mercury"){
+//     //     else if(userIn == "mercury"){
 
-    //         cout<<"Mercury Selected"<<endl;
+//     //         cout<<"Mercury Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Mercury",3.7);
+//     //         planet p("Mercury",3.7);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else if(userIn == "venus"){
+//     //     else if(userIn == "venus"){
 
-    //         cout<<"Venus Selected"<<endl;
+//     //         cout<<"Venus Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Venus",8.87);
+//     //         planet p("Venus",8.87);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else if(userIn == "mars"){
+//     //     else if(userIn == "mars"){
 
-    //         cout<<"mars Selected"<<endl;
+//     //         cout<<"mars Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("mars",3.73);
+//     //         planet p("mars",3.73);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else if(userIn == "jupiter"){
+//     //     else if(userIn == "jupiter"){
 
-    //         cout<<"Jupiter Selected"<<endl;
+//     //         cout<<"Jupiter Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Jupiter",24.79);
+//     //         planet p("Jupiter",24.79);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else if(userIn == "saturn"){
+//     //     else if(userIn == "saturn"){
 
-    //         cout<<"Saturn Selected"<<endl;
+//     //         cout<<"Saturn Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Saturn",10.44);
+//     //         planet p("Saturn",10.44);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else if(userIn == "uranus"){
+//     //     else if(userIn == "uranus"){
 
-    //         cout<<"Uranus Selected"<<endl;
+//     //         cout<<"Uranus Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Uranus",8.87);
+//     //         planet p("Uranus",8.87);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else if(userIn == "neptune"){
+//     //     else if(userIn == "neptune"){
 
-    //         cout<<"Neptune Selected"<<endl;
+//     //         cout<<"Neptune Selected"<<endl;
 
-    //         cout<<"Setting Up Sim...."<<endl;
+//     //         cout<<"Setting Up Sim...."<<endl;
 
-    //         planet p("Neptune",11.15);
+//     //         planet p("Neptune",11.15);
 
-    //         setSim(p);
-    //     }
+//     //         setSim(p);
+//     //     }
 
-    //     else{
+//     //     else{
 
-    //         cout<<"Error: Unidentified Input: "<<userIn <<endl;
-    //     }
-    // }
+//     //         cout<<"Error: Unidentified Input: "<<userIn <<endl;
+//     //     }
+//     // }
 
-    return 0;
+//     return 0;
 
-}
+// }
 
-int setSim(planet p){
+// int setSim(planet p){
 
-    string input;
+//     string input;
 
-    cout<<"What object would you like to spawn?"<<endl;
+//     cout<<"What object would you like to spawn?"<<endl;
 
-    getline(cin,input);
+//     getline(cin,input);
     
-    if(input != "sphere") cout<<"Invalid object"<<input<<endl;//TODO: Add more options for object spawns
+//     if(input != "sphere") cout<<"Invalid object"<<input<<endl;//TODO: Add more options for object spawns
 
-    object obj = p.spawnObj(input);
+//     object obj = p.spawnObj(input);
 
-    cout<<"Please set the object's initial position"<<endl;
+//     cout<<"Please set the object's initial position"<<endl;
 
-    cout<<"X:";
+//     cout<<"X:";
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    obj.setX(stof(input));
+//     obj.setX(stof(input));
 
-    cout<<"Y:";
+//     cout<<"Y:";
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    obj.setY(stof(input));
+//     obj.setY(stof(input));
 
-    cout<<"Z:";
+//     cout<<"Z:";
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    obj.setZ(stof(input));
+//     obj.setZ(stof(input));
 
-    cout<<"Your input was "<<obj.getX()<<obj.getY()<<obj.getZ()<<endl;
+//     cout<<"Your input was "<<obj.getX()<<obj.getY()<<obj.getZ()<<endl;
 
-    cout<<"Please set the objects mass"<<endl;
+//     cout<<"Please set the objects mass"<<endl;
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    cout<<"Your input was "<<input<<endl;
+//     cout<<"Your input was "<<input<<endl;
 
-    obj.setMass(stof(input));
+//     obj.setMass(stof(input));
 
-    cout<<"Please set the objects initial velocity"<<endl;
+//     cout<<"Please set the objects initial velocity"<<endl;
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    cout<<"Your input was "<<input<<endl;
+//     cout<<"Your input was "<<input<<endl;
 
-    obj.setInitV(stof(input));
+//     obj.setInitV(stof(input));
 
-    cout<< "Please indicate the plane positions"<<endl;
+//     cout<< "Please indicate the plane positions"<<endl;
 
-    plane pl = p.spawnPlane("plane1");
+//     plane pl = p.spawnPlane("plane1");
 
-    cout<< "X:";
+//     cout<< "X:";
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    cout<<"Your input was "<<input<<endl;
+//     cout<<"Your input was "<<input<<endl;
 
-    pl.setX(stof(input));
+//     pl.setX(stof(input));
 
-    cout<< "Y:";
+//     cout<< "Y:";
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    cout<<"Your input was "<<input<<endl;
+//     cout<<"Your input was "<<input<<endl;
 
-    pl.setY(stof(input));
+//     pl.setY(stof(input));
 
-    cout<< "Z:";
+//     cout<< "Z:";
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    cout<<"Your input was "<<input<<endl;
+//     cout<<"Your input was "<<input<<endl;
 
-    pl.setZ(stof(input));
+//     pl.setZ(stof(input));
 
-    cout << "What simulation would you like to run?" <<endl;
+//     cout << "What simulation would you like to run?" <<endl;
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    if(input == "free fall"){
+//     if(input == "free fall"){
 
-        cout << "Running Sim" <<endl;
+//         cout << "Running Sim" <<endl;
 
-        freeFall(obj, p, pl);
+//         freeFall(obj, p, pl);
 
-    }
+//     }
 
-    return 0;
+//     return 0;
 
-}
+// }
 
-int freeFall(object obj, planet p, plane pl){//Free fall simulation
+// int freeFall(object obj, planet p, plane pl){//Free fall simulation
     
-    //Vars I will need
-    float vFin = 0;
-    int sec = 0;
-    int time = 0;
+//     //Vars I will need
+//     float vFin = 0;
+//     int sec = 0;
+//     int time = 0;
 
-    string input;
+//     string input;
 
-    //Get user input
-    cout<<"Please set free fall time"<<endl;
+//     //Get user input
+//     cout<<"Please set free fall time"<<endl;
 
-    getline(cin,input);
+//     getline(cin,input);
 
-    cout<<"Your input was "<<time<<endl;
+//     cout<<"Your input was "<<time<<endl;
 
-    time = stoi(input);
+//     time = stoi(input);
 
-    while(sec != time){//Free fall loop
+//     while(sec != time){//Free fall loop
 
-        obj.setY((obj.getY()) - (p.getGrav()));
+//         obj.setY((obj.getY()) - (p.getGrav()));
 
-        if((obj.getY()) <= (pl.getX())){
+//         if((obj.getY()) <= (pl.getX())){
 
-            cout<<"Object Reached Plane"<<endl;
-            break;
-        }
+//             cout<<"Object Reached Plane"<<endl;
+//             break;
+//         }
 
-        obj.printPos();
+//         obj.printPos();
 
-        vFin = (obj.getInitV()) + ((p.getGrav())*sec);
+//         vFin = (obj.getInitV()) + ((p.getGrav())*sec);
 
-        cout<<"Velocity: "<<vFin<<"At time: "<<sec<<endl;
+//         cout<<"Velocity: "<<vFin<<"At time: "<<sec<<endl;
 
-        sec++;
+//         sec++;
 
-    }
-    cout<<"Simulation Completed"<<endl;
+//     }
+//     cout<<"Simulation Completed"<<endl;
 
-    cout<<"Final Velocity: "<<vFin<<endl;
+//     cout<<"Final Velocity: "<<vFin<<endl;
 
-    cout<<"Final Position:"<< endl;
-    obj.printPos();
+//     cout<<"Final Position:"<< endl;
+//     obj.printPos();
 
-    return 0;
+//     return 0;
 
-}
+// }
