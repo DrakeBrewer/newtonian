@@ -10,6 +10,9 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QRadioButton>
+#include <QListWidget>
+#include <QMessageBox>
+#include <string>
 #include "planets.hpp"
 
 
@@ -20,7 +23,7 @@ public:
     simConfigWindow(QWidget *parent = nullptr);
 
 private slots:
-    void startSim();
+    void checkInputs();
 
 private:
     QPushButton *quitButton;
@@ -28,17 +31,9 @@ private:
 
     QLabel *selectPlanetLabel;
 
-    QVBoxLayout *layout;
+    QLineEdit *planetInput;
 
-    QRadioButton *earthRadio;
-    QRadioButton *moonRadio;
-    QRadioButton *mercuryRadio;
-    QRadioButton *venusRadio;
-    QRadioButton *marsRadio;
-    QRadioButton *jupiterRadio;
-    QRadioButton *saturnRadio;
-    QRadioButton *uranusRadio;
-    QRadioButton *neptuneRadio;
+    QVBoxLayout *layout;
 
     QLineEdit *objectInput;
 
@@ -49,11 +44,7 @@ private:
     QLineEdit *massInput;
     QLineEdit *initVInput;
 
-
-
-
-
-
+    QDoubleValidator *floatValidator;
 
 
 };

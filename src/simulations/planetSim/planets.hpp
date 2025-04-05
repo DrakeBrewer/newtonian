@@ -14,9 +14,8 @@ class planet{
     //TODO: Add other fields as for planet characteristics such as temperature, wind speed, etc.
 
 public:
-    planet(const string &input,const float g){//Constructor
+    planet(const string &input){//Constructor
         planetName = input;
-        gravity = g;
         
     }
     object spawnObj(const string &input){//Allow a planet to spawn and object
@@ -28,6 +27,19 @@ public:
     }
 
     //Getters and setters
+    void setGrav() {
+        if (planetName == "earth") gravity = 9.81f;
+        else if (planetName == "moon") gravity = 1.62f;
+        else if (planetName == "mercury") gravity = 3.7f;
+        else if (planetName == "venus") gravity = 8.87f;
+        else if (planetName == "mars") gravity = 3.73f;
+        else if (planetName == "jupiter") gravity = 24.79f;
+        else if (planetName == "saturn") gravity = 10.44f;
+        else if (planetName == "uranus") gravity = 8.87f;
+        else if (planetName == "neptune") gravity = 11.15f;
+        else gravity = 9.81f;
+    }
+    
     float getGrav(){ return gravity;};
 
 };

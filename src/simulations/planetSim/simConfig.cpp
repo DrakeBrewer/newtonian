@@ -1,6 +1,6 @@
 #include "simConfig.hpp"
 
-
+using namespace std;
 
 simConfigWindow::simConfigWindow(QWidget *parent) : QWidget(parent){
 
@@ -13,48 +13,24 @@ simConfigWindow::simConfigWindow(QWidget *parent) : QWidget(parent){
     setPalette(pal);
 
     startButton = new QPushButton("Start",this);
-    startButton -> move(350,100);
+    startButton -> move(400,50);
 
-    connect(startButton, &QPushButton::clicked, this, &simConfigWindow::startSim);
+    connect(startButton, &QPushButton::clicked, this, &simConfigWindow::checkInputs);
 
     quitButton = new QPushButton("Quit",this);
-    quitButton -> move(350,150);
+    quitButton -> move(400,100);
 
     connect(quitButton,&QPushButton::clicked,this, &QApplication::quit);
-
 
     selectPlanetLabel = new QLabel("Select Planet",this);
     selectPlanetLabel -> move(350,200);
 
-    earthRadio = new QRadioButton("Earth", this);
-    earthRadio -> move(50,250);
-
-    moonRadio = new QRadioButton("Moon", this);
-    moonRadio -> move(125,250);
-
-    mercuryRadio = new QRadioButton("Mercury", this);
-    mercuryRadio -> move(200,250);
-
-    venusRadio = new QRadioButton("Venus", this);
-    venusRadio -> move(275,250);
-
-    marsRadio = new QRadioButton("Mars", this);
-    marsRadio -> move(350,250);
-
-    jupiterRadio = new QRadioButton("Jupiter", this);
-    jupiterRadio -> move(425,250);
-
-    saturnRadio = new QRadioButton("Saturn", this);
-    saturnRadio -> move(500,250);
-
-    uranusRadio = new QRadioButton("Uranus", this);
-    uranusRadio -> move(575,250);
-
-    neptuneRadio = new QRadioButton("Neptune", this);
-    neptuneRadio -> move(650,250);
+    planetInput = new QLineEdit(this);
+    planetInput->setPlaceholderText("Enter planet name");
+    planetInput->move(350, 250);
 
     objectInput = new QLineEdit(this);
-    objectInput -> setPlaceholderText("Enter the object you wish to spawn");
+    objectInput -> setPlaceholderText("Enter the object");
     objectInput -> move(350,400 );
 
     massInput = new QLineEdit(this);
@@ -77,11 +53,60 @@ simConfigWindow::simConfigWindow(QWidget *parent) : QWidget(parent){
     zInput -> setPlaceholderText("Enter Starting Z value");
     zInput -> move(250, 600);
 
+    floatValidator = new QDoubleValidator(0.0f, 1000.0f,2, this);
+    massInput -> setValidator(floatValidator);
+    initVInput -> setValidator(floatValidator);
+    xInput->setValidator(floatValidator);
+    yInput->setValidator(floatValidator);
+    zInput->setValidator(floatValidator);
 
+
+    
 
 
 }
 
-void simConfigWindow::startSim(){
-    planetSim();
+void simConfigWindow::checkInputs(){
+
+  
+    if (planetInput->text().isEmpty() || objectInput->text().isEmpty() || massInput->text().isEmpty() || initVInput->text().isEmpty()
+    || xInput->text().isEmpty() || zInput->text().isEmpty() || yInput->text().isEmpty()){
+        cout<<"Checked empty inputs"<<endl;
+        QMessageBox::warning(this, "Missing Inputs", "Please enter all fields.");
+        return;
+    }
+    std::cout << "All inputs were filled. Proceeding..." << std::endl;
+
+
+    
+    QString planetIn = planetInput -> text().trimmed().toLower();
+    QString objectIn = objectInput -> text().trimmed().toLower();
+
+    QStringList validPlanets = {"earth","moon","mercury","venus","mars","jupiter","saturn","uranus","neptune"};
+
+    if(!validPlanets.contains(planetIn)){
+        QMessageBox::warning (this,"Invalid Planet","Please enter a valid planet");
+        planetInput -> clear();
+        planetInput -> setFocus();
+        return;
+    }
+
+    string objectName = objectIn.toStdString();
+    string validPlanet = planetIn.toStdString();
+
+    float mass = massInput -> text().toFloat();
+    float initV = initVInput -> text().toFloat();
+    float x = xInput -> text().toFloat();
+    float y = yInput -> text().toFloat();
+    float z = zInput -> text().toFloat();
+
+    planet p(validPlanet);
+
+    object obj = p.spawnObj(objectName);
+    obj.setMass(mass);
+    obj.setInitV(initV);
+    obj.setX(x);
+    obj.setY(y);
+    obj.setZ(z);
+
 }
