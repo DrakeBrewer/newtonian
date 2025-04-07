@@ -15,7 +15,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 add_executable(planetSim
 	planetSim.cpp
 	QtApp.cpp
-	#simConfig.cpp
+	simConfig.cpp
 )
 
 # include_directories(C:/Qt/6.8.2/mingw_64/include)

@@ -5,7 +5,7 @@ using namespace std;
 simConfigWindow::simConfigWindow(QWidget *parent) : QWidget(parent){
 
     setWindowTitle("Configure Simulation");
-    resize(1000,1000);
+    resize(2000,2000);
 
     QPalette pal = palette();
     pal.setColor(QPalette::Window,Qt::blue);

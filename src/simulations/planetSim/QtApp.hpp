@@ -32,7 +32,7 @@ private:
     QPushButton *startButton;
     QPushButton *quitButton;
 
-    //simConfigWindow *configWindow;
+    simConfigWindow *configWindow;
 
 };
 

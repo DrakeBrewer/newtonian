@@ -6,7 +6,7 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
 
     //Title and initial size
     setWindowTitle("PlanetSim");
-    resize(600,600);
+    resize(1000,1000);
 
     QPalette pal = palette();
     pal.setColor(QPalette::Window, Qt::blue);
@@ -46,11 +46,8 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
 
 void QtApp::startApp(){
 
-    // configWindow = new simConfigWindow(this);
-    // configWindow -> show();
-    //qDebug() << "Qdug working";
-    cout<<("Staring sim")<<endl;
-    return;
+    configWindow = new simConfigWindow(this);
+    configWindow -> show();
 }
 
 

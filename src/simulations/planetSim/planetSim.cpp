@@ -1,7 +1,7 @@
 
-// #include "planets.hpp"
-// #include "QtApp.hpp"
-// #include "simConfig.hpp"
+#include "planets.hpp"
+#include "QtApp.hpp"
+#include "simConfig.hpp"
 
 #include <QApplication>
 #include <QMainWindow>
@@ -11,39 +11,33 @@
 
 int main(int argc, char *argv[]){
     
-    //QCoreApplication::addLibraryPath("C:/Qt/6.8.2/mingw_64/plugins");
-    //QCoreApplication::addLibraryPath("platforms");
-    //QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/platforms");
-
-    // QApplication app(argc, argv);//Initalize the QT event loop
-
-    // QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/platforms");
+    QApplication app(argc, argv);//Initalize the QT event loop
     
-    // QtApp mainWindow;//Create an instance of the mainwindow
-    // mainWindow.show();//Display the window
+    QtApp mainWindow;//Create an instance of the mainwindow
+    mainWindow.show();//Display the window
 
-    // return app.exec();//Start the app
+    return app.exec();//Start the app
 
-    QApplication app(argc, argv);
+    // QApplication app(argc, argv);
 
-    QMainWindow window;
-    QWidget *central = new QWidget(&window);
-    QVBoxLayout *layout = new QVBoxLayout(central);
+    // QMainWindow window;
+    // QWidget *central = new QWidget(&window);
+    // QVBoxLayout *layout = new QVBoxLayout(central);
 
-    QComboBox *combo = new QComboBox(central);
-    combo->addItems({"Earth", "Mars", "Venus"});
-    layout->addWidget(combo);
+    // QComboBox *combo = new QComboBox(central);
+    // combo->addItems({"Earth", "Mars", "Venus"});
+    // layout->addWidget(combo);
 
-    QObject::connect(combo, &QComboBox::currentTextChanged, [](const QString &text){
-        qDebug() << "Selected:" << text;
-    });
+    // QObject::connect(combo, &QComboBox::currentTextChanged, [](const QString &text){
+    //     qDebug() << "Selected:" << text;
+    // });
 
-    window.setCentralWidget(central);
-    window.setWindowTitle("Combo Test");
-    window.resize(400, 200);
-    window.show();
+    // window.setCentralWidget(central);
+    // window.setWindowTitle("Combo Test");
+    // window.resize(400, 200);
+    // window.show();
 
-    return app.exec();
+    // return app.exec();
 
     
 
