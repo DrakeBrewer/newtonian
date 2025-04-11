@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QWheelEvent>
 #include <QMouseEvent>
+#include <QtCore/qnamespace.h>
 #include <QtWidgets/qgraphicsview.h>
 #include <qtimer.h>
 
@@ -21,13 +22,15 @@ PhysicsRenderer::PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QOb
 	view->setRenderHint(QPainter::Antialiasing);
 	view->setBackgroundBrush(this->bgColor);
 	view->setMinimumSize(800, 600);
-	// view->setDragMode(QGraphicsView::ScrollHandDrag);
 
 	// Qt has the pos Y direction as downward for some reason
 	//  so we need to flip it.
 	view->scale(1, -1);
 
-	this->scene->setSceneRect(-300, -200, 1000, 1000);
+	this->scene->setSceneRect(-500, -50, 1000, 1000);
+	this->drawGrid();
+
+	view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 }
 
 
@@ -41,7 +44,19 @@ PhysicsRenderer::~PhysicsRenderer() {
 }
 
 void PhysicsRenderer::drawGrid() {
-	// TODO: Implement
+	int space = 50;
+	QGraphicsLineItem *xAxis = scene->addLine(-5000, 0, 5000, 0, QPen(Qt::black, 2));
+	QGraphicsLineItem *yAxis = scene->addLine(0, -5000, 0, 5000, QPen(Qt::black, 2));
+
+	for (int i = 0; i < 100; i++) {
+		QGraphicsLineItem *xAxis = scene->addLine(-5000, space*i, 5000, space*i, QPen(Qt::gray, 1));
+		QGraphicsLineItem *yAxis = scene->addLine(space*i, -5000, space*i, 5000, QPen(Qt::gray, 1));
+	}
+
+	for (int i = 0; i > -100; i--) {
+		QGraphicsLineItem *xAxis = scene->addLine(-5000, space*i, 5000, space*i, QPen(Qt::gray, 1));
+		QGraphicsLineItem *yAxis = scene->addLine(space*i, -5000, space*i, 5000, QPen(Qt::gray, 1));
+	}
 }
 
 void PhysicsRenderer::addBody(RigidBody *body, QColor color) {
@@ -63,6 +78,7 @@ void PhysicsRenderer::removeBody(RigidBody *body) {
 }
 
 void PhysicsRenderer::start() {
+	this->view->show();
 	this->timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, this, &PhysicsRenderer::updateRender);
 	this->timer->start(16);

@@ -7,8 +7,8 @@ EllipseRender::EllipseRender(Ellipse *ellipse, QColor color, QGraphicsItem *pare
 	this->physEllipse = ellipse;
 	this->color = color;
 
-	int xPos = this->physEllipse->position.x;
-	int yPos = this->physEllipse->position.z;
+	int xPos = this->physEllipse->position.x - int(ellipse->radius);
+	int yPos = this->physEllipse->position.z - int(ellipse->radius);
 
 	this->setRect(xPos, yPos, ellipse->radius*2, ellipse->radius*2);
 	this->setBrush(QBrush(color));
@@ -25,8 +25,8 @@ RectRender::RectRender(Rectangle *rect, QColor color, QGraphicsItem *parent) : Q
 	this->physRectangle = rect;
 	this->color = color;
 
-	int xPos = this->physRectangle->position.x;
-	int yPos = this->physRectangle->position.z;
+	int xPos = this->physRectangle->position.x - int(rect->width / 2);
+	int yPos = this->physRectangle->position.z - int(rect->height / 2);
 
 	this->setRect(xPos, yPos, rect->width, rect->height);
 	this->setBrush(QBrush(color));
