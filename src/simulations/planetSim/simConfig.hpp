@@ -30,12 +30,10 @@ private:
     QPushButton *startButton;
 
     QLabel *selectPlanetLabel;
+    QLabel *selectObjectLabel;
 
-    QLineEdit *planetInput;
-
-    QVBoxLayout *layout;
-
-    QLineEdit *objectInput;
+    QComboBox *planetSelect;
+    QComboBox *objectSelect;
 
     QLineEdit *xInput;
     QLineEdit *yInput;
@@ -44,7 +42,15 @@ private:
     QLineEdit *massInput;
     QLineEdit *initVInput;
 
+    QLineEdit *xPlaneInput;
+    QLineEdit *yPlaneInput;
+    QLineEdit *zPlaneInput;
+
+
     QDoubleValidator *floatValidator;
+
+    QWidget *centerlWidget;
+    QVBoxLayout *layout;
 
 
 };

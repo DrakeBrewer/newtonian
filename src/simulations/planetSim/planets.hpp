@@ -16,6 +16,7 @@ class planet{
 public:
     planet(const string &input){//Constructor
         planetName = input;
+        setGrav();
         
     }
     object spawnObj(const string &input){//Allow a planet to spawn and object
@@ -28,16 +29,16 @@ public:
 
     //Getters and setters
     void setGrav() {
-        if (planetName == "earth") gravity = 9.81f;
-        else if (planetName == "moon") gravity = 1.62f;
-        else if (planetName == "mercury") gravity = 3.7f;
-        else if (planetName == "venus") gravity = 8.87f;
-        else if (planetName == "mars") gravity = 3.73f;
-        else if (planetName == "jupiter") gravity = 24.79f;
-        else if (planetName == "saturn") gravity = 10.44f;
-        else if (planetName == "uranus") gravity = 8.87f;
-        else if (planetName == "neptune") gravity = 11.15f;
-        else gravity = 9.81f;
+        if (planetName == "earth") gravity = 9.81;
+        else if (planetName == "moon") gravity = 1.62;
+        else if (planetName == "mercury") gravity = 3.7;
+        else if (planetName == "venus") gravity = 8.87;
+        else if (planetName == "mars") gravity = 3.73;
+        else if (planetName == "jupiter") gravity = 24.79;
+        else if (planetName == "saturn") gravity = 10.44;
+        else if (planetName == "uranus") gravity = 8.87;
+        else if (planetName == "neptune") gravity = 11.15;
+        else gravity = 9.81;
     }
     
     float getGrav(){ return gravity;};
