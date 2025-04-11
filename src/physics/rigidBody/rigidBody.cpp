@@ -159,10 +159,11 @@ float Cuboid::volume() {
 	return this->length * this->width * this->height;
 }
 
-Ellipse::Ellipse(float radius, Vector3d position, float mass) {
+Ellipse::Ellipse(float radius, Vector3d position, float mass, bool isStatic) {
 	this->radius = radius;
 	this->position = position;
 	this->mass = mass;
+	this->isStatic = isStatic;
 }
 
 float Ellipse::area() {
@@ -177,11 +178,12 @@ void Ellipse::update(double delta) {
 	RigidBody::update(delta);
 }
 
-Rectangle::Rectangle(int width, int height, Vector3d position, float mass) {
+Rectangle::Rectangle(int width, int height, Vector3d position, float mass, bool isStatic) {
 	this->width = width;
 	this->height = height;
 	this->position = position;
 	this->mass = mass;
+	this->isStatic = isStatic;
 
 	float halfWidth = float(width) / 2;
 	float halfHeight = float(height) / 2;

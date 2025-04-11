@@ -85,7 +85,7 @@ private:
 
 class Ellipse : public RigidBody {
 public:
-	Ellipse(float radius, Vector3d position, float mass);
+	Ellipse(float radius, Vector3d position, float mass, bool isStatic);
 	~Ellipse() {};
 
 	int radius;
@@ -97,7 +97,7 @@ public:
 
 class Rectangle : public RigidBody {
 public:
-	Rectangle(int width, int height, Vector3d position, float mass);
+	Rectangle(int width, int height, Vector3d position, float mass, bool isStatic);
 	~Rectangle() {};
 
 	int width;

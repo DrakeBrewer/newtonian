@@ -8,6 +8,7 @@ qt_standard_project_setup()
 add_library(physics_renderer
 	renderer.cpp
 	shapes.cpp
+	physicsView.cpp
 )
 
 target_link_libraries(physics_renderer

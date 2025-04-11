@@ -13,9 +13,13 @@
 
 class PhysicsRenderer : public QObject {
 	Q_OBJECT
+
+private:
+	void drawGrid();
 public:
 	PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QObject *parent = nullptr);
 	~PhysicsRenderer();
+
 
 	void addBody(RigidBody *body, QColor color);
 	void removeBody(RigidBody *body);

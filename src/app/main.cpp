@@ -14,8 +14,8 @@ int main(int argc, char **argv) {
 
 	QGraphicsScene *scene = new QGraphicsScene();
 
-	Rectangle *rect = new Rectangle(100, 155, Vector3d(), 100);
-	Ellipse *ellipse = new Ellipse(20, Vector3d(-50, -50, -50), 5);
+	Rectangle *rect = new Rectangle(1000, 50, Vector3d(-250, 0, -25), 100, true);
+	Ellipse *ellipse = new Ellipse(20, Vector3d(-50, 0, 200), 5, false);
 
 	PhysicsWorld *world = new PhysicsWorld(9.81);
 	world->addBody(rect);

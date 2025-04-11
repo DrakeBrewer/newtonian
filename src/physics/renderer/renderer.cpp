@@ -2,29 +2,34 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QColor>
+#include <QWheelEvent>
+#include <QMouseEvent>
+#include <QtWidgets/qgraphicsview.h>
 #include <qtimer.h>
 
 #include "renderer.hpp"
 #include "shapes.hpp"
 #include "rigidBody.hpp"
 #include "vector3d.hpp"
+#include "physicsView.hpp"
 
 PhysicsRenderer::PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QObject *parent) :
 	QObject(parent), world(world), scene(scene) {
 	this->bgColor = Qt::white;
 
-	this->view = new QGraphicsView(scene);
+	this->view = new PhysicsView(scene);
 	view->setRenderHint(QPainter::Antialiasing);
 	view->setBackgroundBrush(this->bgColor);
 	view->setMinimumSize(800, 600);
+	// view->setDragMode(QGraphicsView::ScrollHandDrag);
 
 	// Qt has the pos Y direction as downward for some reason
 	//  so we need to flip it.
 	view->scale(1, -1);
 
-	this->scene->setSceneRect(-400, -300, 800, 600);
-	this->view->centerOn(0, 0);
+	this->scene->setSceneRect(-300, -200, 1000, 1000);
 }
+
 
 PhysicsRenderer::~PhysicsRenderer() {
 	for (auto& pair : bodyToRender) {
@@ -33,6 +38,10 @@ PhysicsRenderer::~PhysicsRenderer() {
 	}
 
 	bodyToRender.clear();
+}
+
+void PhysicsRenderer::drawGrid() {
+	// TODO: Implement
 }
 
 void PhysicsRenderer::addBody(RigidBody *body, QColor color) {
@@ -68,6 +77,8 @@ void PhysicsRenderer::stop() {
 	}
 }
 
+// TODO:
+// Find alternative to dynamic casting?
 void PhysicsRenderer::updateRender() {
 	this->world->tick(0.016);
 	for (auto& pair : this->bodyToRender) {
@@ -92,8 +103,9 @@ void PhysicsRenderer::updateRender() {
 	this->scene->update();
 }
 
-// TODO: 3D
-// Use generics instead
+
+// TODO:
+// Find alternative to dynamic casting?
 QGraphicsItem *attachRenderItem(RigidBody *body, QColor color) {
 	QGraphicsItem *gItem = nullptr;
 
@@ -111,3 +123,4 @@ QGraphicsItem *attachRenderItem(RigidBody *body, QColor color) {
 
 	return gItem;
 }
+
