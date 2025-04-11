@@ -12,6 +12,9 @@ add_executable(newtonian
 target_link_libraries(newtonian
 PUBLIC
 	window
+	physics_renderer
+	rigid_body
+	physics_engine
 PRIVATE
 	Qt6::Core
 	Qt6::Widgets

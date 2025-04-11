@@ -83,4 +83,28 @@ private:
 	void updateVertices();
 };
 
-// TODO: meshes and compound objects?
+class Ellipse : public RigidBody {
+public:
+	Ellipse(float radius, Vector3d position, float mass, bool isStatic);
+	~Ellipse() {};
+
+	int radius;
+
+	void update(double delta);
+	float area();
+	float diameter();
+};
+
+class Rectangle : public RigidBody {
+public:
+	Rectangle(int width, int height, Vector3d position, float mass, bool isStatic);
+	~Rectangle() {};
+
+	int width;
+	int height;
+
+	Vector3d vertices[4];
+
+	void update(double delta);
+	float area();
+};
