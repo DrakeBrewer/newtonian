@@ -9,7 +9,7 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
     resize(1000,1000);
 
     QPalette pal = palette();
-    pal.setColor(QPalette::Window, Qt::blue);
+    pal.setColor(QPalette::Window, Qt::darkGray);
     setAutoFillBackground(true);
     setPalette(pal);
 
@@ -30,10 +30,10 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
 
-    QComboBox *planetBox = new QComboBox(this);
-    planetBox->addItems({"Earth", "Mars", "Jupiter"});
-    planetBox->move(100, 50);
-    planetBox->show();
+    // QComboBox *planetBox = new QComboBox(this);
+    // planetBox->addItems({"Earth", "Mars", "Jupiter"});
+    // planetBox->move(100, 50);
+    // planetBox->show();
 
     // Connect signals
     connect(startButton, &QPushButton::clicked, this, &QtApp::startApp);
@@ -46,8 +46,9 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
 
 void QtApp::startApp(){
 
-    configWindow = new simConfigWindow(this);
+    configWindow = new simConfigWindow();
     configWindow -> show();
+    this->close();
 }
 
 

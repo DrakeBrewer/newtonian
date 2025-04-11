@@ -265,50 +265,51 @@ int main(int argc, char *argv[]){
 
 // }
 
-// int freeFall(object obj, planet p, plane pl){//Free fall simulation
+int freeFall(object obj, planet p, plane pl){//Free fall simulation
     
-//     //Vars I will need
-//     float vFin = 0;
-//     int sec = 0;
-//     int time = 0;
+    //Vars I will need
+    float vFin = 0;
+    int sec = 0;
+    int time = 0;
 
-//     string input;
+    string input;
 
-//     //Get user input
-//     cout<<"Please set free fall time"<<endl;
+    //Get user input
+    // cout<<"Please set free fall time"<<endl;
 
-//     getline(cin,input);
+    // getline(cin,input);
 
-//     cout<<"Your input was "<<time<<endl;
+    // cout<<"Your input was "<<time<<endl;
 
-//     time = stoi(input);
+    time = 60;
 
-//     while(sec != time){//Free fall loop
+    while(sec != time){//Free fall loop
 
-//         obj.setY((obj.getY()) - (p.getGrav()));
+        obj.setY((obj.getY()) - (p.getGrav()));
 
-//         if((obj.getY()) <= (pl.getX())){
+        if((obj.getY()) <= (pl.getX())){
 
-//             cout<<"Object Reached Plane"<<endl;
-//             break;
-//         }
+            cout<<"Object Reached Plane"<<endl;
+            obj.setY(pl.getY());
+            break;
+        }
 
-//         obj.printPos();
+        obj.printPos();
 
-//         vFin = (obj.getInitV()) + ((p.getGrav())*sec);
+        vFin = (obj.getInitV()) + ((p.getGrav())*sec);
 
-//         cout<<"Velocity: "<<vFin<<"At time: "<<sec<<endl;
+        cout<<"Velocity: "<<vFin<<"At time: "<<sec<<endl;
 
-//         sec++;
+        sec++;
 
-//     }
-//     cout<<"Simulation Completed"<<endl;
+    }
+    cout<<"Simulation Completed"<<endl;
 
-//     cout<<"Final Velocity: "<<vFin<<endl;
+    cout<<"Final Velocity: "<<vFin<<endl;
 
-//     cout<<"Final Position:"<< endl;
-//     obj.printPos();
+    cout<<"Final Position:"<< endl;
+    obj.printPos();
 
-//     return 0;
+    return 0;
 
-// }
+}
