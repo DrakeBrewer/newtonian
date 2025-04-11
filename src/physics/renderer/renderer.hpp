@@ -5,6 +5,7 @@
 #include <QGraphicsItem>
 #include <QColor>
 
+#include <cstdint>
 #include <unordered_map>
 
 #include "vector3d.hpp"
@@ -20,11 +21,10 @@ public:
 	PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QObject *parent = nullptr);
 	~PhysicsRenderer();
 
-
-	void addBody(RigidBody *body, QColor color);
+	void addBody(RigidBody *body, uint8_t color[3]);
 	void removeBody(RigidBody *body);
 
-	void start();
+	void start(double deltaT);
 	void stop();
 
 	void updateRender();

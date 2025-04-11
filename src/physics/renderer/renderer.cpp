@@ -59,8 +59,9 @@ void PhysicsRenderer::drawGrid() {
 	}
 }
 
-void PhysicsRenderer::addBody(RigidBody *body, QColor color) {
-	QGraphicsItem *item = attachRenderItem(body, color);
+void PhysicsRenderer::addBody(RigidBody *body, uint8_t color[3]) {
+	QColor c = QColor(color[0], color[1], color[2]);
+	QGraphicsItem *item = attachRenderItem(body, c);
 
 	if (item != nullptr) {
 		this->scene->addItem(item);
@@ -77,11 +78,12 @@ void PhysicsRenderer::removeBody(RigidBody *body) {
 	}
 }
 
-void PhysicsRenderer::start() {
+void PhysicsRenderer::start(double deltaT) {
+	int mSec = int(deltaT * 1000);
 	this->view->show();
 	this->timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, this, &PhysicsRenderer::updateRender);
-	this->timer->start(16);
+	this->timer->start(mSec);
 }
 
 void PhysicsRenderer::stop() {
@@ -96,7 +98,7 @@ void PhysicsRenderer::stop() {
 // TODO:
 // Find alternative to dynamic casting?
 void PhysicsRenderer::updateRender() {
-	this->world->tick(0.016);
+	// this->world->tick(0.016);
 	for (auto& pair : this->bodyToRender) {
 		RigidBody *body = pair.first;
 		QGraphicsItem *item = pair.second;

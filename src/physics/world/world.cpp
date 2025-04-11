@@ -1,11 +1,12 @@
 #include "world.hpp"
 #include "rigidBody.hpp"
+#include <cstdint>
 
 PhysicsWorld::PhysicsWorld(float gravity) {
 	this->gravity = gravity;
 }
 
-void PhysicsWorld::addBody(RigidBody *body) {
+void PhysicsWorld::addBody(RigidBody *body, uint8_t color[3]) {
 	this->bodies.push_back(body);
 }
 

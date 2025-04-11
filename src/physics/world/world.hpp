@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rigidBody.hpp"
+#include <cstdint>
 #include <vector>
 
 class PhysicsWorld {
@@ -11,6 +12,6 @@ private:
 
 public:
 	PhysicsWorld(float gravity);
-	void addBody(RigidBody *body);
+	void addBody(RigidBody *body, uint8_t color[3]);
 	void tick(double delta);
 };
