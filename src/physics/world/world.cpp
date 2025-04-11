@@ -1,6 +1,9 @@
-#include <iostream>
 #include "world.hpp"
 #include "rigidBody.hpp"
+
+PhysicsWorld::PhysicsWorld(float gravity) {
+	this->gravity = gravity;
+}
 
 void PhysicsWorld::addBody(RigidBody *body) {
 	this->bodies.push_back(body);
@@ -17,7 +20,7 @@ void PhysicsWorld::tick(double delta) {
 		// - [ ] check collision (can of worms, notes contain details)
 		// - [ ] resolve collisions
 
-		const Vector3d gravity(0, 0, -9.81);
+		const Vector3d gravity(0, 0, -this->gravity);
 		Vector3d gForce(
 			gravity.x * body->mass,
 			gravity.y * body->mass,

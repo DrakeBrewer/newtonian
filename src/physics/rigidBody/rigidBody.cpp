@@ -1,4 +1,5 @@
 #include "rigidBody.hpp"
+#include "vector3d.hpp"
 #include <cmath>
 #include <cstdio>
 #include <iostream>
@@ -157,3 +158,41 @@ float Cuboid::surfaceArea() {
 float Cuboid::volume() {
 	return this->length * this->width * this->height;
 }
+
+Ellipse::Ellipse(float radius, Vector3d position, float mass) {
+	this->radius = radius;
+	this->position = position;
+	this->mass = mass;
+}
+
+float Ellipse::area() {
+	return 2 * PI * this->radius;
+}
+
+float Ellipse::diameter() {
+	return 2 * this->radius;
+}
+
+void Ellipse::update(double delta) {
+	RigidBody::update(delta);
+}
+
+Rectangle::Rectangle(int width, int height, Vector3d position, float mass) {
+	this->width = width;
+	this->height = height;
+	this->position = position;
+	this->mass = mass;
+
+	float halfWidth = float(width) / 2;
+	float halfHeight = float(height) / 2;
+
+	this->vertices[0] = Vector3d(this->position.x - halfWidth, this->position.y - halfHeight, 0); // bottom Left
+	this->vertices[1] = Vector3d(this->position.x - halfWidth, this->position.y + halfHeight, 0); // bottom Right
+	this->vertices[2] = Vector3d(this->position.x + halfWidth, this->position.y - halfHeight, 0); // top Left
+	this->vertices[3] = Vector3d(this->position.x + halfWidth, this->position.y + halfHeight, 0); // top right
+}
+
+void Rectangle::update(double delta) {
+	RigidBody::update(delta);
+}
+
