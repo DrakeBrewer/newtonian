@@ -11,7 +11,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setWindowTitle("Orbital Mechanics Simulator");
-    resize(1000,800);
+    resize(1400,800);
 
     // Central widget, vertical and horizontal layout
     QWidget *centralWidget = new QWidget(this);
