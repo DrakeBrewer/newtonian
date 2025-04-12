@@ -22,9 +22,6 @@ public:
     // This method updates the moon's velocity and adjusts the other parameters accordingly
     void updateMoonVelocity(double newVelocity);
 
-    // This method updates the planet's mass and adjusts the other parameters accordingly
-    void updatePlanetMass(double newPlanetMass);
-
     // This method updates the distance between the planet and moon and adjusts the other parameters accordingly
     void updatePlanetMoonDistance(double newDistance);
 };

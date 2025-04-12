@@ -92,8 +92,7 @@ bool OrbitSimulation::handleParameterUpdate(){
 
     std::cout<<"\n===========Now You Can Update Equation Parameters===========" << std::endl;
     std::cout << "1) Update Moon Velocity" << std::endl;
-    std::cout << "2) Update Planet Mass" << std::endl;
-    std::cout << "3) Update Planet-Moon Distance" << std::endl;
+    std::cout << "2) Update Planet-Moon Distance" << std::endl;
     std::cout << "0) Exit Parameter Updates" << std::endl;
     std::cout << "Enter Parameter Update Choice: ";
     std::cin>> parameterChoice;
@@ -108,17 +107,12 @@ bool OrbitSimulation::handleParameterUpdate(){
         orbitSim.updateMoonVelocity(newParameterValue);
     }
     else if(parameterChoice == 2){
-        std::cout << "\n<Enter new planet mass [kg]: ";
-        std::cin >> newParameterValue;
-        orbitSim.updatePlanetMass(newParameterValue);
-    }
-    else if(parameterChoice == 3){
         std::cout << "\n<Enter new planet-moon distance [m]: ";
         std::cin >> newParameterValue;
         orbitSim.updatePlanetMoonDistance(newParameterValue);
     }
     else{
-        std::cout<<"\n<ERROR: Invalid parameter update choice, select options 0-3>"<<std::endl;
+        std::cout<<"\n<ERROR: Invalid parameter update choice, select options 0-2>"<<std::endl;
     }
     return true;
 }

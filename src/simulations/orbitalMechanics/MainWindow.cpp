@@ -85,9 +85,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
         integrateOrbitSim.orbitSim.moonMass = userMoonMass;
         qDebug() << "<Updated Moon Mass: " << userMoonMass << "[kg]>";
-        double minMoonMass = integrateOrbitSim.getMinMoonMass();
-        double maxMoonMass = integrateOrbitSim.getMaxMoonMass();
-        moonMassRangeLabel->setText(QString("Valid Moon Mass Range: %1 [kg] to %2 [kg]").arg(minMoonMass).arg(maxMoonMass));
     });
     mainLayout->addSpacing(21);
 
@@ -95,28 +92,54 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     QLabel *updateVelocityLabel = new QLabel("Update Moon Velocity [m/s]", centralWidget);
     updateVelocityLabel->setStyleSheet("font-size: 16pt; font-weight: bold;");
     mainLayout->addWidget(updateVelocityLabel);
+    
+    QVBoxLayout *moonVelocityInputLayout = new QVBoxLayout();
+    QLineEdit *moonVelocityInput = new QLineEdit(centralWidget);
+    moonVelocityInput->setPlaceholderText("Enter moon velocity [m/s] and press ENTER...");
+    moonVelocityInput->setStyleSheet("font-size: 12pt;");
+    moonVelocityInput->setFixedWidth(330);
+    moonVelocityInputLayout->addWidget(moonVelocityInput);
+    mainLayout->addLayout(moonVelocityInputLayout);
+
+    connect(moonVelocityInput, &QLineEdit::returnPressed, this, [=]() {
+        bool isValid;
+        double userVelocity = moonVelocityInput->text().toDouble(&isValid);
+        if (!isValid) {
+            qDebug() << "<ERROR: Enter a number>";
+            return;
+        }
+
+        integrateOrbitSim.orbitSim.updateMoonVelocity(userVelocity);
+        qDebug() << "<Updated moon velocity: " << userVelocity << " [m/s]>";
+    });
     mainLayout->addSpacing(21);
-
-
-    // Update Planet Mass --------------------------------------------------------------------
-    QLabel *updatePlanetMassLabel = new QLabel("Update Planet Mass [kg]", centralWidget);
-    updatePlanetMassLabel->setStyleSheet("font-size: 16pt; font-weight: bold;");
-    mainLayout->addWidget(updatePlanetMassLabel);
-    mainLayout->addSpacing(21);
-
 
     // Update Planet to Moon Distance --------------------------------------------------------
     QLabel *updateDistanceLabel = new QLabel("Update Planet to Moon Distance [m]", centralWidget);
     updateDistanceLabel->setStyleSheet("font-size: 16pt; font-weight: bold;");
     mainLayout->addWidget(updateDistanceLabel);
 
+    QVBoxLayout *distanceInputLayout = new QVBoxLayout();
+    QLineEdit *distanceInput = new QLineEdit(centralWidget);
+    distanceInput->setPlaceholderText("Enter planet-moon distance [m] and press ENTER...");
+    distanceInput->setStyleSheet("font-size: 12pt;");
+    distanceInput->setFixedWidth(330);
+    distanceInputLayout->addWidget(distanceInput);
+    mainLayout->addLayout(distanceInputLayout);
 
+    connect(distanceInput, &QLineEdit::returnPressed, this, [=]() {
+        bool isValid;
+        double userDistance = distanceInput->text().toDouble(&isValid);
+        if (!isValid) {
+            qDebug() << "<ERROR: Enter a number>";
+            return;
+        }
+
+        integrateOrbitSim.orbitSim.updatePlanetMoonDistance(userDistance);
+        qDebug() << "<Updated planet-moon distance: " << userDistance << " [m]>";
+    });
 
     mainLayout->addStretch();
-}
-
-MainWindow::~MainWindow(){
-
 }
 
 void MainWindow::planetSelected(const QString &planet){
