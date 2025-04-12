@@ -21,11 +21,11 @@ int main() {
     // Simulate a few updates and add the attributes to the replayTable
     updater1.update();
     body1.update(1);
-    updater1.update();  // Adds body1 data
+    updater1.update();
     body1.update(1);
-    updater1.update();  // Adds body2 data
+    updater1.update();
     body1.update(1);
-    updater1.update();  // Adds body3 data
+    updater1.update();
 
     // Print the current table after updates
     std::cout << "Original Table:" << std::endl;
@@ -39,7 +39,6 @@ int main() {
     selectResult.printTable();
     std::cout << std::endl;
 
-    // Export the table to a CSV file (optional)
     table.exportCSV("test_replay_table.csv");
 
 }

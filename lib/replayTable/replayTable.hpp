@@ -55,6 +55,9 @@ class replayTableUpdater{
         int tickCount;
         // constructor
         //replayTableUpdater(testObject* obj, replayTable* tab, const std::vector<std::string>& attrName, int freq);
+        //
+        void setUpdateFrequency(int freq);
+        void setTrackedAttributes(const std::vector<std::string>& attrName);
         replayTableUpdater(RigidBody* body, replayTable* tab, const std::vector<std::string>& attrName, int freq);
         void update(); // update the table
 };
