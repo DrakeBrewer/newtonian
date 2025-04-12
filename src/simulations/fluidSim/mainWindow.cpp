@@ -2,17 +2,17 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
-    //Title and initial size
+    // Title and initial window size
     setWindowTitle("Fluid Simulation");
     resize(1000,1000);
 
-    //Change the background color
+    // Change the background color to green
     QPalette pal = palette();
     pal.setColor(QPalette::Window,Qt::green);
     setAutoFillBackground(true);
     setPalette(pal);
 
-    //Initialize buttons
+    // Initialize buttons
     //startButton = new QPushButton("Start",this);//'This' makes the button a child of the window
     //startButton -> move(350,300);
     
@@ -25,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     //Connect the quitButton signal to trigger application exit
     connect(quitButton, &QPushButton::clicked,this,&QApplication::quit);
 }
+
+// Need: to get my sim to work with Qt
 
 //void QtApp::startApp(){
 //

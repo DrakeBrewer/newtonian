@@ -7,6 +7,6 @@ using namespace std;
 int main(int argc, char *argv[]){
     cout << "Fluid Simulation\n\n";
 
-    userInterface();
+    userInterface(); // Runs the interface with all the simulations
     return 0;
 }

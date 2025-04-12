@@ -1,6 +1,7 @@
 #include "fluidSim.hpp"
+#include "rigidBody.hpp"
 
-// ------------- Tests ------------- //
+// --------Tests---------
 
 // Has user input for the object and the fluid
 int run(){
@@ -27,7 +28,10 @@ int run(){
             break;
         }
     }
-    object obj(userInput);
+    //Need: to implement rigidBody objects
+
+    //object obj(userInput);
+
     //Getting users input for what fluid to use
     while(true){
         cout << "\nSelect fluid:";
@@ -48,7 +52,10 @@ int run(){
             break;
         }
     }
-    fluid liquid(userInput);
+    //Need: to implement rigidBody objects
+
+    //fluid liquid(userInput);
+
     //Set height of the object
     while(true){
         cout << "\nSet Object Height (-20 to 20):";
@@ -84,9 +91,10 @@ int runTest1(){
     //The top of the water level is at z=0 , everything less than 0 is water
 
     string input;
-    
-    object obj("rock",10);
-    fluid liquid("water", 0);
+    //Need: to implement rigidBody objects
+
+    //object obj("rock",10);
+    //fluid liquid("water", 0);
     float sec = 0; float reachedIn = 0;
     int reachedFlag = 0;
     float velocity = obj.getInitV();//inital velocity
@@ -121,8 +129,10 @@ int runTest2(){
     int sec = 0;
     int vFin = 0;
 
-    object obj("wood",-10);
-    fluid liquid("water");
+    //Need: to implement rigidBody objects
+
+    //object obj("wood",-10);
+    //fluid liquid("water");
 
     int simResult = runSimulation(obj, liquid, true);
 
@@ -132,7 +142,7 @@ int runTest2(){
 }
 
 
-// ------------ Functions ------------- //
+//----------Functions----------
 
 float netForce(object obj, fluid liquid, float velocity){
     float dragCoefficient = obj.dragCoe;

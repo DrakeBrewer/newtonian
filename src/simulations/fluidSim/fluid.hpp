@@ -6,7 +6,6 @@
 #include <chrono>
 #include <thread>
 
-//#include "object.hpp"
 using namespace std;
 
 class fluid{

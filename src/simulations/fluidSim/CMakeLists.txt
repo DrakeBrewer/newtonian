@@ -22,6 +22,11 @@ target_link_libraries(FluidSimQt PRIVATE Qt6::Widgets)
 add_executable(FluidSim
         mainFluid.cpp    
         fluidSim.cpp
+        #fluidSim2.cpp
+)
+
+target_link_libraries(FluidSim
+	rigid_body
 )
 
 #-------------Testing Suite-------------#
