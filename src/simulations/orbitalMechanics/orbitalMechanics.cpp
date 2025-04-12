@@ -76,23 +76,6 @@ void OrbitalMechanics::updateMoonVelocity(double newVelocity){
     std::cout << "<Updated Orbital Period, t = " << orbitTime << " [s] (or " << (orbitTime / 86400) << " [days])" << std::endl;
 }
 
-// This method updates the planet's mass and adjusts the other parameters accordingly
-void OrbitalMechanics::updatePlanetMass(double newPlanetMass){
-    planetMass = newPlanetMass;
-
-    // Since we update planet mass, we can update 'v' or 'r', lets stick with updating 'v', the moon velocity
-    // We use equation v = sqrt(GM/r) of the updated velocity of the moon
-    moonVelocity = sqrt(gravitationalConstant * planetMass / planetMoonDistance);
-
-    // Since 'v' has changed, we also have to update the orbital period t = (2pi) * sqrt(r^3/(GM)
-    orbitTime = (2 * pi) * sqrt((planetMoonDistance * planetMoonDistance * planetMoonDistance) / (gravitationalConstant * planetMass));
-
-    std::cout << std::scientific << std::setprecision(5);
-    std::cout << "\n<Updated Planet Mass, M = " << planetMass << " [kg]" << std::endl;
-    std::cout << "<Updated Moon Velocity, v = " << moonVelocity << " [m/s]" << std::endl;
-    std::cout << "<Updated Orbital Period, t = " << orbitTime << " [s] (or " << (orbitTime / 86400) << " [days])" << std::endl;
-}
-
 // This method updates the distance between the planet and moon and adjusts the other parameters accordingly
 void OrbitalMechanics::updatePlanetMoonDistance(double newDistance){
     planetMoonDistance = newDistance;

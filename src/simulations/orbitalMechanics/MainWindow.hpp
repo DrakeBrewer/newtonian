@@ -9,10 +9,8 @@ class MainWindow : public QMainWindow {
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
 
     OrbitSimulation integrateOrbitSim;
-
 
     void planetSelected(const QString &planet);
  
