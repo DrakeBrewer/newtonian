@@ -149,6 +149,16 @@ replayTableUpdater::replayTableUpdater(RigidBody* body, replayTable* tab, const 
     tickCount = 0;
 }
 
+void replayTableUpdater::setUpdateFrequency(int freq)
+{
+    updateFrequency = freq;
+}
+
+void replayTableUpdater::setTrackedAttributes(const std::vector<std::string>& attrName)
+{
+    trackedAttributes = attrName;
+}
+
 void replayTableUpdater::update()
 {
     tickCount++;
