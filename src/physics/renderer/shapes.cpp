@@ -38,3 +38,27 @@ void RectRender::updatePosition() {
 		this->physRectangle->position.z
 	);
 }
+
+TriangleRender::TriangleRender(Triangle *triangle, QColor color, QGraphicsItem *parent) : QGraphicsPolygonItem(parent) {
+	this->physTriangle = triangle;
+	this->color = color;
+
+	int xPos = this->physTriangle->position.x - int(triangle->width / 2);
+	int yPos = this->physTriangle->position.z - int(triangle->height / 2);
+
+	QPolygonF polygon;
+	polygon << QPointF(this->physTriangle->vertices[0].x, this->physTriangle->vertices[0].y);
+	polygon << QPointF(this->physTriangle->vertices[1].x, this->physTriangle->vertices[1].y);
+	polygon << QPointF(this->physTriangle->vertices[2].x, this->physTriangle->vertices[2].y);
+
+	this->setPolygon(polygon);
+	this->setPos(xPos, yPos);
+	this->setBrush(QBrush(color));
+}
+
+void TriangleRender::updatePosition() {
+	this->setPos(
+		this->physTriangle->position.x,
+		this->physTriangle->position.z
+	);
+}

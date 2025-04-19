@@ -37,3 +37,13 @@ public:
 	Rectangle *physRectangle;
 	QColor color;
 };
+
+
+class TriangleRender : public QGraphicsPolygonItem {
+public:
+	TriangleRender(Triangle *triangle, QColor color, QGraphicsItem *parent = nullptr);
+	void updatePosition();
+
+	Triangle *physTriangle;
+	QColor color;
+};

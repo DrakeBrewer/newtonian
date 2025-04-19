@@ -198,3 +198,21 @@ void Rectangle::update(double delta) {
 	RigidBody::update(delta);
 }
 
+Triangle::Triangle(int width, int height, Vector3d position, float mass, bool isStatic) {
+	this->width = width;
+	this->height = height;
+	this->position = position;
+	this->mass = mass;
+	this->isStatic = isStatic;
+
+	float halfWidth = float(width) / 2;
+	float halfHeight = float(height) / 2;
+
+	this->vertices[0] = Vector3d(this->position.x - halfWidth, this->position.y - halfHeight, 0); // bottom Left
+	this->vertices[1] = Vector3d(this->position.x, this->position.y + halfHeight, 0); // bottom Right
+	this->vertices[2] = Vector3d(this->position.x + halfWidth, this->position.y - halfHeight, 0); // top Left
+}
+
+void Triangle::update(double delta) {
+	RigidBody::update(delta);
+}

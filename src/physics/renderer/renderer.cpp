@@ -115,6 +115,12 @@ void PhysicsRenderer::updateRender() {
 			continue;
 		}
 
+		TriangleRender *t = dynamic_cast<TriangleRender*>(item);
+		if (t) {
+			t->updatePosition();
+			continue;
+		}
+
 		item->setPos(body->position.x, body->position.z);
 	}
 
@@ -137,6 +143,12 @@ QGraphicsItem *attachRenderItem(RigidBody *body, QColor color) {
 	if (r) {
 		RectRender *rr = new RectRender(r, color, nullptr);
 		gItem = rr;
+	}
+
+	Triangle *t = dynamic_cast<Triangle*>(body);
+	if (t) {
+		TriangleRender *tr = new TriangleRender(t, color, nullptr);
+		gItem = tr;
 	}
 
 	return gItem;

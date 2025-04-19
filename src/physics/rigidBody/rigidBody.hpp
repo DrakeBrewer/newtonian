@@ -108,3 +108,17 @@ public:
 	void update(double delta);
 	float area();
 };
+
+class Triangle : public RigidBody {
+public:
+	Triangle(int width, int height, Vector3d position, float mass, bool isStatic);
+	~Triangle() {};
+
+	int width;
+	int height;
+
+	Vector3d vertices[3];
+
+	void update(double delta);
+	float area();
+};
