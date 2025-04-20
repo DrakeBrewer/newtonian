@@ -13,16 +13,20 @@
 #include <QListWidget>
 #include <QMessageBox>
 #include <string>
+
 #include "planets.hpp"
+#include "simulation.hpp"
 
 
 class simConfigWindow: public QWidget{
-    Q_OBJECT
+    Q_OBJECT // Macro required by QT to allow signals and slots
 
 public:
-    simConfigWindow(QWidget *parent = nullptr);
+    simConfigWindow(QWidget *parent = nullptr); 
+    /*Constructor for a QtApp. *parent defines a parent widget and nullptr is the default value
+    and also indicates that the widget is independent of other widgets*/
 
-private slots:
+private slots: //Qt uses slots that to handle behavior such as button clicks
     void checkInputs();
 
 private:
@@ -51,6 +55,7 @@ private:
 
     QWidget *centerlWidget;
     QVBoxLayout *layout;
+
 
 
 };

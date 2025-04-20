@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// Constructor declaration
 simConfigWindow::simConfigWindow(QWidget *parent) : QWidget(parent){
 
     setWindowTitle("Configure Simulation");
@@ -77,7 +78,7 @@ simConfigWindow::simConfigWindow(QWidget *parent) : QWidget(parent){
 
     layout -> addStretch();
 
-    floatValidator = new QDoubleValidator(0.0f, 1000.0f,2, this);
+    floatValidator = new QDoubleValidator(0.0, 1000.0,2, this);
     massInput -> setValidator(floatValidator);
     initVInput -> setValidator(floatValidator);
     xInput -> setValidator(floatValidator);
@@ -105,7 +106,7 @@ void simConfigWindow::checkInputs(){
         QMessageBox::warning(this, "Missing Inputs", "Please enter all fields.");
         return;
     }
-    std::cout << "All inputs were filled. Proceeding..." << std::endl;
+    //cout << "All inputs were filled. Proceeding..." << endl;
 
     QString selectedPlanet = planetSelect -> currentText().toLower();
     QString selectedObject = objectSelect -> currentText();
@@ -139,7 +140,9 @@ void simConfigWindow::checkInputs(){
     pl.setY(planeY);
     pl.setZ(planeZ);
     
-    freeFall(obj,p,pl);
+    //freeFall(obj,p,pl);
+    runSimulation(p.getGrav(), x, y, z, planeX,planeY,planeZ, initV, mass,planetName);
+
 
 
 }
