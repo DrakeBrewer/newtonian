@@ -14,6 +14,8 @@ build/
 
 .vscode/
 
+resources/
+
 /extern/googletest/ 
 
 CMakeCache.txt
