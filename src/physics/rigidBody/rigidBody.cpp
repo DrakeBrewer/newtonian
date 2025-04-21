@@ -4,8 +4,8 @@
 #include <cstdio>
 #include <iostream>
 
-RigidBody::RigidBody(Vector3d initPos, Vector3d initVel, Vector3d initAcc,
-		     float mass, bool isStatic) {
+
+RigidBody::RigidBody(Vector3d initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic) {
 	this->position = initPos;
 	this->velocity = initVel;
 	this->acceleration = initAcc;
@@ -26,10 +26,25 @@ void RigidBody::update(double delta) {
 		this->position.z += this->velocity.z * delta;
 	}
 
-	std::cout << "\r" << std::fflush(stdout) << "x: " << this->position.x
-		<< ", y: " << this->position.y << ", z: " << this->position.z;
+	float radius = 20.0f; 
+	float bottom = this->position.z + radius;
+	
 
+	if (bottom <= -200.0f) {
+		
+		this->position.z = -210;
 
+		this->velocity.z *= -1.05;
+		
+	}
+
+	
+
+	
+	std::cout << "\r" << std::fflush(stdout) <<
+		"x: " << this->position.x <<
+		", y: " << this->position.y <<
+		", z: " << this->position.z;
 }
 
 // Method to get map of attributes to be used by replayTable.

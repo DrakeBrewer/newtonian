@@ -55,7 +55,7 @@ add_executable(planetSim
 	 ${PROJECT_SOURCE_DIR}/src/physics/object/object.cpp
  
 	 
-	 ${PROJECT_SOURCE_DIR}/src/physics/collisionSystem/collisionSystem.cpp
+	#${PROJECT_SOURCE_DIR}/src/physics/collisionSystem/collisionSystem.cpp
 	# ${LIB_SOURCES}
 	# ${PHYSICS_SOURCES}
 

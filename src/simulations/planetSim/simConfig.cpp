@@ -142,6 +142,7 @@ void simConfigWindow::checkInputs(){
     
     //freeFall(obj,p,pl);
     runSimulation(p.getGrav(), x, y, z, planeX,planeY,planeZ, initV, mass,planetName);
+    cout<< p.getGrav() << endl;
 
 
 

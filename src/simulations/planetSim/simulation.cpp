@@ -36,7 +36,7 @@
 void runSimulation(float grav, float x, float y, float z,float xPLane, float yPlane, float zPlane, float initV, float mass,string planetName) {
     QGraphicsScene *scene = new QGraphicsScene();
 
-    Rectangle *rect = new Rectangle(5000, 120, Vector3d(xPLane, yPlane, zPlane), 100, true);
+    Rectangle *rect = new Rectangle(5000, 100, Vector3d(xPLane, yPlane, zPlane), 100, true);
     Ellipse *ellipse = new Ellipse(2*mass, Vector3d(x, y, z), mass, false);
     ellipse->velocity = Vector3d(0, 0, initV);
 
