@@ -116,7 +116,7 @@ int runTest1(){
 }
 
 int runTest2(){
-    
+    cout << "Simulating piece of wood starting in the water\n";
     string input;
     int sec = 0;
     int vFin = 0;
@@ -126,7 +126,25 @@ int runTest2(){
 
     int simResult = runSimulation(obj, liquid, true);
 
-    cout<<"Simulation Done\n";
+    if(simResult) cout << "\nObject: " << obj.name << ", Sinks" << endl;
+    else cout << "\nObject: " << obj.name << ", Floats" << endl;
+
+    return 0;
+}
+
+int runTest3(){
+    cout << "Simulating a rock falling into oil\n";
+    string input;
+    int sec = 0;
+    int vFin = 0;
+
+    object obj("rock",20);
+    fluid liquid("oil");
+
+    int simResult = runSimulation(obj, liquid, true);
+
+    if(simResult) cout << "\nObject: " << obj.name << ", Sinks" << endl;
+    else cout << "\nObject: " << obj.name << ", Floats" << endl;
 
     return 0;
 }
@@ -152,7 +170,7 @@ float netForce(object obj, fluid liquid, float velocity){
 
 int runSimulation(object obj, fluid liquid, bool printFlag){
     float velocity = obj.getInitV();//inital velocity
-    float dt = 0.01; // Time step in seconds
+    float dt = 0.005; // Time step in seconds
     while((std::abs(velocity) > 0.03 || std::abs(obj.getZ()) > .03) && obj.getZ() >= -20){
         float force = netForce(obj,liquid,velocity);
         float acceleration = force / obj.getMass();
@@ -161,7 +179,7 @@ int runSimulation(object obj, fluid liquid, bool printFlag){
 
         if(printFlag){
             std::cout << "\rz: " << obj.getZ() << " m" << ", velocity: " << velocity << " m/s";
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));; //Slows down the simulation
+            std::this_thread::sleep_for(std::chrono::milliseconds(4));; //Slows down the simulation
         }
     }
 
@@ -186,7 +204,8 @@ void userInterface(){
                     "exit: will exit the program\n"
                     "run: runs sim with user's input\n"
                     "test1: sim an object falling into water\n"
-                    "test2: sim an object starting under the water\n"
+                    "test2: sim piece of wood starting under the water\n"
+                    "test3: sim a rock falling into oil\n"
                     "details: detailed explanation of each test" << endl;
             continue;
         }
@@ -216,6 +235,11 @@ void userInterface(){
         else if(userInput.compare("test2") == 0){
             cout << "Running Test2" << endl;
             runTest2();
+            continue;
+        }
+        else if(userInput.compare("test3") == 0){
+            cout << "Running Test3" << endl;
+            runTest3();
             continue;
         }
         else{

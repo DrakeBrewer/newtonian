@@ -11,13 +11,26 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 add_executable(FluidSimQt
         mainQt.cpp
-        mainWindow.cpp
-        mainWindow.hpp
+        #mainWindow.cpp
+        #mainWindow.hpp
         
-        fluidSim.cpp
+        #fluidSim.cpp
+
+
+        fluidRenderer.cpp
+        fluidBody.cpp
+        fluidShapes.cpp
+        fluidWorld.cpp
+        fluidEngine.cpp
+        fluidPhysicsView.cpp
 )
 
-target_link_libraries(FluidSimQt PRIVATE Qt6::Widgets)
+target_link_libraries(FluidSimQt 
+PRIVATE 
+        Qt6::Widgets
+PUBLIC
+        rigid_body
+)
 
 add_executable(FluidSim
         mainFluid.cpp    
