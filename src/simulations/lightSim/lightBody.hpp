@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <cmath>
 #include "rigidBody.hpp"
 
@@ -18,7 +19,4 @@ public:
     void update(double delta) override;
     void reflect(Vector3d& surfaceNormal);
     void refract(Vector3d& surfaceNormal, float newRefractiveIndex);
-
-    std::unordered_map<std::string, float> getAttributes() const override;
-
 };
