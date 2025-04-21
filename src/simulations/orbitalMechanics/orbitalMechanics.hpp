@@ -17,7 +17,7 @@ public:
     double posX;
     double posY;
     double angle;
-    int dayCounter;
+    int orbitCounter;
 
     // Constructor to init the default values for planet being Earth and moon the Moon
     OrbitalMechanics(); 
@@ -33,6 +33,6 @@ public:
     void updatePlanetMoonDistance(double newDistance);
 
     // This method updates the moon's 2D position around the planet based on the orbital kinematics 
-    void updateMoonOrbitalPosition(double timeIntervalForPositionUpdate, int timeScalar);
+    void updateMoonOrbitalPosition(double timeInterval, int timeScalar);
 };
 

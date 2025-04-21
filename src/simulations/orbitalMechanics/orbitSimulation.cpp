@@ -1,6 +1,65 @@
 #include <iostream>
 #include <iomanip>
 #include "orbitSimulation.hpp"
+#include <chrono>
+#include <thread>
+#include <cmath>
+
+// This is the interface for the user, which starts/ runs the simulation and collects input
+void OrbitSimulation::runSimulation(){
+    std::cout<<"=============================================================="<<std::endl;
+    std::cout<<"          Welcome to the Orbital Mechanics Simulator!         "<<std::endl;
+    std::cout<<"--------------------------------------------------------------"<<std::endl;
+    std::cout<<"\nDefault planet is Earth and default moon is Earth's Moon"<<std::endl;
+    std::cout<<"Here is the list of planets you can run the simulation with:"<<std::endl;
+    std::cout<<"1) Mercury"<<std::endl;
+    std::cout<<"2) Venus"<<std::endl;
+    std::cout<<"3) Earth"<<std::endl;
+    std::cout<<"4) Mars"<<std::endl;
+    std::cout<<"5) Jupiter"<<std::endl;
+    std::cout<<"6) Saturn"<<std::endl;
+    std::cout<<"7) Uranus"<<std::endl;
+    std::cout<<"8) Neptune"<<std::endl;
+    std::cout<<"=============================================================="<<std::endl;
+
+    
+    // TEMP: real-time updates are loop driven, with Qt it'll be updated to be event-driven
+    while(true){
+        // Handle planet mass
+        if(!handlePlanetMassInput()){
+            break;
+        }
+        // Handle moon mass, only after a valid planet is selected 
+        if(!handleMoonMassInput()){
+            continue;
+        }
+        // Handle parameter updates
+        bool updatingParameters = true;
+        while(updatingParameters){
+            updatingParameters = handleParameterUpdate();
+        }
+
+        orbitSim.angle = (orbitSim.pi /2);
+        orbitSim.orbitCounter = 0;
+        orbitSim.posX = (orbitSim.planetMoonDistance * cos(orbitSim.angle));
+        orbitSim.posY = (orbitSim.planetMoonDistance * sin(orbitSim.angle));
+
+        bool moonIsOrbiting = true;
+        int timeInterval = 1000;
+        int timeScalar = 59000;
+
+        while(moonIsOrbiting){
+            orbitSim.updateMoonOrbitalPosition(timeInterval, timeScalar);
+
+            std::cout << "X-coord: " << orbitSim.posX 
+                      << " Y-coord: " << orbitSim.posY
+                      << " Orbits Completed: " << orbitSim.orbitCounter 
+                      << std::endl;
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(timeInterval));
+        }
+    }
+}
 
 // Function that handles the user input for selecting a planet
 bool OrbitSimulation::handlePlanetMassInput(){
@@ -117,36 +176,3 @@ bool OrbitSimulation::handleParameterUpdate(){
     return true;
 }
 
-// This is the interface for the user, which starts/ runs the simulation and collects input
-void OrbitSimulation::runSimulation(){
-    std::cout<<"=============================================================="<<std::endl;
-    std::cout<<"          Welcome to the Orbital Mechanics Simulator!         "<<std::endl;
-    std::cout<<"--------------------------------------------------------------"<<std::endl;
-    std::cout<<"\nDefault planet is Earth and default moon is Earth's Moon"<<std::endl;
-    std::cout<<"Here is the list of planets you can run the simulation with:"<<std::endl;
-    std::cout<<"1) Mercury"<<std::endl;
-    std::cout<<"2) Venus"<<std::endl;
-    std::cout<<"3) Earth"<<std::endl;
-    std::cout<<"4) Mars"<<std::endl;
-    std::cout<<"5) Jupiter"<<std::endl;
-    std::cout<<"6) Saturn"<<std::endl;
-    std::cout<<"7) Uranus"<<std::endl;
-    std::cout<<"8) Neptune"<<std::endl;
-    std::cout<<"=============================================================="<<std::endl;
-    
-    // TEMP: real-time updates are loop driven, with Qt it'll be updated to be event-driven
-    while(true){
-        // Handle planet mass
-        if(!handlePlanetMassInput()){
-            break;
-        }
-        // Handle moon mass, only after a valid planet is selected 
-        if(!handleMoonMassInput()){
-            continue;
-        }
-        // Handle parameter updates
-        while(handleParameterUpdate()){
-            continue;
-        }
-    }
-}
