@@ -4,7 +4,8 @@
 #include <cstdio>
 #include <iostream>
 
-RigidBody::RigidBody(Vector3d initPos, Vector3d initVel, Vector3d initAcc, float mass, bool isStatic) {
+RigidBody::RigidBody(Vector3d initPos, Vector3d initVel, Vector3d initAcc,
+		     float mass, bool isStatic) {
 	this->position = initPos;
 	this->velocity = initVel;
 	this->acceleration = initAcc;
@@ -25,10 +26,8 @@ void RigidBody::update(double delta) {
 		this->position.z += this->velocity.z * delta;
 	}
 
-	std::cout << "\r" << std::fflush(stdout) <<
-		"x: " << this->position.x <<
-		", y: " << this->position.y <<
-		", z: " << this->position.z;
+	std::cout << "\r" << std::fflush(stdout) << "x: " << this->position.x
+		<< ", y: " << this->position.y << ", z: " << this->position.z;
 }
 
 // Method to get map of attributes to be used by replayTable.
@@ -36,26 +35,28 @@ void RigidBody::update(double delta) {
 // This code was written by Brendan
 
 std::unordered_map<std::string, float> RigidBody::getAttributes() const {
-        std::unordered_map<std::string, float> attributes;
+	std::unordered_map<std::string, float> attributes;
 	std::cout << "Getting values" << std::endl;
-        attributes["position.x"] = position.x;
-        attributes["position.y"] = position.y;
-        attributes["position.z"] = position.z;
-        attributes["velocity.x"] = velocity.x;
-        attributes["velocity.y"] = velocity.y;
-        attributes["velocity.z"] = velocity.z;
-        attributes["acceleration.x"] = acceleration.x;
-        attributes["acceleration.y"] = acceleration.y;
-        attributes["acceleration.z"] = acceleration.z;
-        attributes["mass"] = mass;
-	std::cout << "position x, y, z is <" << position.x <<","<< position.y << "," << position.z <<">" << std::endl;
-	std::cout << "velocity x, y, z is <" << velocity.x <<","<< velocity.y << "," << velocity.z <<">" << std::endl;
+	attributes["position.x"] = position.x;
+	attributes["position.y"] = position.y;
+	attributes["position.z"] = position.z;
+	attributes["velocity.x"] = velocity.x;
+	attributes["velocity.y"] = velocity.y;
+	attributes["velocity.z"] = velocity.z;
+	attributes["acceleration.x"] = acceleration.x;
+	attributes["acceleration.y"] = acceleration.y;
+	attributes["acceleration.z"] = acceleration.z;
+	attributes["mass"] = mass;
+	std::cout << "position x, y, z is <" << position.x << "," << position.y << ","
+		<< position.z << ">" << std::endl;
+	std::cout << "velocity x, y, z is <" << velocity.x << "," << velocity.y << ","
+		<< velocity.z << ">" << std::endl;
 
-	std::cout << "acceleration x, y, z is <" << acceleration.x <<","<< acceleration.y << "," << acceleration.z <<">" << std::endl;
+	std::cout << "acceleration x, y, z is <" << acceleration.x << ","
+		<< acceleration.y << "," << acceleration.z << ">" << std::endl;
 
-        return attributes;
+	return attributes;
 }
-
 
 // TODO: use diff eq's for this later?
 void RigidBody::applyForce(Vector3d force) {
@@ -64,28 +65,24 @@ void RigidBody::applyForce(Vector3d force) {
 	this->acceleration.z += force.z / this->mass;
 }
 
-
 Sphere::Sphere(float radius, Vector3d position, float mass)
-	: RigidBody(position, Vector3d(), Vector3d(), mass, false) {
+: RigidBody(position, Vector3d(), Vector3d(), mass, false) {
 	this->radius = radius;
 	this->position = position;
 	this->mass = mass;
 }
 
-float Sphere::surfaceArea() {
-	return 4.0f * PI * std::pow(this->radius, 2);
-}
+float Sphere::surfaceArea() { return 4.0f * PI * std::pow(this->radius, 2); }
 
 float Sphere::volume() {
-	return (4.0f/3.0f) * PI * std::pow(this->radius, 3);
+	return (4.0f / 3.0f) * PI * std::pow(this->radius, 3);
 }
 
-float Sphere::diameter() {
-	return 2 * this->radius;
-}
+float Sphere::diameter() { return 2 * this->radius; }
 
-Cuboid::Cuboid(float length, float width, float height, Vector3d position, float mass)
-	: RigidBody(position, Vector3d(), Vector3d(), mass, false) {
+Cuboid::Cuboid(float length, float width, float height, Vector3d position,
+	       float mass)
+: RigidBody(position, Vector3d(), Vector3d(), mass, false) {
 	this->length = length;
 	this->width = width;
 	this->height = height;
@@ -94,14 +91,30 @@ Cuboid::Cuboid(float length, float width, float height, Vector3d position, float
 	float halfW = this->width / 2;
 	float halfH = this->height / 2;
 
-	this->vertices[0] = Vector3d(this->position.x + halfL, this->position.y + halfW, this->position.z + halfH);  // top-front-right
-	this->vertices[1] = Vector3d(this->position.x - halfL, this->position.y + halfW, this->position.z + halfH);  // top-front-left
-	this->vertices[2] = Vector3d(this->position.x + halfL, this->position.y - halfW, this->position.z + halfH);  // top-back-right
-	this->vertices[3] = Vector3d(this->position.x - halfL, this->position.y - halfW, this->position.z + halfH);  // top-back-left
-	this->vertices[4] = Vector3d(this->position.x + halfL, this->position.y + halfW, this->position.z - halfH);  // bottom-front-right
-	this->vertices[5] = Vector3d(this->position.x - halfL, this->position.y + halfW, this->position.z - halfH);  // bottom-front-left
-	this->vertices[6] = Vector3d(this->position.x + halfL, this->position.y - halfW, this->position.z - halfH);  // bottom-back-right
-	this->vertices[7] = Vector3d(this->position.x - halfL, this->position.y - halfW, this->position.z - halfH);  // bottom-back-left
+	this->vertices[0] =
+		Vector3d(this->position.x + halfL, this->position.y + halfW,
+	   this->position.z + halfH); // top-front-right
+	this->vertices[1] =
+		Vector3d(this->position.x - halfL, this->position.y + halfW,
+	   this->position.z + halfH); // top-front-left
+	this->vertices[2] =
+		Vector3d(this->position.x + halfL, this->position.y - halfW,
+	   this->position.z + halfH); // top-back-right
+	this->vertices[3] =
+		Vector3d(this->position.x - halfL, this->position.y - halfW,
+	   this->position.z + halfH); // top-back-left
+	this->vertices[4] =
+		Vector3d(this->position.x + halfL, this->position.y + halfW,
+	   this->position.z - halfH); // bottom-front-right
+	this->vertices[5] =
+		Vector3d(this->position.x - halfL, this->position.y + halfW,
+	   this->position.z - halfH); // bottom-front-left
+	this->vertices[6] =
+		Vector3d(this->position.x + halfL, this->position.y - halfW,
+	   this->position.z - halfH); // bottom-back-right
+	this->vertices[7] =
+		Vector3d(this->position.x - halfL, this->position.y - halfW,
+	   this->position.z - halfH); // bottom-back-left
 }
 
 void Cuboid::update(double delta) {
@@ -150,51 +163,71 @@ void Cuboid::updateVertices() {
 }
 
 float Cuboid::surfaceArea() {
-	return 2 * (this->length * this->width +
-		    this->height * this->width +
-		    this->length * this->height);
+	return 2 * (this->length * this->width + this->height * this->width +
+	this->length * this->height);
 }
 
-float Cuboid::volume() {
-	return this->length * this->width * this->height;
-}
+float Cuboid::volume() { return this->length * this->width * this->height; }
 
-Ellipse::Ellipse(float radius, Vector3d position, float mass, bool isStatic) {
+Ellipse::Ellipse(int radius, Vector3d position, float mass, bool isStatic) {
 	this->radius = radius;
 	this->position = position;
 	this->mass = mass;
 	this->isStatic = isStatic;
 }
 
-float Ellipse::area() {
-	return 2 * PI * this->radius;
-}
+float Ellipse::area() { return 2 * PI * this->radius; }
 
-float Ellipse::diameter() {
-	return 2 * this->radius;
-}
+float Ellipse::diameter() { return 2 * this->radius; }
 
-void Ellipse::update(double delta) {
-	RigidBody::update(delta);
-}
+void Ellipse::update(double delta) { RigidBody::update(delta); }
 
-Rectangle::Rectangle(int width, int height, Vector3d position, float mass, bool isStatic) {
+Rectangle::Rectangle(int width, int height, Vector3d position, float mass,
+		     bool isStatic) {
 	this->width = width;
 	this->height = height;
 	this->position = position;
 	this->mass = mass;
 	this->isStatic = isStatic;
 
-	float halfWidth = float(width) / 2;
-	float halfHeight = float(height) / 2;
+	this->updateVertices();
+}
 
-	this->vertices[0] = Vector3d(this->position.x - halfWidth, this->position.y - halfHeight, 0); // bottom Left
-	this->vertices[1] = Vector3d(this->position.x - halfWidth, this->position.y + halfHeight, 0); // bottom Right
-	this->vertices[2] = Vector3d(this->position.x + halfWidth, this->position.y - halfHeight, 0); // top Left
-	this->vertices[3] = Vector3d(this->position.x + halfWidth, this->position.y + halfHeight, 0); // top right
+void Rectangle::updateVertices() {
+	float halfWidth = float(this->width) / 2;
+	float halfHeight = float(this->height) / 2;
+
+	this->vertices[0] = Vector3d(this->position.x - halfWidth, 0, this->position.z - halfHeight); // bottom left
+	this->vertices[1] = Vector3d(this->position.x + halfWidth, 0, this->position.z - halfHeight); // bottom right
+	this->vertices[2] = Vector3d(this->position.x + halfWidth, 0, this->position.z + halfHeight); // top right
+	this->vertices[3] = Vector3d(this->position.x - halfWidth, 0, this->position.z + halfHeight); // top left
 }
 
 void Rectangle::update(double delta) {
 	RigidBody::update(delta);
+	this->updateVertices();
 }
 
+Triangle::Triangle(int width, int height, Vector3d position, float mass, bool isStatic) {
+	this->width = width;
+	this->height = height;
+	this->position = position;
+	this->mass = mass;
+	this->isStatic = isStatic;
+
+	this->updateVertices();
+}
+
+void Triangle::updateVertices() {
+	float halfWidth = float(width) / 2;
+	float halfHeight = float(height) / 2;
+
+	this->vertices[0] = Vector3d(this->position.x - halfWidth, 0, this->position.z - halfHeight); // bottom Left
+	this->vertices[1] = Vector3d(this->position.x + halfWidth, 0, this->position.z - halfHeight); // bottom Right
+	this->vertices[2] = Vector3d(this->position.x, 0, this->position.z + halfHeight); // top
+}
+
+void Triangle::update(double delta) {
+	RigidBody::update(delta);
+	this->updateVertices();
+}

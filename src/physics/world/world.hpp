@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rigidBody.hpp"
+#include "collision.hpp"
 #include <cstdint>
 #include <vector>
 
@@ -9,6 +10,7 @@ private:
 	double timeElapsed;
 	std::vector<RigidBody*> bodies;
 	float gravity;
+	CollisionSystem *collisionSystem;
 
 public:
 	PhysicsWorld(float gravity);
