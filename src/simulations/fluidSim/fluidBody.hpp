@@ -42,21 +42,25 @@ class fluidBody : public RigidBody {
 	    Vector3d acceleration;
 	    float mass;*/
         //applyForce()  this->acceleration.x += force.x / this->mass;
+        void update(double delta);
+        void applyForce(Vector3d force); //Changed to =, not +=
+
+
 };
 
 
 class fluidEllipse : public fluidBody {
 public:
 
-    fluidEllipse(Vector3d position, float mass, bool isStatic,
+    fluidEllipse(Vector3d position, bool isStatic,
         float dragCoe, float density)
-    {
+    {   
+        this->volume = .1; //10m^3
 	    this->position = position;
-	    this->mass = mass;
+        this->density = density;
+	    this->mass = this->volume * this->density;
 	    this->isStatic = isStatic;
         this->dragCoe = dragCoe;
-        this->volume = mass/density;
-        this->density = density;
         this->radius = std::cbrt((3*this->volume)/(4*PI));    //meters
 
     }
@@ -66,7 +70,7 @@ public:
     
     void update(double delta);
     float area() override{
-        return 2 * PI * this->radius;
+        return  PI * this->radius * this->radius;
     }
     float diameter();
 };

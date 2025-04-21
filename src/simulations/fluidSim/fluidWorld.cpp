@@ -13,26 +13,20 @@ void fluidPhysicsWorld::addBody(fluidBody *body, uint8_t color[3]) {
 void fluidPhysicsWorld::tick(double delta) {
 	this->timeElapsed += delta;
 	// std::cout << "\r" << std::fflush(stdout) << "Time: " << this->timeElapsed;
-
+    bool printFlag = true;
 	for (auto& body : this->bodies) {
         Vector3d force(0, 0, 0);
 
         if(!body->isStatic) {
-            force = force + netForce(body,this->gravity);
-            //std::cout << "mass: "<<  body->mass  <<  ", velocity"<<  body->velocity.z  <<
-             //", raadius"<<  body->radius  << ", vol"<<  body->volume  <<
-            //", draf"<<  body->dragCoe<< ", position:"<< body->position.z <<
-            //", area:"<< body->area() << ", accel:"<< body->acceleration.z << std::endl; 
+            force = netForce(body,this->gravity);
+            if(printFlag){
+                std::cout << "mass: "<<  body->mass  <<  ", velocity"<<  body->velocity.z  <<
+                ", raadius"<<  body->radius  << ", vol"<<  body->volume  <<
+                ", draf"<<  body->dragCoe<< ", position:"<< body->position.z <<
+                ", area:"<< body->area() << ", accel:"<< body->acceleration.z << std::endl; 
+            }
         }
-        
-        std::cout << "force: " << force.z << std::endl; 
-
-        const Vector3d gravity(0, 0, -this->gravity);
-		Vector3d force2(
-			gravity.x * body->mass,
-			gravity.y * body->mass,
-			gravity.z * body->mass
-		);
+    
 
         body->applyForce(force);
 		body->update(delta); 
@@ -43,10 +37,10 @@ Vector3d netForce(fluidBody *body, float gravity){
     float waterDensity = 1000;
     float dragCoefficient = body->dragCoe;
     float g = -gravity;
-    std::cout <<  "g:" << g  << std::endl;
+    std::cout <<  " ACCeleration:" << body->acceleration.z  << std::endl;
     float buoyantForce = waterDensity * body->volume * (-g);
     float weight = body->mass * g;
-    //float weight = 0;
+    //float weight = body->mass * body->acceleration.z;
     float drag;
     float airDensity = 1.225;
     
@@ -61,9 +55,9 @@ Vector3d netForce(fluidBody *body, float gravity){
 
         return force;
     }
-    drag = .4 * dragCoefficient * waterDensity * body->area() * body->velocity.z * std::abs(body->velocity.z);
+    drag = .5 * dragCoefficient * waterDensity * body->area() * body->velocity.z * std::abs(body->velocity.z);
     //drag=0;
-    Vector3d force(0,0,(weight - buoyantForce - drag));
+    Vector3d force(0,0,(weight + buoyantForce - drag));
     std::cout <<  "drag: "<<drag<<  "weight: "<< weight << "buoyancy:" << buoyantForce << std::endl;
     return force;
 }

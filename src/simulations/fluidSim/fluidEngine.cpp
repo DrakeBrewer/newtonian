@@ -12,7 +12,7 @@ fluidEngine::fluidEngine(fluidPhysicsWorld *world, fluidPhysicsRenderer *rendere
 void fluidEngine::start() {
 	this->timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, this, &fluidEngine::update);
-	this->timer->start(25);
+	this->timer->start(5);
 	this->renderer->view->show();
 }
 

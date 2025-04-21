@@ -25,9 +25,9 @@ fluidPhysicsRenderer::fluidPhysicsRenderer(fluidPhysicsWorld *world, QGraphicsSc
 
 	// Qt has the pos Y direction as downward for some reason
 	//  so we need to flip it.
-	view->scale(5, -5);
+	view->scale(1, -1);
 
-	this->scene->setSceneRect(-75, -7.5, 150, 150);
+	this->scene->setSceneRect(-10, -1, 20, 20);
 	//this->drawGrid();
 
 	view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);

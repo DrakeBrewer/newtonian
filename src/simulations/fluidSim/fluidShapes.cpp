@@ -7,7 +7,8 @@ EllipseRender::EllipseRender(fluidEllipse *ellipse, QColor color, QGraphicsItem 
 	this->physEllipse = ellipse;
 	this->color = color;
 
-	this->setRect(0, 0, ellipse->radius*20, ellipse->radius*20);
+	this->setRect(0, 0, ellipse->radius*2, ellipse->radius*2);
+    this->setPen(Qt::NoPen);
 	this->setBrush(QBrush(color));
 
 	this->updatePosition();
@@ -25,6 +26,7 @@ RectRender::RectRender(fluidRectangle *rect, QColor color, QGraphicsItem *parent
 	this->color = color;
 
 	this->setRect(0, 0, rect->width, rect->height);
+    this->setPen(Qt::NoPen);
 	this->setBrush(QBrush(color));
 
 	this->updatePosition();
