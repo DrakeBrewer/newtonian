@@ -18,4 +18,4 @@ public:
 	void tick(double delta);
 };
 
-Vector3d netForce(fluidBody *body, float g);
+Vector3d netForce(fluidBody *obj, fluidBody *fluid, float gravity);
