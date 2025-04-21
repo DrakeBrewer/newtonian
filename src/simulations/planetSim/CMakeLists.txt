@@ -48,7 +48,7 @@ add_executable(planetSim
 	
 	 ${PROJECT_SOURCE_DIR}/src/physics/renderer/renderer.cpp
 	 ${PROJECT_SOURCE_DIR}/src/physics/renderer/shapes.cpp
-	 ${PROJECT_SOURCE_DIR}/src/physics/renderer/PhysicsView.cpp
+	 ${PROJECT_SOURCE_DIR}/src/physics/renderer/physicsView.cpp
 
  
 	 

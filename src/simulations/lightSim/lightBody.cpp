@@ -1,20 +1,23 @@
 #include "lightBody.hpp"
 
+
 LightBody::LightBody(Vector3d initPos, Vector3d dir, float wavelength, float speed)
     : RigidBody(initPos, dir.normalized() * speed, Vector3d(0,0,0), 0.0f, true), wavelength(wavelength), speed(speed), direction(dir.normalized()) {
 
     this->velocity = direction * speed;
 }
 
-// gonna need += operator, need to ask if I can implement it into vector3d
-inline Vector3d& addScaler(Vector3d& a, const Vector3d& b, float scalar) {
-    a = a + (b * scalar);
-    return a;
-}
-
 void LightBody::update(double delta) {
     //acceleration and force do not apply to light, need custom update
-    addScaler(position, velocity, delta);
+    this->position.x += this->velocity.x * delta;
+    this->position.y += this->velocity.y * delta;
+    this->position.z += this->velocity.z * delta;
+
+    std::cout << "\r" << std::fflush(stdout) <<
+    	"x: " << this->position.x <<
+    	", y: " << this->position.y <<
+    	", z: " << this->position.z;
+
 }
 
 void LightBody::reflect(Vector3d& normal){
@@ -52,22 +55,4 @@ void LightBody::refract(Vector3d& normal, float newRefractiveIndex) {
     speed =  2.997925E8 / refractiveIndex;
     velocity = direction * speed;
 
-}
-
-std::unordered_map<std::string, float> LightBody::getAttributes() const {
-    std::unordered_map<std::string, float> attributes;
-
-    attributes["position.x"] = position.x;
-    attributes["position.y"] = position.y;
-    attributes["position.z"] = position.z;
-
-    attributes["velocity.x"] = velocity.x;
-    attributes["velocity.y"] = velocity.y;
-    attributes["velocity.z"] = velocity.z;
-
-    attributes["wavelength"] = wavelength;
-    attributes["speed"] = speed;
-    attributes["refractiveIndex"] = refractiveIndex;
-
-    return attributes;
 }
