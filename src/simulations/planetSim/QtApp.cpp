@@ -30,11 +30,6 @@ QtApp::QtApp(QWidget *parent) : QMainWindow(parent){
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
 
-    // QComboBox *planetBox = new QComboBox(this);
-    // planetBox->addItems({"Earth", "Mars", "Jupiter"});
-    // planetBox->move(100, 50);
-    // planetBox->show();
-
     // Connect signals
     connect(startButton, &QPushButton::clicked, this, &QtApp::startApp);
     connect(quitButton, &QPushButton::clicked, qApp, &QApplication::quit);
