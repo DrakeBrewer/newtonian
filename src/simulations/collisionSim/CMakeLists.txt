@@ -5,6 +5,7 @@ add_executable(collision_sim
 target_link_libraries(collision_sim
 	delta_time
 	rigid_body
+	collision
 	world
 )
 

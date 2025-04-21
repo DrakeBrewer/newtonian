@@ -7,17 +7,16 @@ EllipseRender::EllipseRender(Ellipse *ellipse, QColor color, QGraphicsItem *pare
 	this->physEllipse = ellipse;
 	this->color = color;
 
-	int xPos = this->physEllipse->position.x - int(ellipse->radius);
-	int yPos = this->physEllipse->position.z - int(ellipse->radius);
-
-	this->setRect(xPos, yPos, ellipse->radius*2, ellipse->radius*2);
+	this->setRect(0, 0, ellipse->radius*2, ellipse->radius*2);
 	this->setBrush(QBrush(color));
+
+	this->updatePosition();
 }
 
 void EllipseRender::updatePosition() {
 	this->setPos(
-		this->physEllipse->position.x,
-		this->physEllipse->position.z
+		this->physEllipse->position.x - this->physEllipse->radius,
+		this->physEllipse->position.z - this->physEllipse->radius
 	);
 }
 
@@ -25,17 +24,16 @@ RectRender::RectRender(Rectangle *rect, QColor color, QGraphicsItem *parent) : Q
 	this->physRectangle = rect;
 	this->color = color;
 
-	int xPos = this->physRectangle->position.x - int(rect->width / 2);
-	int yPos = this->physRectangle->position.z - int(rect->height / 2);
-
-	this->setRect(xPos, yPos, rect->width, rect->height);
+	this->setRect(0, 0, rect->width, rect->height);
 	this->setBrush(QBrush(color));
+
+	this->updatePosition();
 }
 
 void RectRender::updatePosition() {
 	this->setPos(
-		this->physRectangle->position.x,
-		this->physRectangle->position.z
+		this->physRectangle->vertices[0].x,
+		this->physRectangle->vertices[0].z
 	);
 }
 
@@ -43,22 +41,20 @@ TriangleRender::TriangleRender(Triangle *triangle, QColor color, QGraphicsItem *
 	this->physTriangle = triangle;
 	this->color = color;
 
-	int xPos = this->physTriangle->position.x - int(triangle->width / 2);
-	int yPos = this->physTriangle->position.z - int(triangle->height / 2);
-
 	QPolygonF polygon;
-	polygon << QPointF(this->physTriangle->vertices[0].x, this->physTriangle->vertices[0].y);
-	polygon << QPointF(this->physTriangle->vertices[1].x, this->physTriangle->vertices[1].y);
-	polygon << QPointF(this->physTriangle->vertices[2].x, this->physTriangle->vertices[2].y);
+	polygon << QPointF(0, 0);
+	polygon << QPointF(triangle->width, 0);
+	polygon << QPointF(int(triangle->width / 2), triangle->height);
 
 	this->setPolygon(polygon);
-	this->setPos(xPos, yPos);
 	this->setBrush(QBrush(color));
+
+	this->updatePosition();
 }
 
 void TriangleRender::updatePosition() {
 	this->setPos(
-		this->physTriangle->position.x,
-		this->physTriangle->position.z
+		this->physTriangle->position.x - int(this->physTriangle->width / 2),
+		this->physTriangle->position.z - int(this->physTriangle->height / 2)
 	);
 }

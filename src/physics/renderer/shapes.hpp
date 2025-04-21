@@ -36,6 +36,7 @@ public:
 
 	Rectangle *physRectangle;
 	QColor color;
+	QGraphicsRectItem *debugRect;
 };
 
 

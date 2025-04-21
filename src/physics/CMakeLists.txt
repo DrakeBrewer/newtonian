@@ -1,6 +1,6 @@
 add_subdirectory(object)
 add_subdirectory(rigidBody)
 add_subdirectory(world)
-add_subdirectory(collisionSystem)
 add_subdirectory(renderer)
 add_subdirectory(engine)
+add_subdirectory(collision)
