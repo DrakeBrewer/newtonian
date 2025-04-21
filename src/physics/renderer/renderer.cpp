@@ -33,7 +33,6 @@ PhysicsRenderer::PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QOb
 	view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 }
 
-
 PhysicsRenderer::~PhysicsRenderer() {
 	for (auto& pair : bodyToRender) {
 		this->scene->removeItem(pair.second);
@@ -75,23 +74,6 @@ void PhysicsRenderer::removeBody(RigidBody *body) {
 		this->scene->removeItem(item->second);
 		delete item->second;
 		bodyToRender.erase(item);
-	}
-}
-
-void PhysicsRenderer::start(double deltaT) {
-	int mSec = int(deltaT * 1000);
-	this->view->show();
-	this->timer = new QTimer(this);
-	connect(timer, &QTimer::timeout, this, &PhysicsRenderer::updateRender);
-	this->timer->start(mSec);
-}
-
-void PhysicsRenderer::stop() {
-	if (timer) {
-		timer->stop();
-		disconnect(this->timer, &QTimer::timeout, this, &PhysicsRenderer::updateRender);
-		delete this->timer;
-		timer = nullptr;
 	}
 }
 
