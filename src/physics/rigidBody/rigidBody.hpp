@@ -85,7 +85,7 @@ private:
 
 class Ellipse : public RigidBody {
 public:
-	Ellipse(float radius, Vector3d position, float mass, bool isStatic);
+	Ellipse(int radius, Vector3d position, float mass, bool isStatic);
 	~Ellipse() {};
 
 	int radius;
@@ -106,5 +106,21 @@ public:
 	Vector3d vertices[4];
 
 	void update(double delta);
+	void updateVertices();
+	float area();
+};
+
+class Triangle : public RigidBody {
+public:
+	Triangle(int width, int height, Vector3d position, float mass, bool isStatic);
+	~Triangle() {};
+
+	int width;
+	int height;
+
+	Vector3d vertices[3];
+
+	void update(double delta);
+	void updateVertices();
 	float area();
 };

@@ -33,7 +33,6 @@ PhysicsRenderer::PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QOb
 	view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 }
 
-
 PhysicsRenderer::~PhysicsRenderer() {
 	for (auto& pair : bodyToRender) {
 		this->scene->removeItem(pair.second);
@@ -78,23 +77,6 @@ void PhysicsRenderer::removeBody(RigidBody *body) {
 	}
 }
 
-void PhysicsRenderer::start(double deltaT) {
-	int mSec = int(deltaT * 1000);
-	this->view->show();
-	this->timer = new QTimer(this);
-	connect(timer, &QTimer::timeout, this, &PhysicsRenderer::updateRender);
-	this->timer->start(mSec);
-}
-
-void PhysicsRenderer::stop() {
-	if (timer) {
-		timer->stop();
-		disconnect(this->timer, &QTimer::timeout, this, &PhysicsRenderer::updateRender);
-		delete this->timer;
-		timer = nullptr;
-	}
-}
-
 // TODO:
 // Find alternative to dynamic casting?
 void PhysicsRenderer::updateRender() {
@@ -112,6 +94,12 @@ void PhysicsRenderer::updateRender() {
 		RectRender *r = dynamic_cast<RectRender*>(item);
 		if (r) {
 			r->updatePosition();
+			continue;
+		}
+
+		TriangleRender *t = dynamic_cast<TriangleRender*>(item);
+		if (t) {
+			t->updatePosition();
 			continue;
 		}
 
@@ -137,6 +125,12 @@ QGraphicsItem *attachRenderItem(RigidBody *body, QColor color) {
 	if (r) {
 		RectRender *rr = new RectRender(r, color, nullptr);
 		gItem = rr;
+	}
+
+	Triangle *t = dynamic_cast<Triangle*>(body);
+	if (t) {
+		TriangleRender *tr = new TriangleRender(t, color, nullptr);
+		gItem = tr;
 	}
 
 	return gItem;

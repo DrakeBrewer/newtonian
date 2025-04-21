@@ -24,9 +24,6 @@ public:
 	void addBody(RigidBody *body, uint8_t color[3]);
 	void removeBody(RigidBody *body);
 
-	void start(double deltaT);
-	void stop();
-
 	void updateRender();
 
 	PhysicsWorld *world;
