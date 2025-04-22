@@ -20,7 +20,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src/physics/rigidBody
     ${PROJECT_SOURCE_DIR}/src/physics/renderer
     ${PROJECT_SOURCE_DIR}/src/physics/object
-    ${PROJECT_SOURCE_DIR}/src/physics/collisionSystem
+	${PROJECT_SOURCE_DIR}/src/physics/collision
 	
 )
 
@@ -53,6 +53,8 @@ add_executable(planetSim
  
 	 
 	 ${PROJECT_SOURCE_DIR}/src/physics/object/object.cpp
+	 
+	 ${PROJECT_SOURCE_DIR}/src/physics/collision/collision.cpp
  
 	 
 	#${PROJECT_SOURCE_DIR}/src/physics/collisionSystem/collisionSystem.cpp

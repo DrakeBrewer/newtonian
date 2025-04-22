@@ -2,6 +2,7 @@
 #include "rigidBody.hpp"
 #include "vector3d.hpp"
 #include <vector>
+#include <limits>
 
 static bool isPolygon(RigidBody *body) {
 	return dynamic_cast<Rectangle*>(body) || dynamic_cast<Triangle*>(body);

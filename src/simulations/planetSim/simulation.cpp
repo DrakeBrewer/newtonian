@@ -17,7 +17,6 @@
 #include <QImageReader>
 
 
-
 #include <QApplication>
 #include <QtWidgets/qgraphicsitem.h>
 #include <QtWidgets/qgraphicsscene.h>
@@ -33,12 +32,15 @@
 #include "simulation.hpp"
 
 
-void runSimulation(float grav, float x, float y, float z,float xPLane, float yPlane, float zPlane, float initV, float mass,string planetName) {
+void runSimulation(float grav, float x, float y, float z,float xPlane, float yPlane, float zPlane, float initV, float mass,string planetName) {
     QGraphicsScene *scene = new QGraphicsScene();
 
-    Rectangle *rect = new Rectangle(5000, 100, Vector3d(xPLane, yPlane, zPlane), 100, true);
-    Ellipse *ellipse = new Ellipse(2*mass, Vector3d(x, y, z), mass, false);
-    ellipse->velocity = Vector3d(0, 0, initV);
+    Rectangle *rect2 = new Rectangle(2*mass, 2*mass, Vector3d(x, y, z), mass, false);
+    Rectangle *rect = new Rectangle(5000, 100, Vector3d(xPlane, yPlane, zPlane), 100, true);
+    Rectangle *rect3 = new Rectangle(2*mass, 2*mass, Vector3d(2*x, 2*y, 2*z), mass, false);
+    Triangle *triangle = new Triangle(2*mass, 2*mass, Vector3d(xPlane, yPlane+20, 200), mass, false);
+    //Ellipse *ellipse = new Ellipse(2*mass, Vector3d(x, y, z), mass, false);
+    rect->velocity = Vector3d(0, 0, initV);
 
     PhysicsWorld *world = new PhysicsWorld(grav);
     PhysicsRenderer *renderer = new PhysicsRenderer(world, scene, nullptr);
@@ -66,6 +68,7 @@ void runSimulation(float grav, float x, float y, float z,float xPLane, float yPl
         Qt::IgnoreAspectRatio,   
         Qt::SmoothTransformation
     );
+
     QGraphicsPixmapItem *background = new QGraphicsPixmapItem(bgPixmap);
     background->setZValue(-1); // Push it to the background
     background->setPos(scene->sceneRect().topLeft());
@@ -116,7 +119,9 @@ void runSimulation(float grav, float x, float y, float z,float xPLane, float yPl
     }
 
     uint8_t red[3] = {0xFF, 0x00, 0x00};
-    engine->addBody(ellipse, red);
+    engine->addBody(rect2, red);
+    engine->addBody(rect3, red);
+    engine->addBody(triangle, red);
 
     engine->start();
 }

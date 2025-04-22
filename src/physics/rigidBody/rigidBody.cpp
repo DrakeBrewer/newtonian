@@ -26,17 +26,17 @@ void RigidBody::update(double delta) {
 		this->position.z += this->velocity.z * delta;
 	}
 
-	float radius = 20.0f; 
-	float bottom = this->position.z + radius;
+	// float radius = 20.0f; 
+	// float bottom = this->position.z + radius;
 	
 
-	if (bottom <= -200.0f) {
+	// if (bottom <= -200.0f) {
 		
-		this->position.z = -210;
+	// 	this->position.z = -210;
 
-		this->velocity.z *= -1.05;
+	// 	this->velocity.z *= -1.05;
 		
-	}
+	// }
 
 	
 
