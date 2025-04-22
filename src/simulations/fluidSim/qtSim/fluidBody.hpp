@@ -9,13 +9,15 @@
 
 #define PI 3.14f
 
-// Rigid Body but for an object for the fluid sim
+
+// Rigid Body but for objects in the fluid sim
 class fluidBody : public RigidBody {
     public:
         float dragCoe;
         float volume;
         float density;
         float radius;
+        float height;
 
         fluidBody() : RigidBody(){
             float dragCoe = 0;
@@ -37,13 +39,9 @@ class fluidBody : public RigidBody {
         virtual float area(){
             return 0;
         }
-        /*Vector3d position;
-	    Vector3d velocity;
-	    Vector3d acceleration;
-	    float mass;*/
-        //applyForce()  this->acceleration.x += force.x / this->mass;
+        
         void update(double delta);
-        void applyForce(Vector3d force); //Changed to =, not +=
+        void applyForce(Vector3d force);
 
 
 };
@@ -55,7 +53,7 @@ public:
     fluidEllipse(Vector3d position, bool isStatic,
         float dragCoe, float density)
     {   
-        this->volume = .1; //10m^3
+        this->volume = 3; //3m^3
 	    this->position = position;
         this->density = density;
 	    this->mass = this->volume * this->density;
@@ -78,22 +76,25 @@ public:
 
 class fluidRectangle : public fluidBody {
 public:
-    int width;
-    int height;
+    float width;
+    
 
     Vector3d vertices[4];
     
 
-    fluidRectangle(int width, int height, Vector3d position, float mass, bool isStatic,
-        float density)
-    {
-        this->width = width;
-	    this->height = height;
+    fluidRectangle(Vector3d position, bool isStatic,float dragCoe,  float density)
+    {   
+        this->volume = 3; //3m^3
+        this->width = std::cbrt(this->volume);
+	    this->height = this->width;
+        
+        
 	    this->position = position;
-	    this->mass = mass;
-	    this->isStatic = isStatic;
         this->density = density;
-
+        this->mass = this->volume * this->density;
+	    this->isStatic = isStatic;
+        this->dragCoe = dragCoe;
+        
 	    float halfWidth = float(width) / 2;
 	    float halfHeight = float(height) / 2;
 
@@ -102,7 +103,70 @@ public:
 	    this->vertices[2] = Vector3d(this->position.x + halfWidth, this->position.y - halfHeight, 0); // top Left
 	    this->vertices[3] = Vector3d(this->position.x + halfWidth, this->position.y + halfHeight, 0); // top right
     }
+    fluidRectangle(float width, float height, Vector3d position, bool isStatic){
+        this->width = width;
+        this->height = height; 
+        this->position = position; 
+        this->isStatic = isStatic;
+    }
+
     ~fluidRectangle() {};
+
+    float area() override{
+        return  this->width * this->height;
+    }
         
     void update(double delta);
 };    
+
+class fluidTriangle : public fluidBody {
+public:
+    float width;
+	float height;
+    int direction; // where the tip is pointing, 1: up, 2: down
+
+	Vector3d vertices[3];
+
+    fluidTriangle(Vector3d position, bool isStatic,  int direction, float dragCoe,  float density){
+        this->volume = 3; //3m^3
+        this->width = std::cbrt(this->volume);
+	    this->height = this->width;
+	    this->direction = direction;
+        this->position = position;
+	    this->isStatic = isStatic;
+        this->density = density;
+        this->mass = this->volume * this->density;
+        this->dragCoe = dragCoe;  // Not accurate since it changes depending on the direction it's moving
+
+	    this->updateVertices();
+    }
+	~fluidTriangle() {};
+
+	
+	void update(double delta);
+	void updateVertices();
+	float area() override{ 
+        return  this->width * this->height;
+    }
+};
+
+//--------------Liquid----------------//
+
+class fluidLiquid : public fluidBody {
+    public:
+        float width;
+        
+    
+        fluidLiquid(float width, float height, Vector3d position, bool isStatic,
+            float density)
+        {   
+            this->width = width;
+            this->height = height;
+            this->position = position;
+            this->density = density;
+            
+            this->isStatic = isStatic;
+            
+        }
+        ~fluidLiquid() {};
+    };   

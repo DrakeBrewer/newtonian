@@ -22,8 +22,8 @@ void fluidBody::update(double delta) {
 		this->position.z += this->velocity.z * delta;
 	}
 
-	std::cout << "\r" << std::fflush(stdout) << "x: " << this->position.x
-		<< ", y: " << this->position.y << ", z: " << this->position.z;
+	//std::cout << "\r" << std::fflush(stdout) << "x: " << this->position.x
+	//	<< ", y: " << this->position.y << ", z: " << this->position.z;
 }
 
 void fluidBody::applyForce(Vector3d force) {
@@ -45,15 +45,17 @@ void fluidRectangle::update(double delta) {
 	fluidBody::update(delta);
 }
 
+void fluidTriangle::updateVertices() {
+	float halfWidth = float(width) / 2;
+	float halfHeight = float(height) / 2;
 
-
-/*
-int main(int argc, char **argv) {
-    fluidRectangle *rect = new fluidRectangle(5000, 50, Vector3d(0, 0, 0), 100, true, 1000);
-    fluidEllipse *ellipse = new fluidEllipse(20, Vector3d(0, 0, 250), 5, false,  1.05, 500);
-    fluidPhysicsWorld *world = new fluidPhysicsWorld(9.81);
-    std::cout << rect->density  <<  std::endl;
-    std::cout << "mass:  "  << rect->mass << std::endl;
-
+	this->vertices[0] = Vector3d(this->position.x - halfWidth, 0, this->position.z - halfHeight); // bottom Left
+	this->vertices[1] = Vector3d(this->position.x + halfWidth, 0, this->position.z - halfHeight); // bottom Right
+	this->vertices[2] = Vector3d(this->position.x, 0, this->position.z + halfHeight); // top
 }
-    */
+
+void fluidTriangle::update(double delta) {
+	fluidBody::update(delta);
+	// Can swich the dragCoe here with some if statements
+	this->updateVertices();
+}

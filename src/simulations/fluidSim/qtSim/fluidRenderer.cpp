@@ -21,14 +21,13 @@ fluidPhysicsRenderer::fluidPhysicsRenderer(fluidPhysicsWorld *world, QGraphicsSc
 	this->view = new fluidPhysicsView(scene);
 	view->setRenderHint(QPainter::Antialiasing);
 	view->setBackgroundBrush(this->bgColor);
-	view->setMinimumSize(800, 600);
+	view->setMinimumSize(900, 800);
 
 	// Qt has the pos Y direction as downward for some reason
 	//  so we need to flip it.
 	view->scale(1, -1);
 
-	this->scene->setSceneRect(-10, -1, 20, 20);
-	//this->drawGrid();
+	this->scene->setSceneRect(-10, -20, 20, 35);  //setSceneRect(qreal x, qreal y, qreal w, qreal h)
 
 	view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 }
@@ -65,7 +64,6 @@ void fluidPhysicsRenderer::removeBody(fluidBody *body) {
 
 
 void fluidPhysicsRenderer::updateRender() {
-	// this->world->tick(0.016);
 	for (auto& pair : this->bodyToRender) {
 		fluidBody *body = pair.first;
 		QGraphicsItem *item = pair.second;
@@ -79,6 +77,18 @@ void fluidPhysicsRenderer::updateRender() {
 		RectRender *r = dynamic_cast<RectRender*>(item);
 		if (r) {
 			r->updatePosition();
+			continue;
+		}
+
+		TriangleRender *t = dynamic_cast<TriangleRender*>(item);
+		if (t) {
+			t->updatePosition();
+			continue;
+		}
+
+		LiquidRender *l = dynamic_cast<LiquidRender*>(item);
+		if (l) {
+			l->updatePosition();
 			continue;
 		}
 
@@ -102,6 +112,18 @@ QGraphicsItem *attachRenderItem(fluidBody *body, QColor color) {
 	if (r) {
 		RectRender *rr = new RectRender(r, color, nullptr);
 		gItem = rr;
+	}
+
+	fluidTriangle *t = dynamic_cast<fluidTriangle*>(body);
+	if (t) {
+		TriangleRender *tr = new TriangleRender(t, color, nullptr);
+		gItem = tr;
+	}
+
+	fluidLiquid *l = dynamic_cast<fluidLiquid*>(body);
+	if (l) {
+		LiquidRender *lr = new LiquidRender(l, color, nullptr);
+		gItem = lr;
 	}
 
 	return gItem;

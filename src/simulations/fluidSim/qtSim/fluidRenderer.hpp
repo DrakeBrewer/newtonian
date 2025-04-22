@@ -19,8 +19,6 @@
 class fluidPhysicsRenderer : public QObject {
 	Q_OBJECT
 
-private:
-	//void drawGrid();
 public:
     fluidPhysicsRenderer(fluidPhysicsWorld *world, QGraphicsScene *scene, QObject *parent = nullptr);
 	~fluidPhysicsRenderer();

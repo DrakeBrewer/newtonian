@@ -1,36 +1,8 @@
-
-cmake_minimum_required(VERSION 3.16)
+#cmake_minimum_required(VERSION 3.16)
 
 project(FluidSim)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_AUTOMOC ON)
-
-
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
-
-add_executable(FluidSimQt
-        mainQt.cpp
-        #mainWindow.cpp
-        #mainWindow.hpp
-        
-        #fluidSim.cpp
-
-
-        fluidRenderer.cpp
-        fluidBody.cpp
-        fluidShapes.cpp
-        fluidWorld.cpp
-        fluidEngine.cpp
-        fluidPhysicsView.cpp
-)
-
-target_link_libraries(FluidSimQt 
-PRIVATE 
-        Qt6::Widgets
-PUBLIC
-        rigid_body
-)
+add_subdirectory(qtSim)
 
 add_executable(FluidSim
         mainFluid.cpp    
