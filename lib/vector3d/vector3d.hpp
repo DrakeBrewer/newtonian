@@ -21,7 +21,7 @@ public:
 	Vector3d crossProduct(const Vector3d& vec);
 	Vector3d projectOnto(const Vector3d& vec);
 	Vector3d normalized();
-	Vector3d reflect(); // TODO: implement this
+	Vector3d reflect(const Vector3d &normal); // TODO: implement this
 
 	float dotProduct(const Vector3d& vec);
 	float magnitude();

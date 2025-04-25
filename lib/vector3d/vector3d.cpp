@@ -92,3 +92,8 @@ float Vector3d::magnitude() {
 	float sum = std::pow(this->x, 2) + std::pow(this->y, 2) + std::pow(this->z, 2);
 	return std::sqrt(sum);
 }
+
+Vector3d Vector3d::reflect(const Vector3d &N) {
+	float d = this->dotProduct(N);
+	return *this - (2.0f * d) * N;
+}

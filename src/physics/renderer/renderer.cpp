@@ -13,6 +13,7 @@
 #include "rigidBody.hpp"
 #include "vector3d.hpp"
 #include "physicsView.hpp"
+#include "lightBody.hpp"
 
 PhysicsRenderer::PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QObject *parent) :
 	QObject(parent), world(world), scene(scene) {
@@ -21,16 +22,17 @@ PhysicsRenderer::PhysicsRenderer(PhysicsWorld *world, QGraphicsScene *scene, QOb
 	this->view = new PhysicsView(scene);
 	view->setRenderHint(QPainter::Antialiasing);
 	view->setBackgroundBrush(this->bgColor);
-	view->setMinimumSize(800, 600);
+	view->setMinimumSize(600, 600);
 
 	// Qt has the pos Y direction as downward for some reason
 	//  so we need to flip it.
 	view->scale(1, -1);
 
-	this->scene->setSceneRect(-500, -50, 1000, 1000);
-	this->drawGrid();
+	this->scene->setSceneRect(-150, -150, 300, 300);
+	//this->drawGrid();
 
 	view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+	view->centerOn(0,0);
 }
 
 PhysicsRenderer::~PhysicsRenderer() {
@@ -85,6 +87,12 @@ void PhysicsRenderer::updateRender() {
 		RigidBody *body = pair.first;
 		QGraphicsItem *item = pair.second;
 
+		LightRender *rayRender = dynamic_cast<LightRender*>(item);
+		if(rayRender) {
+			rayRender->updatePosition();
+			continue;
+		}
+
 		EllipseRender *e = dynamic_cast<EllipseRender*>(item);
 		if (e) {
 			e->updatePosition();
@@ -114,6 +122,12 @@ void PhysicsRenderer::updateRender() {
 // Find alternative to dynamic casting?
 QGraphicsItem *attachRenderItem(RigidBody *body, QColor color) {
 	QGraphicsItem *gItem = nullptr;
+
+	LightBody *ray = dynamic_cast<LightBody*>(body);
+	if(ray) {
+		LightRender *rayRender = new LightRender(ray, color, nullptr);
+		gItem = rayRender;
+	}
 
 	Ellipse *e = dynamic_cast<Ellipse*>(body);
 	if (e) {

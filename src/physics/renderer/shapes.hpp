@@ -1,6 +1,30 @@
 #include "rigidBody.hpp"
 #include <QtGui/qcolor.h>
+#include <QPainter>
 #include <QtWidgets/qgraphicsitem.h>
+#include <qpen.h>
+#include "lightBody.hpp"
+
+// circle + line showing photon and its direction
+class QPainter;
+class QStyleOptionGraphicsItem;
+class QWidget;
+class LightBody;
+
+class LightRender: public QGraphicsItem {
+public:
+	LightRender(LightBody *light, QColor color, QGraphicsItem *parent=nullptr);
+
+	QRectF boundingRect() const override;
+	void paint(QPainter *p, const QStyleOptionGraphicsItem *opt, QWidget *widget) override;
+	void updatePosition();
+
+	LightBody *light;
+	QColor color;
+	float radius;
+	QPen pen;
+	QBrush brush;
+};
 
 class SphereRender: public QGraphicsEllipseItem {
 public:
