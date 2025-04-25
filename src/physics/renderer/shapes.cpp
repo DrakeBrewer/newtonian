@@ -3,12 +3,44 @@
 
 #include "shapes.hpp"
 
+
+LightRender::LightRender(LightBody *light, QColor color, QGraphicsItem *parent) : 
+	QGraphicsItem(parent),
+	light(light),
+	color(color),
+	radius(2.0f),
+	pen(color), 
+	brush(color)
+{}
+
+
+QRectF LightRender::boundingRect() const {
+	float d = radius + 1.0f;
+	return QRectF(-d, -d, 2*d, 2*d);
+}
+
+void LightRender::paint(QPainter *p, const QStyleOptionGraphicsItem*, QWidget*){
+	p->setPen(Qt::NoPen);
+	p->setBrush(brush);
+	p->drawEllipse(-radius, -radius, 2*radius, 2*radius);
+	// trailing rect
+	p->setPen(pen);
+	QPointF tip(light->direction.x *-10.0f, light->direction.z * -10.0f);
+	p->drawLine(QPointF(0,0), tip);
+}
+
+void LightRender::updatePosition() {
+	setPos(light->position.x, light->position.z);
+	update();
+}
+
 EllipseRender::EllipseRender(Ellipse *ellipse, QColor color, QGraphicsItem *parent) : QGraphicsEllipseItem(parent) {
 	this->physEllipse = ellipse;
 	this->color = color;
 
 	this->setRect(0, 0, ellipse->radius*2, ellipse->radius*2);
 	this->setBrush(QBrush(color));
+	this->setPen(Qt::NoPen);
 
 	this->updatePosition();
 }
@@ -26,6 +58,7 @@ RectRender::RectRender(Rectangle *rect, QColor color, QGraphicsItem *parent) : Q
 
 	this->setRect(0, 0, rect->width, rect->height);
 	this->setBrush(QBrush(color));
+	this->setPen(Qt::NoPen);
 
 	this->updatePosition();
 }
@@ -48,6 +81,7 @@ TriangleRender::TriangleRender(Triangle *triangle, QColor color, QGraphicsItem *
 
 	this->setPolygon(polygon);
 	this->setBrush(QBrush(color));
+	this->setPen(Qt::NoPen);
 
 	this->updatePosition();
 }

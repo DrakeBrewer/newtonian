@@ -2,30 +2,34 @@
 
 
 LightBody::LightBody(Vector3d initPos, Vector3d dir, float wavelength, float speed)
-    : RigidBody(initPos, dir.normalized() * speed, Vector3d(0,0,0), 0.0f, true), wavelength(wavelength), speed(speed), direction(dir.normalized()) {
-
-    this->velocity = direction * speed;
+    : RigidBody(initPos, dir.normalized() * speed, Vector3d(0,0,0), 0.0f, false), wavelength(wavelength), speed(speed), direction(dir.normalized()) {
+    this->velocity = this->direction * this->speed;
 }
 
 void LightBody::update(double delta) {
+    this->lastDelta = float(delta);
     //acceleration and force do not apply to light, need custom update
     this->position.x += this->velocity.x * delta;
     this->position.y += this->velocity.y * delta;
     this->position.z += this->velocity.z * delta;
-
-    std::cout << "\r" << std::fflush(stdout) <<
-    	"x: " << this->position.x <<
-    	", y: " << this->position.y <<
-    	", z: " << this->position.z;
-
+    
+    std::cout << "\r" << std::fflush(stdout) << "LightBody x: " << this->position.x<< ", y: " << this->position.y << ", z: " << this->position.z << 
+    "\n";
 }
 
-void LightBody::reflect(Vector3d& normal){
+void LightBody::reflect(const Vector3d& normal){
     // Reflection forumla R = D-2(D dot N)N, where R is the reflection
     // vector, D is the incident ray direction, and N is the surface normal.
     // Derived from law of reflection. thetaL=thetaR.
-    direction = direction - 2 * (direction.dotProduct(normal)) * normal;
-    direction = direction.normalized();
+    direction = (direction - 2 * (direction.dotProduct(normal)) * normal).normalized();
+
+    auto snap = [&](float &v) {
+	if (std::fabs(v) < 1e-6f) v = 0.0f;
+    };
+    snap(direction.x);
+    snap(direction.y);
+    snap(direction.z);
+
     velocity = direction * speed;
 }
 

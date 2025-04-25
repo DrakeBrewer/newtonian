@@ -1,7 +1,9 @@
 #pragma once
 
+#include <limits>
 #include "rigidBody.hpp"
 #include "vector3d.hpp"
+#include "lightBody.hpp"
 
 typedef struct CollisionData {
 	bool hasCollision;
@@ -32,4 +34,5 @@ private:
 	bool ellipseVsEllipse(Ellipse *ellipseA, Ellipse *ellipseB);
 	bool ellipseVsPolygon(Ellipse *ellipse, RigidBody *polygon);
 	bool polygonVsPolygon(RigidBody *polygonA, RigidBody *polygonB);
+	bool rayVsShape(LightBody *ray, RigidBody *shape);
 };

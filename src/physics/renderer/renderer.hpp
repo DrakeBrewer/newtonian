@@ -11,6 +11,7 @@
 #include "vector3d.hpp"
 #include "world.hpp"
 #include "rigidBody.hpp"
+#include "lightBody.hpp"
 
 class PhysicsRenderer : public QObject {
 	Q_OBJECT
